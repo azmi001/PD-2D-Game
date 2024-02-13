@@ -139,7 +139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!82 &52419325
 AudioSource:
   m_ObjectHideFlags: 0
@@ -724,7 +724,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -10
   m_Sprite: {fileID: 21300000, guid: 6ab9684727403c240b877fc948d78438, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.003921569}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2012,6 +2012,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1562282650}
   - component: {fileID: 1562282649}
+  - component: {fileID: 1562282651}
   m_Layer: 0
   m_Name: BattleSystem
   m_TagString: Untagged
@@ -2026,7 +2027,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1562282648}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: adcce89afa172f544b0fd22dabd9990f, type: 3}
   m_Name: 
@@ -2036,8 +2037,6 @@ MonoBehaviour:
   playerBattleStation: {fileID: 301402833}
   enemyBattleStation: {fileID: 1655751176}
   dialogueText: {fileID: 403482821}
-  attackButton: {fileID: 182165620}
-  healButton: {fileID: 411558859}
   playerHUD: {fileID: 1253288002}
   enemyHUD: {fileID: 1843279249}
   state: 0
@@ -2059,6 +2058,34 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1562282651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1562282648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 766725e31c38b4a4db1ce0a862efa29d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startState: {fileID: 0}
+  playerTurnState: {fileID: 0}
+  enemyTurnState: {fileID: 0}
+  wonState: {fileID: 0}
+  lostState: {fileID: 0}
+  playerPrefabs: {fileID: 864842667368195608, guid: 6cff672497d19d040a8bc888b102ec61, type: 3}
+  enemyPrefabs: {fileID: 864842667368195608, guid: 4ca41759f65344b448753b8ff4d3c93b, type: 3}
+  playerBattleStation: {fileID: 301402833}
+  enemyBattleStation: {fileID: 1655751176}
+  playerUnit: {fileID: 0}
+  enemyUnit: {fileID: 0}
+  dialogueText: {fileID: 403482821}
+  playerHUD: {fileID: 1253288002}
+  enemyHUD: {fileID: 1843279249}
+  menang: Post Stage 1
+  kalah: Main Menu
 --- !u!1 &1573923215
 GameObject:
   m_ObjectHideFlags: 0
@@ -2351,7 +2378,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -10
   m_Sprite: {fileID: 21300000, guid: 6ab9684727403c240b877fc948d78438, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.003921569}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
