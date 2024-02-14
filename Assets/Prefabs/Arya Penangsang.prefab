@@ -48,7 +48,7 @@ MonoBehaviour:
   unitName: Arya Penangsang
   unitLevel: 5
   deffense: 2
-  damage: 5
+  damage: 10
   maxHP: 20
   currentHP: 20
 --- !u!1 &8890152910749936478

@@ -14,6 +14,10 @@ public class Unit : MonoBehaviour
 
     public bool TakeDemage(int dmg,int def)
     {
+        if (def >= dmg)
+        {
+            def = dmg;
+        }
         currentHP -= (dmg - def);
 
         if (currentHP <= 0)

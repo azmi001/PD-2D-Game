@@ -22,6 +22,7 @@ public class BattleSystem : MonoBehaviour
 	public Text dialogueText;
     public Button attackButton;
     public Button healButton;
+	public Button defenseButton;
     public BattleHUD playerHUD;
 	public BattleHUD enemyHUD;
 	
@@ -31,6 +32,7 @@ public class BattleSystem : MonoBehaviour
 	public string kalah;
 
 	public bool isTurn = false;
+	public bool isPlayerDefense = false;
 
 	// Start is called before the first frame update
 	void Start()
@@ -94,11 +96,51 @@ public class BattleSystem : MonoBehaviour
 		
 		yield return new WaitForSeconds(1f);
 
-		bool isDead = playerUnit.TakeDemage(enemyUnit.damage, playerUnit.deffense);
+		if(isPlayerDefense == true)
+		{
+            bool isDead = playerUnit.TakeDemage(enemyUnit.damage, playerUnit.deffense * 3);
+
+            if (isDead)
+            {
+                state = BattleState.LOST;
+                EndBattle();
+
+                yield return new WaitForSeconds(1f);
+                SceneManager.LoadScene(kalah);
+            }
+            else
+            {
+                state = BattleState.PLAYERTRURN;
+                EnableInteraction();
+                PlayerTurn();
+                isTurn = false;
+				isPlayerDefense = false;
+            }
+        }
+		else
+		{
+            bool isDead = playerUnit.TakeDemage(enemyUnit.damage, playerUnit.deffense);
+
+            if (isDead)
+            {
+                state = BattleState.LOST;
+                EndBattle();
+
+                yield return new WaitForSeconds(1f);
+                SceneManager.LoadScene(kalah);
+            }
+            else
+            {
+                state = BattleState.PLAYERTRURN;
+                EnableInteraction();
+                PlayerTurn();
+                isTurn = false;
+            }
+        }
 
 		playerHUD.SetHP(playerUnit.currentHP);
 
-		yield return new WaitForSeconds(1f);
+		/*yield return new WaitForSeconds(1f);
 
 		if(isDead)
 		{
@@ -113,7 +155,7 @@ public class BattleSystem : MonoBehaviour
             EnableInteraction();
             PlayerTurn();
 			isTurn = false;
-		}
+		}*/
 	}
 
 	void EndBattle()
@@ -136,12 +178,14 @@ public class BattleSystem : MonoBehaviour
     {
         attackButton.interactable = true;
         healButton.interactable = true;
+		defenseButton.interactable = true;
     }
 
     void DisableInteraction()
     {
         attackButton.interactable = false;
         healButton.interactable = false;
+		defenseButton.interactable = false;
     }
 
     IEnumerator PlayerHeal()
@@ -157,6 +201,18 @@ public class BattleSystem : MonoBehaviour
 		StartCoroutine(EnemyTurn());
 	}
 
+	IEnumerator PlayerDefense()
+	{
+		isPlayerDefense = true;
+
+        dialogueText.text = "Player try to Defense!";
+
+        yield return new WaitForSeconds(2f);
+
+        state = BattleState.ENEMYTURN;
+        StartCoroutine(EnemyTurn());
+    }
+
 	public void OnAttackButton()
 	{
 		if (state != BattleState.PLAYERTRURN)
@@ -168,14 +224,31 @@ public class BattleSystem : MonoBehaviour
 
 			isTurn = true;
 		}
-		
 	}
 
 	public void OnHealButton()
 	{
 		if (state != BattleState.PLAYERTRURN)
 			return;
+		
+        if (isTurn != true)
+        {
+            StartCoroutine(PlayerHeal());
 
-		StartCoroutine(PlayerHeal());
-	}
+            isTurn = true;
+        }
+    }
+
+    public void OnDefeseButton()
+    {
+        if (state != BattleState.PLAYERTRURN)
+            return;
+
+        if (isTurn != true)
+        {
+            StartCoroutine(PlayerDefense());
+
+            isTurn = true;
+        }
+    }
 }
