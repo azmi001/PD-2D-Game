@@ -65,9 +65,11 @@ public class BattleSystem : MonoBehaviour
         DisableInteraction();
 
         // Damage the enemy
-        bool isDead = enemyUnit.TakeDemage(playerUnit.damage, enemyUnit.deffense);
+        //bool isDead = enemyUnit.TakeDemage(playerUnit.damage, enemyUnit.deffense);
 
-		enemyHUD.SetHP(enemyUnit.currentHP);
+        bool isDead = enemyUnit.TakeDemage(playerUnit.damage, enemyUnit.deffense, playerUnit.thisUnitElement);
+
+        enemyHUD.SetHP(enemyUnit.currentHP);
 		dialogueText.text = "The attack is successul!";
 
 		yield return new WaitForSeconds(2f);
@@ -98,7 +100,8 @@ public class BattleSystem : MonoBehaviour
 
 		if(isPlayerDefense == true)
 		{
-            bool isDead = playerUnit.TakeDemage(enemyUnit.damage, playerUnit.deffense * 3);
+            //bool isDead = playerUnit.TakeDemage(enemyUnit.damage, playerUnit.deffense * 3);
+            bool isDead = playerUnit.TakeDemage(enemyUnit.damage, playerUnit.deffense * 3, enemyUnit.thisUnitElement);
 
             if (isDead)
             {
@@ -119,7 +122,8 @@ public class BattleSystem : MonoBehaviour
         }
 		else
 		{
-            bool isDead = playerUnit.TakeDemage(enemyUnit.damage, playerUnit.deffense);
+            //bool isDead = playerUnit.TakeDemage(enemyUnit.damage, playerUnit.deffense);
+            bool isDead = playerUnit.TakeDemage(enemyUnit.damage, playerUnit.deffense, enemyUnit.thisUnitElement);
 
             if (isDead)
             {
