@@ -49,7 +49,7 @@ public class BattleSystem : MonoBehaviour
 		GameObject enemyGO= Instantiate(enemyPrefabs, enemyBattleStation);
 		enemyUnit = enemyGO.GetComponent<Unit>();
 
-		dialogueText.text = "A wild " + enemyUnit.unitName + " approaches...";
+		dialogueText.text = "A wild " + enemyUnit.character.unitName + " approaches...";
 
 		playerHUD.SetHUD(playerUnit);
 		enemyHUD.SetHUD(enemyUnit);
@@ -67,7 +67,10 @@ public class BattleSystem : MonoBehaviour
         // Damage the enemy
         //bool isDead = enemyUnit.TakeDemage(playerUnit.damage, enemyUnit.deffense);
 
-        bool isDead = enemyUnit.TakeDemage(playerUnit.damage, enemyUnit.deffense, playerUnit.thisUnitElement);
+        bool isDead = enemyUnit.TakeDemage(
+			playerUnit.character.damage, 
+			enemyUnit.character.deffense, 
+			playerUnit.character.thisUnitElement);
 
         enemyHUD.SetHP(enemyUnit.currentHP);
 		dialogueText.text = "The attack is successul!";
@@ -94,14 +97,17 @@ public class BattleSystem : MonoBehaviour
 
 	IEnumerator EnemyTurn()
 	{
-		dialogueText.text = enemyUnit.unitName + " attacks!";
+		dialogueText.text = enemyUnit.character.unitName + " attacks!";
 		
 		yield return new WaitForSeconds(1f);
 
 		if(isPlayerDefense == true)
 		{
             //bool isDead = playerUnit.TakeDemage(enemyUnit.damage, playerUnit.deffense * 3);
-            bool isDead = playerUnit.TakeDemage(enemyUnit.damage, playerUnit.deffense * 3, enemyUnit.thisUnitElement);
+            bool isDead = playerUnit.TakeDemage(
+				enemyUnit.character.damage, 
+				playerUnit.character.deffense * 3, 
+				enemyUnit.character.thisUnitElement);
 
             if (isDead)
             {
@@ -123,7 +129,10 @@ public class BattleSystem : MonoBehaviour
 		else
 		{
             //bool isDead = playerUnit.TakeDemage(enemyUnit.damage, playerUnit.deffense);
-            bool isDead = playerUnit.TakeDemage(enemyUnit.damage, playerUnit.deffense, enemyUnit.thisUnitElement);
+            bool isDead = playerUnit.TakeDemage(
+				enemyUnit.character.damage, 
+				playerUnit.character.deffense, 
+				enemyUnit.character.thisUnitElement);
 
             if (isDead)
             {
@@ -144,22 +153,6 @@ public class BattleSystem : MonoBehaviour
 
 		playerHUD.SetHP(playerUnit.currentHP);
 
-		/*yield return new WaitForSeconds(1f);
-
-		if(isDead)
-		{
-			state = BattleState.LOST;
-			EndBattle();
-			
-			yield return new WaitForSeconds(1f);
-			SceneManager.LoadScene(kalah);
-		} else
-		{
-			state = BattleState.PLAYERTRURN;
-            EnableInteraction();
-            PlayerTurn();
-			isTurn = false;
-		}*/
 	}
 
 	void EndBattle()
@@ -194,7 +187,9 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator PlayerHeal()
 	{
-		playerUnit.Heal(15);
+        DisableInteraction();
+
+        playerUnit.Heal(100);
 
 		playerHUD.SetHP(playerUnit.currentHP);
 		dialogueText.text = "You feel renewed strength!";
@@ -207,7 +202,9 @@ public class BattleSystem : MonoBehaviour
 
 	IEnumerator PlayerDefense()
 	{
-		isPlayerDefense = true;
+        DisableInteraction();
+
+        isPlayerDefense = true;
 
         dialogueText.text = "Player try to Defense!";
 

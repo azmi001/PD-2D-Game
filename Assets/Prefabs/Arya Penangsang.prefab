@@ -45,14 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 863688f7c3471734b9fa30bc1165f884, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitName: Arya Penangsang
-  unitLevel: 5
-  deffense: 0
-  damage: 10
-  bp: 50
-  maxHP: 100
-  currentHP: 100
-  thisUnitElement: 1
+  currentHP: 0
+  character: {fileID: 11400000, guid: a145b0104c626724f988b654cb1a7c36, type: 2}
 --- !u!1 &8890152910749936478
 GameObject:
   m_ObjectHideFlags: 0

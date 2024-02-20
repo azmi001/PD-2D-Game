@@ -5,116 +5,97 @@ using UnityEngine;
 
 public class Unit : MonoBehaviour
 {
-    [Header("Unit Stat")]
-    public string unitName;
-    public int unitLevel;
-    public int deffense;
-    public int damage;
-    public int bp;
-    public int maxHP;
+    //data darah yang sekarang akan terupdate dalam game
     public int currentHP;
 
-    public enum ElementType
+    //Merenfrensikan dari scriptable object Character untuk mengambil data stat character 
+    public Character character;
+
+    //inisialisasi awal darah
+    public void Awake()
     {
-        Fire,
-        Leaf,
-        Water
+        currentHP = character.maxHP;
     }
 
-    [Header("Element Unit")]
-    public ElementType thisUnitElement;
-
+    //logika penyerangan
     public bool TakeDemage(int dmg, int def, ElementType attackerElement)
     {
-        //int finaldmg;
-        /*int finaldmg;
-        int temp;
-        temp = (dmg + ul) / (1 + (def / 100));
-        finaldmg = bp * temp;*/
+        //Mendubug dmg awal
+        Debug.Log("Demage Murni " + character.unitName + "yang belum dicampur elemen " + dmg);
 
-        /*finaldmg = Mathf.RoundToInt(bp * ((dmg + ul) / (1 + (def / 100f))));
+        //inisialisasi awal logika sitem dmg elemen
+        int actualDamage = dmg * 15/100;
+        Debug.Log("Demage elemen didapat " + character.unitName + "adalah " + actualDamage);
 
-        Debug.Log(finaldmg);
-
-        if (def >= finaldmg)
-        {
-            def = finaldmg;
-        }
-
-        currentHP -= finaldmg;
-
-        if (currentHP <= 0)
-            return true;
-        else
-            return false;*/
-
-        //float dmgMultiplier = 1f;
-
-        Debug.Log(dmg);
-        //Debug.Log(def);
-
-        /*if (ElementSystem.IsStrongAgainst(playerType, enemyType))
-        {
-            dmgMultiplier = 2f;
-        } else if (ElementSystem.IsWeakAgainst(playerType, enemyType))
-        {
-            dmgMultiplier = 0.5f;
-        } else
-        {
-            dmgMultiplier = 1f;
-        }*/
-
-        /*int percentage = Random.Range(80,100);*/
-
-        int actualDamage = dmg /* * (percentage / 100)*/;
-
-
-        switch (thisUnitElement)
+        switch (character.thisUnitElement)
         {
             case ElementType.Fire:
                 if (attackerElement == ElementType.Leaf)
-                    actualDamage /= 2; // Double damage
+                    actualDamage *= -1; // Double damage
                 else if (attackerElement == ElementType.Water)
-                    actualDamage *= 2; // Half damage
+                    actualDamage *= 1; // Half damage
                 break;
             case ElementType.Leaf:
                 if (attackerElement == ElementType.Water)
-                    actualDamage /= 2; // Double damage
+                    actualDamage *= -1; // Double damage
                 else if (attackerElement == ElementType.Fire)
-                    actualDamage *= 2; // Half damage
+                    actualDamage *= 1; // Half damage
                 break;
             case ElementType.Water:
                 if (attackerElement == ElementType.Fire)
-                    actualDamage /= 2; // Double damage
+                    actualDamage *= -1; // Double damage
                 else if (attackerElement == ElementType.Leaf)
-                    actualDamage *= 2; // Half damage
+                    actualDamage *= 1; // Half damage
                 break;
         }
 
-        int finalDmg = actualDamage;
+        //total dmg yang sudah ditambah dari dmg element
+        int finalDmg = dmg + actualDamage;
 
-        def *= 2;
+        //mendebug total dmg final dmg
+        Debug.Log("Demage Final " + character.unitName + "yang dicampur elemen " + finalDmg);
 
-        if (def >= finalDmg)
+        //mebuat logika variasi dmg 20% +- dari total finaldmg
+        int varian = finalDmg * 20 / 100;
+        int minVarian = -varian;
+        int maxVarian = varian;
+        int result = Random.Range(minVarian, maxVarian);
+
+        //mendebug nial variasi dmg varian
+        Debug.Log(character.unitName + "Min range -varian dari dmg " + minVarian);
+        Debug.Log(character.unitName + "Min range +varian dari dmg " + maxVarian);
+        Debug.Log(character.unitName +"Variasi dmg tambahan +- " + result);
+
+        //mendebug nilai finaldmg yang ditambah oleh nilai variasi 
+        int totalDmg = finalDmg + result;
+        Debug.Log("Total Demage yang diberikan oleh " + character.unitName + "adalah " + totalDmg);
+
+        //logika rumus pengurangan darah target 
+        int finalDmg1 = ((finalDmg + result) * 4);
+        int def1 = (def * 2);
+
+        //menbuat logika jika dmg nya minus gak akan menambah darah target yang diserang
+        //dan dmg yang diterima adalah 0
+        if (def1 >= finalDmg1)
         {
-            def = finalDmg;
+            def1 = finalDmg1;
         }
 
-        Debug.Log(finalDmg);
-        //Debug.Log(def);
+        currentHP -= finalDmg1 - def1;
+        //currentHP -= ((finalDmg + result) * 4) - (def * 2);
 
-        currentHP -= (finalDmg - def);
-
+        //pengkondisian apakah target yang diserah sudah mati atau belum
         if (currentHP <= 0)
             return true;
         else 
             return false;
     }
 
+    //logika skill heal
     public void Heal(int amount)
     {
         currentHP += amount;
-        if (currentHP > maxHP)
-            currentHP = maxHP;
+        if (currentHP > character.maxHP)
+            currentHP = character.maxHP;
     }
 }

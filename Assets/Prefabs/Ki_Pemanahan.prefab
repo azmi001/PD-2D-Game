@@ -45,14 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 863688f7c3471734b9fa30bc1165f884, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitName: Ki Pemanahan
-  unitLevel: 10
-  deffense: 0
-  damage: 10
-  bp: 50
-  maxHP: 200
-  currentHP: 200
-  thisUnitElement: 0
+  currentHP: 0
+  character: {fileID: 11400000, guid: 602203a110a014b4385be22f32ff9d43, type: 2}
 --- !u!1 &9068230206245435711
 GameObject:
   m_ObjectHideFlags: 0

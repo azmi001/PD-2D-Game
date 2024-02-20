@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Character", menuName = "Character")]
-public class Character : ScriptableObject
+public partial class Character : ScriptableObject
 {
+    // atribute stast character
     [Header("Unit Stat")]
     public string unitName;
     public int unitLevel;
@@ -12,13 +13,7 @@ public class Character : ScriptableObject
     public int damage;
     public int maxHP;
 
-    public enum ElementType
-    {
-        Fire,
-        Leaf,
-        Water
-    }
-
+    // mendefinisikan tipe element character
     [Header("Element Unit")]
     public ElementType thisUnitElement;
 }
