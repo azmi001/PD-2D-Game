@@ -10,11 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 01f1faae6c29aea42a39b9f28c72f49f, type: 3}
-  m_Name: Ki_Pemanahan
+  m_Name: Arya Penangsang
   m_EditorClassIdentifier: 
-  unitName: Ki_Pemanahan
+  unitName: Arya Penangsang
   unitLevel: 1
+  unitexp: 0
   deffense: 18
   damage: 26
   maxHP: 360
-  thisUnitElement: 1
+  thisUnitElement: 0
+  skillList:
+  - {fileID: 11400000, guid: bc7391f22cb2d5a4b86b9ee43074ba43, type: 2}
+  - {fileID: 11400000, guid: 3f968db9b643d2f4fa62c02b16f98487, type: 2}

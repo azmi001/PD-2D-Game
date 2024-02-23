@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Linq;
@@ -6,15 +7,39 @@ using UnityEngine;
 public class Unit : MonoBehaviour
 {
     //data darah yang sekarang akan terupdate dalam game
+    [Header("Status Darah")]
     public int currentHP;
 
-    //Merenfrensikan dari scriptable object Character untuk mengambil data stat character 
+    [Header("Status Level Charcter")]
+    public float currentXP;
+    public float expToLvUp;
+    public float currentLv;
+
+    //Merenfrensikan dari scriptable object Character untuk mengambil data stat character
+    [Header("Data Character")]
     public Character character;
+
+    [Header("List Skill Character")]
+    public List<Skill> skillList;
 
     //inisialisasi awal darah
     public void Awake()
     {
+        InitializedData();
+    }
+
+    public void Start()
+    {
+        float hasil = MathF.Pow(2f / 0.09f, 1.6f);
+        Debug.Log(hasil);
+    }
+
+    public void InitializedData()
+    {
         currentHP = character.maxHP;
+        currentLv = character.unitLevel;
+        currentXP = character.unitexp;
+        skillList = new List<Skill>(character.skills);
     }
 
     //logika penyerangan
@@ -24,7 +49,7 @@ public class Unit : MonoBehaviour
         Debug.Log("Demage Murni " + character.unitName + "yang belum dicampur elemen " + dmg);
 
         //inisialisasi awal logika sitem dmg elemen
-        int actualDamage = dmg * 15/100;
+        int actualDamage = dmg * BattleSystem.instance.elDmg /100;
         Debug.Log("Demage elemen didapat " + character.unitName + "adalah " + actualDamage);
 
         switch (character.thisUnitElement)
@@ -56,10 +81,10 @@ public class Unit : MonoBehaviour
         Debug.Log("Demage Final " + character.unitName + "yang dicampur elemen " + finalDmg);
 
         //mebuat logika variasi dmg 20% +- dari total finaldmg
-        int varian = finalDmg * 20 / 100;
+        int varian = finalDmg * BattleSystem.instance.varDmg / 100;
         int minVarian = -varian;
         int maxVarian = varian;
-        int result = Random.Range(minVarian, maxVarian);
+        int result = UnityEngine.Random.Range(minVarian, maxVarian);
 
         //mendebug nial variasi dmg varian
         Debug.Log(character.unitName + "Min range -varian dari dmg " + minVarian);
@@ -90,12 +115,36 @@ public class Unit : MonoBehaviour
         else 
             return false;
     }
-
+    
     //logika skill heal
     public void Heal(int amount)
     {
         currentHP += amount;
         if (currentHP > character.maxHP)
             currentHP = character.maxHP;
+    }
+    
+
+    public void GainExp(int exp)
+    {
+        currentXP += exp;
+        if(currentXP >= expToLvUp)
+        {
+            LvUp();
+        }
+    }
+
+    public void LvUp()
+    {
+        currentLv++;
+        currentXP -= expToLvUp; 
+        expToLvUp = CalculateNextLevelXP();
+    }
+
+    float CalculateNextLevelXP()
+    {
+        float result = Mathf.Pow(currentLv + 1 / 0.09f, 1.6f);
+        Debug.Log("Result: " + result);
+        return result;
     }
 }
