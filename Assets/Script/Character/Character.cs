@@ -13,6 +13,7 @@ public partial class Character : ScriptableObject
     public int deffense;
     public int damage;
     public int maxHP;
+    public int Heal;
 
     // mendefinisikan tipe element character
     [Header("Element Unit")]

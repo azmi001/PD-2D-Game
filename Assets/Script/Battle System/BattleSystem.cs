@@ -4,7 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public enum BattleState { START, PLAYERTRURN, ENEMYTURN, WON, LOST }
+public enum BattleState { 
+	START, PLAYERTRURN, ENEMYTURN, WON, LOST,CHECK 
+}
 
 public class BattleSystem : MonoBehaviour
 {
@@ -89,10 +91,7 @@ public class BattleSystem : MonoBehaviour
         // Damage the enemy
         //bool isDead = enemyUnit.TakeDemage(playerUnit.damage, enemyUnit.deffense);
 
-        bool isDead = _enemyUnit.TakeDemage(
-			_playerUnit.character.damage, 
-			_enemyUnit.character.deffense, 
-			_playerUnit.character.thisUnitElement);
+        bool isDead = _enemyUnit.TakeDemage(_playerUnit.character.damage, _enemyUnit.character.deffense, _playerUnit.character.thisUnitElement);
 
         enemyHUD.SetHP(_enemyUnit.currentHP);
 		dialogueText.text = "The attack is successul!";

@@ -18,6 +18,7 @@ public class Unit : MonoBehaviour
     //Merenfrensikan dari scriptable object Character untuk mengambil data stat character
     [Header("Data Character")]
     public Character character;
+    [HideInInspector]public int _def;
 
     [Header("List Skill Character")]
     public List<Skill> skillList;
@@ -30,10 +31,14 @@ public class Unit : MonoBehaviour
 
     public void Start()
     {
+        _def = character.deffense;
         float hasil = MathF.Pow(2f / 0.09f, 1.6f);
         Debug.Log(hasil);
     }
-
+    private void OnDisable()
+    {
+        _def = character.deffense;
+    }
     public void InitializedData()
     {
         currentHP = character.maxHP;
@@ -49,7 +54,7 @@ public class Unit : MonoBehaviour
         Debug.Log("Demage Murni " + character.unitName + "yang belum dicampur elemen " + dmg);
 
         //inisialisasi awal logika sitem dmg elemen
-        int actualDamage = dmg * BattleSystem.instance.elDmg /100;
+        int actualDamage = dmg * 15 /100;
         Debug.Log("Demage elemen didapat " + character.unitName + "adalah " + actualDamage);
 
         switch (character.thisUnitElement)
@@ -81,7 +86,7 @@ public class Unit : MonoBehaviour
         Debug.Log("Demage Final " + character.unitName + "yang dicampur elemen " + finalDmg);
 
         //mebuat logika variasi dmg 20% +- dari total finaldmg
-        int varian = finalDmg * BattleSystem.instance.varDmg / 100;
+        int varian = finalDmg * 20/ 100;
         int minVarian = -varian;
         int maxVarian = varian;
         int result = UnityEngine.Random.Range(minVarian, maxVarian);
