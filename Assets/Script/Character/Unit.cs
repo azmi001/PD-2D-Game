@@ -23,6 +23,8 @@ public class Unit : MonoBehaviour
     [Header("List Skill Character")]
     public List<Skill> skillList;
 
+    public ACTORTYPE actorType;
+
     //inisialisasi awal darah
     public void Awake()
     {
@@ -34,10 +36,6 @@ public class Unit : MonoBehaviour
         _def = character.deffense;
         float hasil = MathF.Pow(2f / 0.09f, 1.6f);
         Debug.Log(hasil);
-    }
-    private void OnDisable()
-    {
-        _def = character.deffense;
     }
     public void InitializedData()
     {
@@ -121,6 +119,11 @@ public class Unit : MonoBehaviour
             return false;
     }
     
+    public void DefUp(int amount)
+    {
+        _def *= amount;
+    }
+
     //logika skill heal
     public void Heal(int amount)
     {
@@ -152,4 +155,9 @@ public class Unit : MonoBehaviour
         Debug.Log("Result: " + result);
         return result;
     }
+}
+public enum ACTORTYPE
+{
+    PLAYER,
+    ENEMY
 }

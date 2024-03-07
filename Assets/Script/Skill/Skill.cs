@@ -1,7 +1,7 @@
+using System.Collections;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Skill", menuName = "Skill")]
-public class Skill : ScriptableObject
+public abstract class Skill : ScriptableObject
 {
     [Header("Nama Skill")]
     public string skillName;
@@ -10,6 +10,9 @@ public class Skill : ScriptableObject
     public int skillDmg;
     public int skillHeal;
     public int skillDef;
+    public ElementType skillElement;
+
+    public abstract IEnumerator UseSkill(Unit target);
 
     /*[Header("Icon Skill")]
     public Sprite icon;*/

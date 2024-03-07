@@ -15,14 +15,16 @@ public class GameSetting : MonoBehaviour
     [SerializeField]private List<Unit> playerUnit = new();
     [SerializeField] private List<Unit> enemyUnit = new();
 
+    [SerializeField] private Unit currentUnitPlay;
+    
     [SerializeField] private BattleHUD playerHUD;
     [SerializeField] private BattleHUD enemyHUD;
 
     private int playerIndex;
     private int enemyIndex;
 
-    public bool playerTurnIsDone = false;
-    public bool enemyTurnIsDone = false;
+    private bool playerTurnIsDone = false;
+    private bool enemyTurnIsDone = true;
 
     [SerializeField] private BattleState currentState = BattleState.PLAYERTRURN;
 
@@ -32,23 +34,49 @@ public class GameSetting : MonoBehaviour
     }
     private void OnEnable()
     {
-        Actions.AttackToEnemy += OnAttackToEnemy;
+        Funcs.GetAllPlayerUnit += GetAllPlayerUnit;
+        Funcs.GetCurrentUnitPlay += GetCurrentUnit;
+        Funcs.GetAllEnemyUnit += GetAllEnemy;
+        Actions.OnBattleStateChange += ChangeState;
+        Actions.OnUnitUsedAction += AddUnitIndex;
     }
+
     private void OnDisable()
     {
-        Actions.AttackToEnemy -= OnAttackToEnemy;
+        Funcs.GetAllPlayerUnit -= GetAllPlayerUnit;
+        Funcs.GetCurrentUnitPlay -= GetCurrentUnit;
+        Funcs.GetAllEnemyUnit -= GetAllEnemy;
+        Actions.OnBattleStateChange -= ChangeState;
+        Actions.OnUnitUsedAction -= AddUnitIndex;
     }
-    private void OnAttackToEnemy(int value)
+    private void AddUnitIndex(Unit unit)
     {
-        bool isUnitDead = enemyUnit[value].TakeDemage(playerUnit[playerIndex].character.damage, enemyUnit[value]._def, playerUnit[playerIndex].character.thisUnitElement);
-        if (isUnitDead)
+        switch (unit.actorType)
         {
-            GameObject go = enemyUnit[value].gameObject;
-            enemyUnit.Remove(enemyUnit[value]);
-            Destroy(go);
-
+            case ACTORTYPE.PLAYER:
+                playerIndex++;
+                break;
+            case ACTORTYPE.ENEMY:
+                enemyIndex++;
+                break;
+            default:
+                break;
         }
-        CheckPlayerTurn();
+    }
+
+    private List<Unit> GetAllEnemy()
+    {
+        return enemyUnit;
+    }
+    private Unit GetCurrentUnit()
+    {
+        return currentUnitPlay;
+    }
+
+
+    private List<Unit> GetAllPlayerUnit()
+    {
+        return playerUnit;
     }
 
     private void Init()
@@ -56,47 +84,34 @@ public class GameSetting : MonoBehaviour
         foreach (var item in playerPrefab)
         {
             GameObject go = Instantiate(item, playerPos);
+            go.GetComponent<Unit>().actorType = ACTORTYPE.PLAYER;
             playerUnit.Add(go.GetComponent<Unit>());
         }
         foreach (var item in enemyPrefab)
         {
             GameObject go = Instantiate(item, enemyPos);
+            go.GetComponent<Unit>().actorType = ACTORTYPE.ENEMY;
             enemyUnit.Add(go.GetComponent<Unit>());
         }
 
-        Actions.AddListenerToGameButton?.Invoke(AttackToEnemy, DefenseUp, HealUp);
+        currentUnitPlay = playerUnit[playerIndex];
+        Actions.AddListenerToGameButton?.Invoke(PlayerAttack, DefenseUp, HealUp);
     }
 
     private void HealUp()
     {
-        playerUnit[playerIndex].Heal(playerUnit[playerIndex].character.Heal);
-        CheckPlayerTurn();
+        Actions.OnUnitUseAction?.Invoke(UNITACTIONTYPE.HEAL, currentUnitPlay);
     }
 
     private void DefenseUp()
     {
-        playerUnit[playerIndex]._def *= 3;
-        CheckPlayerTurn();
+        Actions.OnUnitUseAction?.Invoke(UNITACTIONTYPE.DEFENSE,currentUnitPlay);
     }
 
-    private void AttackToEnemy()
+    private void PlayerAttack()
     {
-        Actions.OpenListEnemy?.Invoke(enemyUnit.Count);
-    }
-
-    private void CheckPlayerTurn()
-    {
-        playerIndex++;
-        if (playerIndex >= playerUnit.Count)
-        {
-            playerTurnIsDone = true;
-            ChangeState(BattleState.CHECK);
-        }
-        else
-        {
-            Actions.AddListenerToGameButton?.Invoke(AttackToEnemy, DefenseUp, HealUp);
-            ChangeState(BattleState.PLAYERTRURN);
-        }
+        //Actions.OnUnitUseAction?.Invoke(UNITACTIONTYPE.ATTACK,currentUnitPlay);
+        Actions.OpenListEnemy?.Invoke(UNITACTIONTYPE.ATTACK);
     }
 
     public void ChangeState(BattleState newState)
@@ -108,10 +123,12 @@ public class GameSetting : MonoBehaviour
                 break;
             case BattleState.PLAYERTRURN:
                 Actions.IsDisableAllButton?.Invoke(false);
+                currentUnitPlay = playerUnit[playerIndex];
                 break;
             case BattleState.ENEMYTURN:
-                StartCoroutine(EnemyAttack());
+                currentUnitPlay = enemyUnit[enemyIndex];
                 Actions.IsDisableAllButton?.Invoke(true);
+                StartCoroutine(EnemyAttack());
                 break;
             case BattleState.WON:
                 Debug.Log("Won");
@@ -120,61 +137,63 @@ public class GameSetting : MonoBehaviour
                 Debug.Log("Lost");
                 break;
             case BattleState.CHECK:
-                if (playerTurnIsDone)
+                if (enemyUnit == null || enemyUnit.Count <= 0)
                 {
-                    if (enemyUnit != null||enemyUnit.Count>0)
+                    ChangeState(BattleState.WON);
+                }
+                if(playerUnit == null || enemyUnit.Count <= 0)
+                {
+                    ChangeState(BattleState.LOST);
+                }
+                if (playerTurnIsDone && !enemyTurnIsDone)
+                {
+                    if (enemyIndex >= enemyUnit.Count)
                     {
-                        playerIndex = 0;
                         playerTurnIsDone = false;
+                        enemyTurnIsDone = true;
+                        enemyIndex = 0;
+                        ChangeState(BattleState.CHECK);
+                    }
+                    else
+                    {
                         ChangeState(BattleState.ENEMYTURN);
                     }
-                    if(enemyUnit == null || enemyUnit.Count<=0)
-                    {
-                        playerIndex = 0;
-                        playerTurnIsDone = false;
-                        ChangeState(BattleState.WON);
-                    }
                 }
-                if (enemyTurnIsDone)
+                if(!playerTurnIsDone && enemyTurnIsDone)
                 {
-                    if (playerUnit != null || playerUnit.Count > 0)
+                    if (playerIndex >= playerUnit.Count)
                     {
-                        enemyIndex = 0;
+                        playerTurnIsDone = true;
                         enemyTurnIsDone = false;
+                        playerIndex = 0;
+                        ChangeState(BattleState.CHECK);
+                    }
+                    else
+                    {
                         ChangeState(BattleState.PLAYERTRURN);
                     }
-                    if (playerUnit == null || playerUnit.Count <= 0)
-                    {
-                        enemyIndex = 0;
-                        enemyTurnIsDone = false;
-                        ChangeState(BattleState.LOST);
-                    }
-
+                    break;
                 }
                 break;
             default:
                 break;
         }
     }
-
     private IEnumerator EnemyAttack()
     {
-        while (enemyIndex<enemyUnit.Count)
+        int rand = UnityEngine.Random.Range(0, playerUnit.Count);
+        Debug.Log("Enemy attack player" + rand);
+        bool IsUnitDead = playerUnit[rand].TakeDemage(enemyUnit[enemyIndex].character.damage, playerUnit[rand]._def, enemyUnit[enemyIndex].character.thisUnitElement);
+        if (IsUnitDead)
         {
-            int rand = UnityEngine.Random.Range(0, playerUnit.Count);
-            Debug.Log("Enemy attack player" + rand);
-            bool IsUnitDead = playerUnit[rand].TakeDemage(enemyUnit[enemyIndex].character.damage, playerUnit[rand]._def, enemyUnit[enemyIndex].character.thisUnitElement);
-            if (IsUnitDead)
-            {
-                GameObject go = playerUnit[rand].gameObject;
-                playerUnit.Remove(playerUnit[rand]);
-                Destroy(go);
-            }
-            
-            enemyIndex++;
-            yield return new WaitForSeconds(1f);
+            GameObject go = playerUnit[rand].gameObject;
+            playerUnit.Remove(playerUnit[rand]);
+            Destroy(go);
         }
-        enemyTurnIsDone = true;
+        yield return new WaitForSeconds(1f);
+        //enemyTurnIsDone = true;
+        //playerTurnIsDone = false;
+        AddUnitIndex(currentUnitPlay);
         ChangeState(BattleState.CHECK);
     }
 }
