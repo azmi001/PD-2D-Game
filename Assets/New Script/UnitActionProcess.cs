@@ -29,23 +29,7 @@ public class UnitActionProcess : MonoBehaviour
         switch (_action)
         {
             case UNITACTIONTYPE.ATTACK:
-                bool isUnitDead = unitTarget.TakeDemage(unit.character.damage, unitTarget._def, unit.character.thisUnitElement);
-                if (isUnitDead)
-                {
-                    Unit temp = unitTarget;
-                    switch (unitTarget.actorType)
-                    {
-                        case ACTORTYPE.PLAYER:
-                            Funcs.GetAllPlayerUnit.Invoke().Remove(unitTarget);
-                            break;
-                        case ACTORTYPE.ENEMY:
-                            Funcs.GetAllEnemyUnit.Invoke().Remove(unitTarget);
-                            break;
-                        default:
-                            break;
-                    }
-                    Destroy(temp.gameObject);
-                }
+                unitTarget.TakeDemage(unit.character.damage, unitTarget._def, unit.character.thisUnitElement);
                 break;
             case UNITACTIONTYPE.HEAL:
                 unit.Heal(unit.character.Heal);
@@ -59,8 +43,6 @@ public class UnitActionProcess : MonoBehaviour
             default:
                 break;
         }
-        Actions.OnUnitUsedAction?.Invoke(unit);
-        Actions.OnBattleStateChange?.Invoke(BattleState.CHECK);
     }
 }
 
