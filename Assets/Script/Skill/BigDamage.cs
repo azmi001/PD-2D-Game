@@ -10,9 +10,4 @@ public class BigDamage : Skill
         target.TakeDemage(skillDmg, target._def, skillElement);
         yield return null;
     }
-
-    public override IEnumerator UseSkillTry()
-    {
-        throw new System.NotImplementedException();
-    }
 }

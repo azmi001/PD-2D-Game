@@ -36,6 +36,11 @@ public class SkillContainer : MonoBehaviour
                 GameObject go = Instantiate(skillCard, contentParent);
                 go.GetComponentInChildren<Text>().text = player.skillList[i].skillName;
                 go.GetComponent<SkillCard>().AddListener(i, UNITACTIONTYPE.SKILL);
+                //go.GetComponent<Button>().onClick.AddListener(() =>
+                //{
+                //    Actions.OnSelectedSkill?.Invoke(player.skillList[i]);
+                //    Actions.OpenListEnemy?.Invoke(UNITACTIONTYPE.SKILL);
+                //});
             }
         }
     }

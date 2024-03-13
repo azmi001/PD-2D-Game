@@ -12,6 +12,10 @@ public class GamePage : MonoBehaviour
     [SerializeField] private Transform contentParent;
     [SerializeField] private GameObject listEnemyPanel;
     [SerializeField] private GameObject listSkillPanel;
+    private void Start()
+    {
+        skillBTN.onClick.AddListener(() => listSkillPanel.SetActive(true));
+    }
     private void OnEnable()
     {
         Actions.AddListenerToGameButton += AddListener;
@@ -19,7 +23,6 @@ public class GamePage : MonoBehaviour
         Actions.CloseListEnemy += () => listEnemyPanel.SetActive(false);
         Actions.IsDisableAllButton += DisableAllBTN;
         Actions.CloseListSkill += () => listSkillPanel.SetActive(false);
-        Actions.OpenListSkill += () => listSkillPanel.SetActive(true);
     }
 
 
@@ -30,7 +33,6 @@ public class GamePage : MonoBehaviour
         Actions.CloseListEnemy -= () => listEnemyPanel.SetActive(false);
         Actions.IsDisableAllButton -= DisableAllBTN;
         Actions.CloseListSkill -= () => listSkillPanel.SetActive(false);
-        Actions.OpenListSkill -= () => listSkillPanel.SetActive(true);
 
     }
     private void DisableAllBTN(bool isDisable)
@@ -51,7 +53,7 @@ public class GamePage : MonoBehaviour
             skillBTN.interactable = true;
         }
     }
-    private void OpenListEnemy(List<Unit>listunitTarget,UNITACTIONTYPE actionType)
+    private void OpenListEnemy(UNITACTIONTYPE actionType)
     {
         listEnemyPanel.SetActive(true);
         if (contentParent.childCount > 0)
@@ -61,23 +63,28 @@ public class GamePage : MonoBehaviour
                 Destroy(item.gameObject);
             }
         }
-        for (int i = 0; i < listunitTarget.Count; i++)
+        for (int i = 0; i < Funcs.GetAllEnemyUnit.Invoke().Count; i++)
         {
             GameObject go = Instantiate(enemyCard, contentParent);
             go.GetComponent<UICard>().AddListener(i, actionType);
+            //go.GetComponentInChildren<Text>().text = $"Enemy {i}";
+            //go.GetComponent<Button>().onClick.AddListener(() =>
+            //{
+            //    Actions.OnSelectedEnemy?.Invoke(Funcs.GetAllEnemyUnit.Invoke()[i]);
+            //    Actions.OnUnitUseAction?.Invoke(actionType,Funcs.GetCurrentUnitPlay.Invoke());
+            //    Actions.CloseListEnemy?.Invoke();
+            //});
         }
     }
 
-    private void AddListener(UnityAction action1, UnityAction action2, UnityAction action3,UnityAction action4)
+    private void AddListener(UnityAction action1, UnityAction action2, UnityAction action3)
     {
         attackBTN.onClick.RemoveAllListeners();
         defenseBTN.onClick.RemoveAllListeners();
         healBTN.onClick.RemoveAllListeners();
-        skillBTN.onClick.RemoveAllListeners();
 
         attackBTN.onClick.AddListener(action1);
         defenseBTN.onClick.AddListener(action2);
         healBTN.onClick.AddListener(action3);
-        skillBTN.onClick.AddListener(action4);
     }
 }

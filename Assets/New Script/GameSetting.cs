@@ -38,9 +38,8 @@ public class GameSetting : MonoBehaviour
         Funcs.GetCurrentUnitPlay += GetCurrentUnit;
         Funcs.GetAllEnemyUnit += GetAllEnemy;
         Actions.OnBattleStateChange += ChangeState;
-        Actions.OnUnitUsedAction += OnUnitUsedAction;
+        Actions.OnUnitUsedAction += AddUnitIndex;
     }
-
 
     private void OnDisable()
     {
@@ -48,36 +47,21 @@ public class GameSetting : MonoBehaviour
         Funcs.GetCurrentUnitPlay -= GetCurrentUnit;
         Funcs.GetAllEnemyUnit -= GetAllEnemy;
         Actions.OnBattleStateChange -= ChangeState;
-        Actions.OnUnitUsedAction -= OnUnitUsedAction;
+        Actions.OnUnitUsedAction -= AddUnitIndex;
     }
-    private void OnUnitUsedAction(Unit targetunit, bool isDead)
+    private void AddUnitIndex(Unit unit)
     {
-        if (isDead)
-        {
-            switch (targetunit.actorType)
-            {
-                case ACTORTYPE.PLAYER:
-                    playerUnit.Remove(targetunit);
-                    Destroy(targetunit.gameObject);
-                    break;
-                case ACTORTYPE.ENEMY:
-                    enemyUnit.Remove(targetunit);
-                    Destroy(targetunit.gameObject);
-                    break;
-            }
-        }
-        switch (targetunit.actorType)
+        switch (unit.actorType)
         {
             case ACTORTYPE.PLAYER:
-                enemyIndex++;
+                playerIndex++;
                 break;
             case ACTORTYPE.ENEMY:
-                playerIndex++;
+                enemyIndex++;
                 break;
             default:
                 break;
         }
-        ChangeState(BattleState.CHECK);
     }
 
     private List<Unit> GetAllEnemy()
@@ -111,12 +95,7 @@ public class GameSetting : MonoBehaviour
         }
 
         currentUnitPlay = playerUnit[playerIndex];
-        Actions.AddListenerToGameButton?.Invoke(PlayerAttack, DefenseUp, HealUp,OpenSkill);
-    }
-
-    private void OpenSkill()
-    {
-        Actions.OpenListSkill?.Invoke();
+        Actions.AddListenerToGameButton?.Invoke(PlayerAttack, DefenseUp, HealUp);
     }
 
     private void HealUp()
@@ -132,7 +111,7 @@ public class GameSetting : MonoBehaviour
     private void PlayerAttack()
     {
         //Actions.OnUnitUseAction?.Invoke(UNITACTIONTYPE.ATTACK,currentUnitPlay);
-        Actions.OpenListEnemy?.Invoke(enemyUnit,UNITACTIONTYPE.ATTACK);
+        Actions.OpenListEnemy?.Invoke(UNITACTIONTYPE.ATTACK);
     }
 
     public void ChangeState(BattleState newState)
@@ -161,12 +140,10 @@ public class GameSetting : MonoBehaviour
                 if (enemyUnit == null || enemyUnit.Count <= 0)
                 {
                     ChangeState(BattleState.WON);
-                    return;
                 }
-                if(playerUnit == null || playerUnit.Count <= 0)
+                if(playerUnit == null || enemyUnit.Count <= 0)
                 {
                     ChangeState(BattleState.LOST);
-                    return;
                 }
                 if (playerTurnIsDone && !enemyTurnIsDone)
                 {
@@ -206,7 +183,17 @@ public class GameSetting : MonoBehaviour
     {
         int rand = UnityEngine.Random.Range(0, playerUnit.Count);
         Debug.Log("Enemy attack player" + rand);
-        playerUnit[rand].TakeDemage(enemyUnit[enemyIndex].character.damage, playerUnit[rand]._def, enemyUnit[enemyIndex].character.thisUnitElement);
-        yield return null;
+        bool IsUnitDead = playerUnit[rand].TakeDemage(enemyUnit[enemyIndex].character.damage, playerUnit[rand]._def, enemyUnit[enemyIndex].character.thisUnitElement);
+        if (IsUnitDead)
+        {
+            GameObject go = playerUnit[rand].gameObject;
+            playerUnit.Remove(playerUnit[rand]);
+            Destroy(go);
+        }
+        yield return new WaitForSeconds(1f);
+        //enemyTurnIsDone = true;
+        //playerTurnIsDone = false;
+        AddUnitIndex(currentUnitPlay);
+        ChangeState(BattleState.CHECK);
     }
 }
