@@ -39,8 +39,10 @@ public class GameSetting : MonoBehaviour
         Funcs.GetAllEnemyUnit += GetAllEnemy;
         Actions.OnBattleStateChange += ChangeState;
         Actions.OnUnitUsedAction += OnUnitUsedAction;
+        Actions.OnShowHoverTarget += OnShowHover;
+        Actions.OnUnitDied += RefreshListUnit;
+        Actions.CloseListUnit += OnCloseListUnit;
     }
-
 
     private void OnDisable()
     {
@@ -49,35 +51,9 @@ public class GameSetting : MonoBehaviour
         Funcs.GetAllEnemyUnit -= GetAllEnemy;
         Actions.OnBattleStateChange -= ChangeState;
         Actions.OnUnitUsedAction -= OnUnitUsedAction;
-    }
-    private void OnUnitUsedAction(Unit targetunit, bool isDead)
-    {
-        if (isDead)
-        {
-            switch (targetunit.actorType)
-            {
-                case ACTORTYPE.PLAYER:
-                    playerUnit.Remove(targetunit);
-                    Destroy(targetunit.gameObject);
-                    break;
-                case ACTORTYPE.ENEMY:
-                    enemyUnit.Remove(targetunit);
-                    Destroy(targetunit.gameObject);
-                    break;
-            }
-        }
-        switch (targetunit.actorType)
-        {
-            case ACTORTYPE.PLAYER:
-                enemyIndex++;
-                break;
-            case ACTORTYPE.ENEMY:
-                playerIndex++;
-                break;
-            default:
-                break;
-        }
-        ChangeState(BattleState.CHECK);
+        Actions.OnShowHoverTarget -= OnShowHover;
+        Actions.OnUnitDied -= RefreshListUnit;
+        Actions.CloseListUnit -= OnCloseListUnit;
     }
 
     private List<Unit> GetAllEnemy()
@@ -121,18 +97,100 @@ public class GameSetting : MonoBehaviour
 
     private void HealUp()
     {
-        Actions.OnUnitUseAction?.Invoke(UNITACTIONTYPE.HEAL, currentUnitPlay);
+        currentUnitPlay.Heal(20);
+        Actions.OnUnitUsedAction?.Invoke(currentUnitPlay);
     }
 
     private void DefenseUp()
     {
-        Actions.OnUnitUseAction?.Invoke(UNITACTIONTYPE.DEFENSE,currentUnitPlay);
+        currentUnitPlay._def *= 3;
+        Actions.OnUnitUsedAction?.Invoke(currentUnitPlay);
     }
 
     private void PlayerAttack()
     {
-        //Actions.OnUnitUseAction?.Invoke(UNITACTIONTYPE.ATTACK,currentUnitPlay);
-        Actions.OpenListEnemy?.Invoke(enemyUnit,UNITACTIONTYPE.ATTACK);
+        Actions.OpenListUnit?.Invoke(enemyUnit);
+        Actions.OnTargetedUnit += OnTargetedUnit;
+    }
+
+    private void OnCloseListUnit()
+    {
+        if (Actions.OnTargetedUnit == null)
+            return;
+        Delegate[] subs = Actions.OnTargetedUnit.GetInvocationList();
+        foreach (var item in subs)
+        {
+            Actions.OnTargetedUnit -= (Action<Unit>)item;
+        }
+    }
+    private void RefreshListUnit(Unit targetunit)
+    {
+        switch (targetunit.actorType)
+        {
+            case ACTORTYPE.PLAYER:
+                playerUnit.Remove(targetunit);
+                Destroy(targetunit.gameObject);
+                break;
+            case ACTORTYPE.ENEMY:
+                enemyUnit.Remove(targetunit);
+                Destroy(targetunit.gameObject);
+                break;
+        }
+    }
+    private void OnShowHover(bool isShowing, int index, ACTORTYPE actor)
+    {
+        Debug.Log(actor);
+        if (isShowing)
+        {
+            switch (actor)
+            {
+                case ACTORTYPE.PLAYER:
+                    playerPos.GetChild(index).GetComponentInChildren<SpriteRenderer>().color = Color.green;
+                    break;
+                case ACTORTYPE.ENEMY:
+                    enemyPos.GetChild(index).GetComponentInChildren<SpriteRenderer>().color = Color.green;
+                    break;
+                default:
+                    break;
+            }
+        }
+        else
+        {
+            switch (actor)
+            {
+                case ACTORTYPE.PLAYER:
+                    playerPos.GetChild(index).GetComponentInChildren<SpriteRenderer>().color = Color.white;
+                    break;
+                case ACTORTYPE.ENEMY:
+                    enemyPos.GetChild(index).GetComponentInChildren<SpriteRenderer>().color = Color.white;
+                    break;
+                default:
+                    break;
+            }
+
+        }
+    }
+    private void OnUnitUsedAction(Unit targetunit)
+    {
+        switch (targetunit.actorType)
+        {
+            case ACTORTYPE.PLAYER:
+                playerIndex++;
+                break;
+            case ACTORTYPE.ENEMY:
+                enemyIndex++;
+                break;
+            default:
+                break;
+        }
+        ChangeState(BattleState.CHECK);
+    }
+
+    private void OnTargetedUnit(Unit target)
+    {
+        target.TakeDemage(currentUnitPlay.character.damage, target._def, currentUnitPlay.character.thisUnitElement);
+        Actions.OnUnitUsedAction?.Invoke(Funcs.GetCurrentUnitPlay());
+        Actions.OnTargetedUnit -= OnTargetedUnit;
     }
 
     public void ChangeState(BattleState newState)
@@ -144,6 +202,7 @@ public class GameSetting : MonoBehaviour
                 break;
             case BattleState.PLAYERTRURN:
                 Actions.IsDisableAllButton?.Invoke(false);
+                Actions.AddListenerToGameButton?.Invoke(PlayerAttack, DefenseUp, HealUp, OpenSkill);
                 currentUnitPlay = playerUnit[playerIndex];
                 break;
             case BattleState.ENEMYTURN:
@@ -207,6 +266,7 @@ public class GameSetting : MonoBehaviour
         int rand = UnityEngine.Random.Range(0, playerUnit.Count);
         Debug.Log("Enemy attack player" + rand);
         playerUnit[rand].TakeDemage(enemyUnit[enemyIndex].character.damage, playerUnit[rand]._def, enemyUnit[enemyIndex].character.thisUnitElement);
-        yield return null;
+        yield return new WaitForSeconds(1f);
+        Actions.OnUnitUsedAction?.Invoke(currentUnitPlay);
     }
 }

@@ -1,46 +1,41 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(fileName ="HealUp",menuName ="Skill/Heal")]
 public class HealUp : Skill
 {
     public HEALTARGET healTarget;
-
-    public Unit target1;
-    public override IEnumerator UseSkill(Unit target)
-    {
-        yield break;
-    }
-
-    public override IEnumerator UseSkillTry()
+    public override IEnumerator ActionSkill()
     {
         switch (healTarget)
         {
             case HEALTARGET.SINGLE:
-                yield return new WaitUntil(() => target1 != null);
-                target1.Heal(skillHeal);
+                Actions.OpenListUnit?.Invoke(Funcs.GetAllPlayerUnit());
+                Actions.OnTargetedUnit += UseSkillOnTarget;
                 break;
             case HEALTARGET.EVERYONE:
-                List<Unit> allTarget = new();
-                switch (Funcs.GetCurrentUnitPlay.Invoke().actorType)
-                {
-                    case ACTORTYPE.PLAYER:
-                        allTarget = Funcs.GetAllPlayerUnit.Invoke();
-                        break;
-                    case ACTORTYPE.ENEMY:
-                        allTarget = Funcs.GetAllEnemyUnit.Invoke();
-                        break;
-                    default:
-                        break;
-                }
-                break;
-                foreach (var item in allTarget)
+                foreach (var item in Funcs.GetAllPlayerUnit.Invoke())
                 {
                     item.Heal(skillHeal);
                 }
-            default:
                 break;
         }
+        yield return null;
+    }
+
+    private void UseSkillOnTarget(Unit target)
+    {
+        Debug.Log(target == null);
+        target.Heal(skillHeal);
+        Actions.OnUnitUsedAction?.Invoke(Funcs.GetCurrentUnitPlay());
+        Actions.OnTargetedUnit -= UseSkillOnTarget;
+    }
+
+    public override IEnumerator UseSkill(Unit target)
+    {
+        yield return null;
     }
 }
 public enum HEALTARGET

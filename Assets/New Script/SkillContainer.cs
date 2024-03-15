@@ -35,7 +35,7 @@ public class SkillContainer : MonoBehaviour
             {
                 GameObject go = Instantiate(skillCard, contentParent);
                 go.GetComponentInChildren<Text>().text = player.skillList[i].skillName;
-                go.GetComponent<SkillCard>().AddListener(i, UNITACTIONTYPE.SKILL);
+                go.GetComponent<SkillCard>().AddListener(i);
             }
         }
     }

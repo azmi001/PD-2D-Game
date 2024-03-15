@@ -21,4 +21,8 @@ MonoBehaviour:
   Heal: 100
   thisUnitElement: 0
   skills:
+  - {fileID: 11400000, guid: e09764fbfdcf85248957c49940ec18bf, type: 2}
+  - {fileID: 11400000, guid: 56fa8d400019fe14da9c707879386e9f, type: 2}
+  - {fileID: 11400000, guid: 8e1b2148b65d23349b51eb5b4e14fb52, type: 2}
+  - {fileID: 11400000, guid: d08d0b3e0e52ad246a0db39d4128f413, type: 2}
   - {fileID: 11400000, guid: 3f968db9b643d2f4fa62c02b16f98487, type: 2}

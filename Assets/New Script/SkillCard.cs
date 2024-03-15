@@ -1,24 +1,17 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
-
 public class SkillCard : MonoBehaviour
 {
-    public void AddListener(int value, UNITACTIONTYPE actionType)
+    public void AddListener(int skillIndex)
     {
         GetComponent<Button>().onClick.AddListener(() =>{
             Unit player = Funcs.GetCurrentUnitPlay.Invoke();
-            Actions.OnSelectedSkill?.Invoke(player.skillList[value]);
-            Actions.OpenListEnemy?.Invoke(Funcs.GetAllPlayerUnit.Invoke(),actionType);
+            StartCoroutine(player.skillList[skillIndex].ActionSkill());
             Actions.CloseListSkill?.Invoke();
-        });
-    }
-    public void AddListener(Skill _skill)
-    {
-        GetComponent<Button>().onClick.AddListener(() =>
-        {
-            StartCoroutine(_skill.UseSkillTry());
         });
     }
 }

@@ -112,10 +112,10 @@ public class Unit : MonoBehaviour
         currentHP -= finalDmg1 - def1;
         //currentHP -= ((finalDmg + result) * 4) - (def * 2);
 
-        Actions.OnUnitUsedAction?.Invoke(this, currentHP <= 0 ? true : false);
         //pengkondisian apakah target yang diserah sudah mati atau belum
         if (currentHP <= 0)
         {
+            Actions.OnUnitDied?.Invoke(this);
             return true;
         }
         else
@@ -125,7 +125,6 @@ public class Unit : MonoBehaviour
     public void DefUp(int amount)
     {
         _def *= amount;
-        Actions.OnUnitUsedAction?.Invoke(this, false);
     }
 
     //logika skill heal
@@ -134,8 +133,6 @@ public class Unit : MonoBehaviour
         currentHP += amount;
         if (currentHP > character.maxHP)
             currentHP = character.maxHP;
-
-        Actions.OnUnitUsedAction?.Invoke(this, false);
     }
     
 

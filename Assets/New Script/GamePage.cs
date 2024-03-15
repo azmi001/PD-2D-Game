@@ -7,16 +7,20 @@ using UnityEngine.UI;
 
 public class GamePage : MonoBehaviour
 {
-    [SerializeField] private Button attackBTN, defenseBTN, healBTN, skillBTN;
-    [SerializeField] private GameObject enemyCard;
+    [SerializeField] private Button attackBTN, defenseBTN, healBTN, skillBTN,closeBTN;
+    [SerializeField] private GameObject Card;
     [SerializeField] private Transform contentParent;
     [SerializeField] private GameObject listEnemyPanel;
     [SerializeField] private GameObject listSkillPanel;
+    private void Start()
+    {
+        closeBTN.onClick.AddListener(() => Actions.CloseListUnit?.Invoke());
+    }
     private void OnEnable()
     {
         Actions.AddListenerToGameButton += AddListener;
-        Actions.OpenListEnemy += OpenListEnemy;
-        Actions.CloseListEnemy += () => listEnemyPanel.SetActive(false);
+        Actions.OpenListUnit += OpenListUnit;
+        Actions.CloseListUnit += () => listEnemyPanel.SetActive(false);
         Actions.IsDisableAllButton += DisableAllBTN;
         Actions.CloseListSkill += () => listSkillPanel.SetActive(false);
         Actions.OpenListSkill += () => listSkillPanel.SetActive(true);
@@ -26,8 +30,8 @@ public class GamePage : MonoBehaviour
     private void OnDisable()
     {
         Actions.AddListenerToGameButton -= AddListener;
-        Actions.OpenListEnemy -= OpenListEnemy;
-        Actions.CloseListEnemy -= () => listEnemyPanel.SetActive(false);
+        Actions.OpenListUnit -= OpenListUnit;
+        Actions.CloseListUnit -= () => listEnemyPanel.SetActive(false);
         Actions.IsDisableAllButton -= DisableAllBTN;
         Actions.CloseListSkill -= () => listSkillPanel.SetActive(false);
         Actions.OpenListSkill -= () => listSkillPanel.SetActive(true);
@@ -51,8 +55,10 @@ public class GamePage : MonoBehaviour
             skillBTN.interactable = true;
         }
     }
-    private void OpenListEnemy(List<Unit>listunitTarget,UNITACTIONTYPE actionType)
+    private void OpenListUnit(List<Unit>listunitTarget)
     {
+        ACTORTYPE actorType = listunitTarget[0].actorType;
+        Debug.Log(actorType);
         listEnemyPanel.SetActive(true);
         if (contentParent.childCount > 0)
         {
@@ -63,8 +69,10 @@ public class GamePage : MonoBehaviour
         }
         for (int i = 0; i < listunitTarget.Count; i++)
         {
-            GameObject go = Instantiate(enemyCard, contentParent);
-            go.GetComponent<UICard>().AddListener(i, actionType);
+            GameObject go = Instantiate(Card, contentParent);
+            go.GetComponentInChildren<Text>().text = listunitTarget[i].character.unitName;
+            go.GetComponent<UnitCard>().AddListener(i,actorType);
+            Debug.Log(Funcs.GetAllPlayerUnit.Invoke()[i]);
         }
     }
 
