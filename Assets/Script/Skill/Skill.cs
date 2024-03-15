@@ -13,6 +13,7 @@ public abstract class Skill : ScriptableObject
     public ElementType skillElement;
 
     public abstract IEnumerator UseSkill(Unit target);
+    public abstract IEnumerator UseSkillTry();
 
     /*[Header("Icon Skill")]
     public Sprite icon;*/

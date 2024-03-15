@@ -10,8 +10,15 @@ public class SkillCard : MonoBehaviour
         GetComponent<Button>().onClick.AddListener(() =>{
             Unit player = Funcs.GetCurrentUnitPlay.Invoke();
             Actions.OnSelectedSkill?.Invoke(player.skillList[value]);
-            Actions.OpenListEnemy?.Invoke(actionType);
+            Actions.OpenListEnemy?.Invoke(Funcs.GetAllPlayerUnit.Invoke(),actionType);
             Actions.CloseListSkill?.Invoke();
+        });
+    }
+    public void AddListener(Skill _skill)
+    {
+        GetComponent<Button>().onClick.AddListener(() =>
+        {
+            StartCoroutine(_skill.UseSkillTry());
         });
     }
 }
