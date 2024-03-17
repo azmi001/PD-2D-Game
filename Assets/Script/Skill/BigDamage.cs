@@ -19,10 +19,4 @@ public class BigDamage : Skill
         Actions.OnUnitUsedAction?.Invoke(Funcs.GetCurrentUnitPlay());
         Actions.OnTargetedUnit -= UseSkillOnTarget;
     }
-
-    public override IEnumerator UseSkill(Unit target)
-    {
-        target.TakeDemage(skillDmg, target._def, skillElement);
-        yield return null;
-    }
 }

@@ -14,9 +14,4 @@ public class Meteor : Skill
         Actions.OnUnitUsedAction?.Invoke(Funcs.GetCurrentUnitPlay());
         yield return null;
     }
-
-    public override IEnumerator UseSkill(Unit target)
-    {
-        yield break;
-    }
 }

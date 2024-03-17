@@ -18,7 +18,6 @@ public abstract class Skill : ScriptableObject
     
     public ElementType skillElement;
 
-    public abstract IEnumerator UseSkill(Unit target);
     public abstract IEnumerator ActionSkill();
 
     /*[Header("Icon Skill")]

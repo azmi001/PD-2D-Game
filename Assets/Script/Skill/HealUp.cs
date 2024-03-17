@@ -32,11 +32,6 @@ public class HealUp : Skill
         Actions.OnUnitUsedAction?.Invoke(Funcs.GetCurrentUnitPlay());
         Actions.OnTargetedUnit -= UseSkillOnTarget;
     }
-
-    public override IEnumerator UseSkill(Unit target)
-    {
-        yield return null;
-    }
 }
 public enum HEALTARGET
 {
