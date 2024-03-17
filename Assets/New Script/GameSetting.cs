@@ -34,13 +34,21 @@ public class GameSetting : MonoBehaviour
     }
     private void OnEnable()
     {
+        //get semua unit player
         Funcs.GetAllPlayerUnit += GetAllPlayerUnit;
+        //get unit yang bermain skarang
         Funcs.GetCurrentUnitPlay += GetCurrentUnit;
+        //get semua unit enemy
         Funcs.GetAllEnemyUnit += GetAllEnemy;
+        //subscribe ketika battlestate berubah
         Actions.OnBattleStateChange += ChangeState;
+        //subscribe ketika unit sudah melakukan action
         Actions.OnUnitUsedAction += OnUnitUsedAction;
+        //subscribe ketika mouse berada di tombol unit a/b/c (bukan di klik)
         Actions.OnShowHoverTarget += OnShowHover;
+        //subscribe ketika ada unit yang mati maka refresh semua list
         Actions.OnUnitDied += RefreshListUnit;
+        //subscribe ketika panel unit sudah ditutup
         Actions.CloseListUnit += OnCloseListUnit;
     }
 
@@ -55,22 +63,7 @@ public class GameSetting : MonoBehaviour
         Actions.OnUnitDied -= RefreshListUnit;
         Actions.CloseListUnit -= OnCloseListUnit;
     }
-
-    private List<Unit> GetAllEnemy()
-    {
-        return enemyUnit;
-    }
-    private Unit GetCurrentUnit()
-    {
-        return currentUnitPlay;
-    }
-
-
-    private List<Unit> GetAllPlayerUnit()
-    {
-        return playerUnit;
-    }
-
+    //setup game
     private void Init()
     {
         foreach (var item in playerPrefab)
@@ -89,7 +82,23 @@ public class GameSetting : MonoBehaviour
         currentUnitPlay = playerUnit[playerIndex];
         Actions.AddListenerToGameButton?.Invoke(PlayerAttack, DefenseUp, HealUp,OpenSkill);
     }
+    #region funcs
+    private List<Unit> GetAllEnemy()
+    {
+        return enemyUnit;
+    }
+    private Unit GetCurrentUnit()
+    {
+        return currentUnitPlay;
+    }
 
+
+    private List<Unit> GetAllPlayerUnit()
+    {
+        return playerUnit;
+    }
+    #endregion
+    #region actions
     private void OpenSkill()
     {
         Actions.OpenListSkill?.Invoke();
@@ -261,6 +270,8 @@ public class GameSetting : MonoBehaviour
                 break;
         }
     }
+    #endregion
+    //auto attack enemy
     private IEnumerator EnemyAttack()
     {
         int rand = UnityEngine.Random.Range(0, playerUnit.Count);
