@@ -60,7 +60,7 @@ public class GamePage : MonoBehaviour
         ACTORTYPE actorType = listunitTarget[0].actorType;
         Debug.Log(actorType);
         listEnemyPanel.SetActive(true);
-        if (contentParent.childCount > 0)
+        if (contentParent.childCount > 0) // menghapus list button pada list button pemilihan enemy
         {
             foreach (Transform item in contentParent)
             {

@@ -164,10 +164,10 @@ public class GameSetting : MonoBehaviour
             switch (actor)
             {
                 case ACTORTYPE.PLAYER:
-                    playerPos.GetChild(index).GetComponentInChildren<SpriteRenderer>().color = Color.green;
+                    playerPos.GetChild(index).GetChild(0).GetComponentInChildren<SpriteRenderer>().color = Color.gray;
                     break;
                 case ACTORTYPE.ENEMY:
-                    enemyPos.GetChild(index).GetComponentInChildren<SpriteRenderer>().color = Color.green;
+                    enemyPos.GetChild(index).GetChild(0).GetComponentInChildren<SpriteRenderer>().color = Color.gray;
                     break;
                 default:
                     break;
@@ -178,10 +178,10 @@ public class GameSetting : MonoBehaviour
             switch (actor)
             {
                 case ACTORTYPE.PLAYER:
-                    playerPos.GetChild(index).GetComponentInChildren<SpriteRenderer>().color = Color.white;
+                    playerPos.GetChild(index).GetChild(0).GetComponentInChildren<SpriteRenderer>().color = Color.white;
                     break;
                 case ACTORTYPE.ENEMY:
-                    enemyPos.GetChild(index).GetComponentInChildren<SpriteRenderer>().color = Color.white;
+                    enemyPos.GetChild(index).GetChild(0).GetComponentInChildren<SpriteRenderer>().color = Color.white;
                     break;
                 default:
                     break;

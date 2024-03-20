@@ -26,6 +26,7 @@ public class UnitCard : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
                 default:
                     break;
             }
+            Actions.OnShowHoverTarget?.Invoke(false, index, aCTORTYPE);
             Actions.CloseListUnit?.Invoke();
         });
     }
