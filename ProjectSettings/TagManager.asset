@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - PuzzlePiece
+  - Fire
+  - Leaf
+  - Water
   layers:
   - Default
   - TransparentFX
