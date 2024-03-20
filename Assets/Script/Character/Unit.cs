@@ -2,10 +2,17 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Linq;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Unit : MonoBehaviour
 {
+    [Header("UI Stat Character")]
+    public TMP_Text ChLvlText;
+    public TMP_Text ChNmText;
+    public Slider ChHpSlider;
+
     //data darah yang sekarang akan terupdate dalam game
     [Header("Status Darah")]
     public int currentHP;
@@ -29,6 +36,7 @@ public class Unit : MonoBehaviour
     public void Awake()
     {
         InitializedData();
+        SetHud();
     }
 
     public void Start()
@@ -119,7 +127,10 @@ public class Unit : MonoBehaviour
             return true;
         }
         else
+        {
+            ChHpSlider.value = currentHP;
             return false;
+        }
     }
     
     public void DefUp(int amount)
@@ -133,6 +144,8 @@ public class Unit : MonoBehaviour
         currentHP += amount;
         if (currentHP > character.maxHP)
             currentHP = character.maxHP;
+        ChHpSlider.value = currentHP;
+
     }
     
 
@@ -158,9 +171,18 @@ public class Unit : MonoBehaviour
         Debug.Log("Result: " + result);
         return result;
     }
+
+    public void SetHud()
+    {
+        ChNmText.text = character.unitName;
+        ChLvlText.text = "" + currentLv;
+        ChHpSlider.maxValue = character.maxHP;
+        ChHpSlider.value = currentHP;
+    }
 }
 public enum ACTORTYPE
 {
     PLAYER,
     ENEMY
 }
+

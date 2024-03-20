@@ -3,6 +3,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 public class GameSetting : MonoBehaviour
 {
@@ -12,13 +14,12 @@ public class GameSetting : MonoBehaviour
     [SerializeField] private Transform playerPos;
     [SerializeField] private Transform enemyPos;
 
-    [SerializeField]private List<Unit> playerUnit = new();
+    [SerializeField] private List<Unit> playerUnit = new();
     [SerializeField] private List<Unit> enemyUnit = new();
 
     [SerializeField] private Unit currentUnitPlay;
-    
-    [SerializeField] private BattleHUD playerHUD;
-    [SerializeField] private BattleHUD enemyHUD;
+
+    [SerializeField] private Text DialogText;
 
     private int playerIndex;
     private int enemyIndex;
@@ -30,7 +31,7 @@ public class GameSetting : MonoBehaviour
 
     private void Start()
     {
-        Init();
+        StartCoroutine(Init());
     }
     private void OnEnable()
     {
@@ -64,23 +65,32 @@ public class GameSetting : MonoBehaviour
         Actions.CloseListUnit -= OnCloseListUnit;
     }
     //setup game
-    private void Init()
+    IEnumerator Init()
     {
-        foreach (var item in playerPrefab)
+        for (int i = 0; i < playerPrefab.Length; i++)
         {
-            GameObject go = Instantiate(item, playerPos);
+            GameObject go = Instantiate(playerPrefab[i], playerPos.GetChild(i));
+            go.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = i;
+            go.transform.GetChild(1).GetComponent<Canvas>().sortingOrder = i;
             go.GetComponent<Unit>().actorType = ACTORTYPE.PLAYER;
             playerUnit.Add(go.GetComponent<Unit>());
         }
-        foreach (var item in enemyPrefab)
+
+        for (int i = 0;i < enemyPrefab.Length; i++)
         {
-            GameObject go = Instantiate(item, enemyPos);
+            GameObject go = Instantiate(enemyPrefab[i], enemyPos.GetChild(i));
+            go.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = i;
+            go.transform.GetChild(1).GetComponent<Canvas>().sortingOrder = i;
             go.GetComponent<Unit>().actorType = ACTORTYPE.ENEMY;
+            go.transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = true;
             enemyUnit.Add(go.GetComponent<Unit>());
         }
 
         currentUnitPlay = playerUnit[playerIndex];
         Actions.AddListenerToGameButton?.Invoke(PlayerAttack, DefenseUp, HealUp,OpenSkill);
+        DialogText.text = "The Battle Begin";
+        yield return new WaitForSeconds(1f);
+        DialogText.text = "Player Turn ! " + currentUnitPlay.character.unitName;
     }
     #region funcs
     private List<Unit> GetAllEnemy()
@@ -213,17 +223,21 @@ public class GameSetting : MonoBehaviour
                 Actions.IsDisableAllButton?.Invoke(false);
                 Actions.AddListenerToGameButton?.Invoke(PlayerAttack, DefenseUp, HealUp, OpenSkill);
                 currentUnitPlay = playerUnit[playerIndex];
+                DialogText.text = "Player Turn ! " + currentUnitPlay.character.unitName;
                 break;
             case BattleState.ENEMYTURN:
                 currentUnitPlay = enemyUnit[enemyIndex];
                 Actions.IsDisableAllButton?.Invoke(true);
+                DialogText.text = "Enemy Turn ! " + currentUnitPlay.character.unitName;
                 StartCoroutine(EnemyAttack());
                 break;
             case BattleState.WON:
                 Debug.Log("Won");
+                DialogText.text = "Player Win The Battle!";
                 break;
             case BattleState.LOST:
                 Debug.Log("Lost");
+                DialogText.text = "Enemy Win The Battle!";
                 break;
             case BattleState.CHECK:
                 if (enemyUnit == null || enemyUnit.Count <= 0)
