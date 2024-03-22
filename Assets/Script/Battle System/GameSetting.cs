@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using static UnityEditor.Progress;
 
-public class GameSetting : MonoBehaviour
+public partial class GameSetting : MonoBehaviour
 {
     [SerializeField] private GameObject[] playerPrefab;
     [SerializeField] private GameObject[] enemyPrefab;
@@ -51,6 +51,7 @@ public class GameSetting : MonoBehaviour
         Actions.OnUnitDied += RefreshListUnit;
         //subscribe ketika panel unit sudah ditutup
         Actions.CloseListUnit += OnCloseListUnit;
+
     }
 
     private void OnDisable()

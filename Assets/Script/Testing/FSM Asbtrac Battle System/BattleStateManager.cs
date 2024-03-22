@@ -22,8 +22,6 @@ public class BattleStateManager : MonoBehaviour
     public Unit playerUnit;
     public Unit enemyUnit;
     public Text dialogueText;
-    public BattleHUD playerHUD;
-    public BattleHUD enemyHUD;
     public string menang;
     public string kalah;
 

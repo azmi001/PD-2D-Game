@@ -19,6 +19,7 @@ MonoBehaviour:
   damage: 26
   maxHP: 360
   Heal: 100
+  chBio: 
   thisUnitElement: 0
   skills:
   - {fileID: 11400000, guid: e09764fbfdcf85248957c49940ec18bf, type: 2}

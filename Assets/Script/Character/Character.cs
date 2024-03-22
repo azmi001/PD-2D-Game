@@ -15,6 +15,12 @@ public partial class Character : ScriptableObject
     public int maxHP;
     public int Heal;
 
+    //Character Biography
+    [Header("Character Bio")]
+    [TextArea(5,3)]
+    public string chBio;
+    
+
     // mendefinisikan tipe element character
     [Header("Element Unit")]
     public ElementType thisUnitElement;
