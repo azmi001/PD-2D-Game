@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     //penyimapan variable data story quest
-    StoryQuest currentQuest;
+    public StoryQuest currentQuest;
 
     //Nama Scene yang mau di load
     public string scenename;

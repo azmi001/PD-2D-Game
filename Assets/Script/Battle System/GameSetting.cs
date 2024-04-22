@@ -9,7 +9,7 @@ using static UnityEditor.Progress;
 public partial class GameSetting : MonoBehaviour
 {
     [SerializeField] private GameObject[] playerPrefab;
-    [SerializeField] private GameObject[] enemyPrefab;
+    //[SerializeField] private GameObject[] enemyPrefab;
 
     [SerializeField] private Transform playerPos;
     [SerializeField] private Transform enemyPos;
@@ -20,6 +20,8 @@ public partial class GameSetting : MonoBehaviour
     [SerializeField] private Unit currentUnitPlay;
 
     [SerializeField] private Text DialogText;
+
+
 
     private int playerIndex;
     private int enemyIndex;
@@ -77,9 +79,12 @@ public partial class GameSetting : MonoBehaviour
             playerUnit.Add(go.GetComponent<Unit>());
         }
 
-        for (int i = 0;i < enemyPrefab.Length; i++)
+        //mengambil data enemy dari scribtabke game object story quest
+        StoryQuest quest = FindObjectOfType<GameManager>().currentQuest;
+
+        for (int i = 0;i < quest.EnemyPrefabs.Length; i++)
         {
-            GameObject go = Instantiate(enemyPrefab[i], enemyPos.GetChild(i));
+            GameObject go = Instantiate(quest.EnemyPrefabs[i], enemyPos.GetChild(i));
             go.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = i;
             go.transform.GetChild(1).GetComponent<Canvas>().sortingOrder = i;
             go.GetComponent<Unit>().actorType = ACTORTYPE.ENEMY;

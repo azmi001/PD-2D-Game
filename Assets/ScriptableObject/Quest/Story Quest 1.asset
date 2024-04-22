@@ -15,6 +15,7 @@ MonoBehaviour:
   QuestName: Story quest 1
   EnemyPrefabs:
   - {fileID: 864842667368195608, guid: 4ca41759f65344b448753b8ff4d3c93b, type: 3}
+  - {fileID: 864842667368195608, guid: 4ca41759f65344b448753b8ff4d3c93b, type: 3}
   money: 100
   exp: 20
-  staminaCost: 10
+  staminaCost: 50

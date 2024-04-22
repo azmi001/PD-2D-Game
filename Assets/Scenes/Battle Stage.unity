@@ -529,6 +529,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2cc52a969992f9b408a4c311e9a582fe, type: 3}
+--- !u!114 &935390415 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2576989069165431126, guid: 2cc52a969992f9b408a4c311e9a582fe, type: 3}
+  m_PrefabInstance: {fileID: 935390414}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1073600476 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1892705243817885592, guid: 574fb7e182efd8746a3b116832412918, type: 3}
@@ -803,6 +814,18 @@ PrefabInstance:
       propertyPath: playerPos
       value: 
       objectReference: {fileID: 1073600476}
+    - target: {fileID: 969904548265958398, guid: c0545b447a0b37748bc0c533d0174951, type: 3}
+      propertyPath: DialogText
+      value: 
+      objectReference: {fileID: 935390415}
+    - target: {fileID: 969904548265958398, guid: c0545b447a0b37748bc0c533d0174951, type: 3}
+      propertyPath: playerPrefab.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 969904548265958398, guid: c0545b447a0b37748bc0c533d0174951, type: 3}
+      propertyPath: playerPrefab.Array.data[2]
+      value: 
+      objectReference: {fileID: 3506219432552147847, guid: f4a1efa82c03e824292153ab00860524, type: 3}
     - target: {fileID: 4656980695187843597, guid: c0545b447a0b37748bc0c533d0174951, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
