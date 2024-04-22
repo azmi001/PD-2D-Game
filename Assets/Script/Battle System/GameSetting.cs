@@ -2,6 +2,7 @@ using JetBrains.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 using UnityEngine.UI;
 using static UnityEditor.Progress;
@@ -96,6 +97,7 @@ public partial class GameSetting : MonoBehaviour
         Actions.AddListenerToGameButton?.Invoke(PlayerAttack, DefenseUp, HealUp,OpenSkill);
         DialogText.text = "The Battle Begin";
         yield return new WaitForSeconds(1f);
+        currentUnitPlay.transform.GetChild(0).GetComponentInChildren<SpriteRenderer>().color = Color.yellow;
         DialogText.text = "Player Turn ! " + currentUnitPlay.character.unitName;
     }
     #region funcs
@@ -154,11 +156,11 @@ public partial class GameSetting : MonoBehaviour
         {
             case ACTORTYPE.PLAYER:
                 playerUnit.Remove(targetunit);
-                Destroy(targetunit.gameObject);
+                Destroy(targetunit.transform.parent.gameObject);
                 break;
             case ACTORTYPE.ENEMY:
                 enemyUnit.Remove(targetunit);
-                Destroy(targetunit.gameObject);
+                Destroy(targetunit.transform.parent.gameObject);
                 break;
         }
     }
@@ -197,6 +199,7 @@ public partial class GameSetting : MonoBehaviour
     }
     private void OnUnitUsedAction(Unit targetunit)
     {
+        targetunit.transform.GetChild(0).GetComponentInChildren<SpriteRenderer>().color = Color.white;
         switch (targetunit.actorType)
         {
             case ACTORTYPE.PLAYER:
@@ -229,12 +232,14 @@ public partial class GameSetting : MonoBehaviour
                 Actions.IsDisableAllButton?.Invoke(false);
                 Actions.AddListenerToGameButton?.Invoke(PlayerAttack, DefenseUp, HealUp, OpenSkill);
                 currentUnitPlay = playerUnit[playerIndex];
+                currentUnitPlay.transform.GetChild(0).GetComponentInChildren<SpriteRenderer>().color = Color.yellow;
                 DialogText.text = "Player Turn ! " + currentUnitPlay.character.unitName;
                 break;
             case BattleState.ENEMYTURN:
                 currentUnitPlay = enemyUnit[enemyIndex];
                 Actions.IsDisableAllButton?.Invoke(true);
                 DialogText.text = "Enemy Turn ! " + currentUnitPlay.character.unitName;
+                currentUnitPlay.transform.GetChild(0).GetComponentInChildren<SpriteRenderer>().color = Color.yellow;
                 StartCoroutine(EnemyAttack());
                 break;
             case BattleState.WON:

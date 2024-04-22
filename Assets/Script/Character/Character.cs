@@ -15,6 +15,8 @@ public partial class Character : ScriptableObject
     public int maxHP;
     public int Heal;
 
+    public Sprite HeroIcon;
+
     //Character Biography
     [Header("Character Bio")]
     [TextArea(5,3)]

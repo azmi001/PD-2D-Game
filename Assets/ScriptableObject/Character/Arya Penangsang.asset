@@ -18,7 +18,7 @@ MonoBehaviour:
   deffense: 18
   damage: 26
   maxHP: 360
-  Heal: 100
+  Heal: 150
   chBio: 
   thisUnitElement: 0
   skills:
@@ -26,4 +26,3 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 56fa8d400019fe14da9c707879386e9f, type: 2}
   - {fileID: 11400000, guid: 8e1b2148b65d23349b51eb5b4e14fb52, type: 2}
   - {fileID: 11400000, guid: d08d0b3e0e52ad246a0db39d4128f413, type: 2}
-  - {fileID: 11400000, guid: 3f968db9b643d2f4fa62c02b16f98487, type: 2}

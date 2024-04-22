@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4893610873688226304}
   - component: {fileID: 3529150506278012332}
+  - component: {fileID: 2125783293274207116}
   m_Layer: 0
   m_Name: sultan_adiwijaya
   m_TagString: Untagged
@@ -84,6 +85,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &2125783293274207116
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2982316210023296112}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6d27ae0b6e854f942a0d0e6172ae6571, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &3506219432552147847
 GameObject:
   m_ObjectHideFlags: 0
@@ -137,7 +159,7 @@ MonoBehaviour:
   currentXP: 0
   expToLvUp: 0
   currentLv: 0
-  character: {fileID: 0}
+  character: {fileID: 11400000, guid: 90b7cc4ee58d84e409f4106440ac70bb, type: 2}
   _def: 0
   skillList: []
   actorType: 0
