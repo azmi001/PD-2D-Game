@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 using UnityEngine.UI;
 using static UnityEditor.Progress;
@@ -130,7 +131,7 @@ public partial class GameSetting : MonoBehaviour
 
     private void DefenseUp()
     {
-        currentUnitPlay._def *= 3;
+        currentUnitPlay.DefUp(3);
         Actions.OnUnitUsedAction?.Invoke(currentUnitPlay);
     }
 
@@ -211,6 +212,8 @@ public partial class GameSetting : MonoBehaviour
             default:
                 break;
         }
+        targetunit.LastTurn++;
+
         ChangeState(BattleState.CHECK);
     }
 
@@ -219,6 +222,7 @@ public partial class GameSetting : MonoBehaviour
         target.TakeDemage(currentUnitPlay.character.damage, target._def, currentUnitPlay.character.thisUnitElement);
         Actions.OnUnitUsedAction?.Invoke(Funcs.GetCurrentUnitPlay());
         Actions.OnTargetedUnit -= OnTargetedUnit;
+        currentUnitPlay.GetComponentInChildren<Animator>().Play("Attack");
     }
 
     public void ChangeState(BattleState newState)
@@ -232,6 +236,14 @@ public partial class GameSetting : MonoBehaviour
                 Actions.IsDisableAllButton?.Invoke(false);
                 Actions.AddListenerToGameButton?.Invoke(PlayerAttack, DefenseUp, HealUp, OpenSkill);
                 currentUnitPlay = playerUnit[playerIndex];
+                currentUnitPlay.CurrentTurn++;
+                if (currentUnitPlay.CurrentTurn> currentUnitPlay.LastTurn)
+                {
+                    if(currentUnitPlay.isdefup == true)
+                    {
+                        currentUnitPlay.DefDefault();
+                    }
+                }
                 currentUnitPlay.transform.GetChild(0).GetComponentInChildren<SpriteRenderer>().color = Color.yellow;
                 DialogText.text = "Player Turn ! " + currentUnitPlay.character.unitName;
                 break;
@@ -299,9 +311,10 @@ public partial class GameSetting : MonoBehaviour
     //auto attack enemy
     private IEnumerator EnemyAttack()
     {
-        int rand = UnityEngine.Random.Range(0, playerUnit.Count);
-        Debug.Log("Enemy attack player" + rand);
-        playerUnit[rand].TakeDemage(enemyUnit[enemyIndex].character.damage, playerUnit[rand]._def, enemyUnit[enemyIndex].character.thisUnitElement);
+        //int rand = UnityEngine.Random.Range(0, playerUnit.Count);
+        //Debug.Log("Enemy attack player" + rand);
+        //playerUnit[rand].TakeDemage(enemyUnit[enemyIndex].character.damage, playerUnit[rand]._def, enemyUnit[enemyIndex].character.thisUnitElement);
+        currentUnitPlay.UnitAction();
         yield return new WaitForSeconds(1f);
         Actions.OnUnitUsedAction?.Invoke(currentUnitPlay);
     }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Xml.Linq;
 using TMPro;
 using UnityEngine;
@@ -30,7 +31,14 @@ public class Unit : MonoBehaviour
     [Header("List Skill Character")]
     public List<Skill> skillList;
 
+    //pengkodisian animasi def
+    public bool isdefup = false;
+    public int LastTurn = 0;
+    public int CurrentTurn = 0;
+
     public ACTORTYPE actorType;
+
+    public CharacterState characterState;
 
     //inisialisasi awal darah
     public void Awake()
@@ -63,6 +71,7 @@ public class Unit : MonoBehaviour
         int actualDamage = dmg * 15 /100;
         Debug.Log("Demage elemen didapat " + character.unitName + "adalah " + actualDamage);
 
+        //fsm logic kalkulasi demg element
         switch (character.thisUnitElement)
         {
             case ElementType.Fire:
@@ -120,22 +129,60 @@ public class Unit : MonoBehaviour
         currentHP -= finalDmg1 - def1;
         //currentHP -= ((finalDmg + result) * 4) - (def * 2);
 
+        
+
         //pengkondisian apakah target yang diserah sudah mati atau belum
         if (currentHP <= 0)
         {
-            Actions.OnUnitDied?.Invoke(this);
+            //mengupdate saat ui darah habis saat kondisi mati
+            ChHpSlider.value = currentHP;
+
+            //memutar animasi character mati
+            StartCoroutine(unitdead());
+
             return true;
+            
         }
         else
         {
             ChHpSlider.value = currentHP;
+            //Memutar animasi character hurt
+            if(isdefup)
+            {
+                GetComponentInChildren<Animator>().Play("Block");
+            }
+            else
+            {
+                GetComponentInChildren<Animator>().Play("Hurt");
+            }
+
             return false;
         }
     }
-    
+
+    //memutar animasi character mati
+    private IEnumerator unitdead()
+    {
+        GetComponentInChildren<Animator>().Play("KO");
+        /*while (GetComponentInChildren<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime <= 1)
+        {
+            yield return null;
+        }*/
+
+        yield return new WaitForSeconds(1f);
+        Actions.OnUnitDied?.Invoke(this);
+    }
+
     public void DefUp(int amount)
     {
         _def *= amount;
+        isdefup = true;
+    }
+
+    public void DefDefault()
+    {
+        _def = character.deffense;
+        isdefup = false;
     }
 
     //logika skill heal
@@ -178,6 +225,202 @@ public class Unit : MonoBehaviour
         ChLvlText.text = "" + currentLv;
         ChHpSlider.maxValue = character.maxHP;
         ChHpSlider.value = currentHP;
+    }
+
+    public void UnitAction()
+    {
+        switch (actorType)
+        {
+            case ACTORTYPE.PLAYER:
+                break;
+            case ACTORTYPE.ENEMY:
+                ChangeStateEnemy(CharacterState.ATTACK);
+                Debug.Log(characterState);
+                break;
+        }
+    }
+
+    // FSM NPC mengatur pergerakan penyerangan Enemy secara auto matis berdasrakan kelemahan element character player
+    public void ChangeStateEnemy(CharacterState state)
+    {
+        characterState = state;
+        
+        //mengabil data element player
+        List<Unit> playerList = Funcs.GetAllPlayerUnit();
+        
+        //memilah data element player agar jika terdapat element yang sama pada
+        // 1 team makan penyerangannya bisa dirandom bukan berdasarakan urutan array
+        List<Unit> chElementRndm = new List<Unit>();
+
+        //Logic FSM NPC Enemy
+        switch (characterState)
+        {
+            case CharacterState.IDLE:
+                break;
+            case CharacterState.ATTACK:
+                GetComponentInChildren<Animator>().Play("Attack");// Memutar Animasi Attack
+                Unit TargetUnit = new Unit();
+
+                //FSM logic Element Attact Target
+                switch (character.thisUnitElement)
+                {
+                    case ElementType.Fire:
+                        TargetUnit = Array.Find(playerList.ToArray(), T => T.character.thisUnitElement == ElementType.Leaf);//Mencari Element yang diuntungkan
+                        Debug.Log("character State" + TargetUnit != null );
+                        if (TargetUnit == null)
+                        {
+                            TargetUnit = Array.Find(playerList.ToArray(), T => T.character.thisUnitElement == ElementType.Fire);//mencari element yang sama
+                            if (TargetUnit == null)
+                            {
+                                //logic random
+                                foreach (var item in playerList)
+                                {
+                                    if (item.character.thisUnitElement == ElementType.Water)//element yang dirugikan
+                                    {
+                                        chElementRndm.Add(item);
+                                    }
+                                }
+                                TargetUnit = chElementRndm[UnityEngine.Random.Range(0, chElementRndm.Count)];
+                            }
+                            else
+                            {
+                                //logic random
+                                foreach (var item in playerList)
+                                {
+                                    if (item.character.thisUnitElement == ElementType.Fire)//element yang sama
+                                    {
+                                        chElementRndm.Add(item);
+                                    }
+                                }
+                                TargetUnit = chElementRndm[UnityEngine.Random.Range(0, chElementRndm.Count)];
+                            }
+                        } else
+                        {
+                            //logic random
+                            foreach (var item in playerList)
+                            {
+                                if (item.character.thisUnitElement == ElementType.Leaf)//element yang diuntungkan
+                                {
+                                    chElementRndm.Add(item);
+                                }
+                            }
+                            TargetUnit = chElementRndm[UnityEngine.Random.Range(0, chElementRndm.Count)];
+                        }
+                        break;
+                    case ElementType.Leaf:
+                        TargetUnit = Array.Find(playerList.ToArray(), T => T.character.thisUnitElement == ElementType.Water);//Mencari Element yang diuntungkan
+                        Debug.Log("character State" + TargetUnit != null);
+                        /*if (TargetUnit == null)
+                        {
+                            TargetUnit = Array.Find(playerList.ToArray(), T => T.character.thisUnitElement == ElementType.Leaf);
+
+                            if (TargetUnit == null)
+                            {
+                                TargetUnit = Array.Find(playerList.ToArray(), T => T.character.thisUnitElement == ElementType.Fire);
+                            }
+                        }*/
+                        if (TargetUnit == null)
+                        {
+                            TargetUnit = Array.Find(playerList.ToArray(), T => T.character.thisUnitElement == ElementType.Leaf);//mencari element yang sama
+                            if (TargetUnit == null)
+                            {
+                                //logic random
+                                foreach (var item in playerList)
+                                {
+                                    if (item.character.thisUnitElement == ElementType.Fire)//element yang dirugikan
+                                    {
+                                        chElementRndm.Add(item);
+                                    }
+                                }
+                                TargetUnit = chElementRndm[UnityEngine.Random.Range(0, chElementRndm.Count)];
+                            }
+                            else
+                            {
+                                //logic random
+                                foreach (var item in playerList)
+                                {
+                                    if (item.character.thisUnitElement == ElementType.Leaf)//element yang sama
+                                    {
+                                        chElementRndm.Add(item);
+                                    }
+                                }
+                                TargetUnit = chElementRndm[UnityEngine.Random.Range(0, chElementRndm.Count)];
+                            }
+                        }
+                        else
+                        {
+                            //logic random
+                            foreach (var item in playerList)
+                            {
+                                if (item.character.thisUnitElement == ElementType.Water)//element yang diuntungkan
+                                {
+                                    chElementRndm.Add(item);
+                                }
+                            }
+                            TargetUnit = chElementRndm[UnityEngine.Random.Range(0, chElementRndm.Count)];
+                        }
+                        break;
+                    case ElementType.Water:
+                        TargetUnit = Array.Find(playerList.ToArray(), T => T.character.thisUnitElement == ElementType.Fire);//Mencari Element yang diuntungkan
+                        Debug.Log("character State" + TargetUnit != null);
+                        /*if (TargetUnit == null)
+                        {
+                            TargetUnit = Array.Find(playerList.ToArray(), T => T.character.thisUnitElement == ElementType.Water);
+
+                            if (TargetUnit == null)
+                            {
+                                TargetUnit = Array.Find(playerList.ToArray(), T => T.character.thisUnitElement == ElementType.Leaf);
+                            }
+                        }*/
+                        if (TargetUnit == null)
+                        {
+                            TargetUnit = Array.Find(playerList.ToArray(), T => T.character.thisUnitElement == ElementType.Water);//mencari element yang sama
+                            if (TargetUnit == null)
+                            {
+                                //logic random
+                                foreach (var item in playerList)
+                                {
+                                    if (item.character.thisUnitElement == ElementType.Leaf)//element yang dirugikan
+                                    {
+                                        chElementRndm.Add(item);
+                                    }
+                                }
+                                TargetUnit = chElementRndm[UnityEngine.Random.Range(0, chElementRndm.Count)];
+                            }
+                            else
+                            {
+                                //logic random
+                                foreach (var item in playerList)
+                                {
+                                    if (item.character.thisUnitElement == ElementType.Water)//element yang sama
+                                    {
+                                        chElementRndm.Add(item);
+                                    }
+                                }
+                                TargetUnit = chElementRndm[UnityEngine.Random.Range(0, chElementRndm.Count)];
+                            }
+                        }
+                        else
+                        {
+                            //logic random
+                            foreach (var item in playerList)
+                            {
+                                if (item.character.thisUnitElement == ElementType.Fire)//element yang diuntungkan
+                                {
+                                    chElementRndm.Add(item);
+                                }
+                            }
+                            TargetUnit = chElementRndm[UnityEngine.Random.Range(0, chElementRndm.Count)];
+                        }
+                        break;
+                }
+                TargetUnit.TakeDemage(character.damage, TargetUnit._def, character.thisUnitElement);
+                break;
+            case CharacterState.HEAL:
+                break;
+            case CharacterState.DEFENSE:
+                break;
+        }
     }
 }
 public enum ACTORTYPE

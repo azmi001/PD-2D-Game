@@ -19,6 +19,7 @@ MonoBehaviour:
   damage: 58
   maxHP: 810
   Heal: 300
+  HeroIcon: {fileID: 21300000, guid: ef72358ca865bff4098d6dbe9a4d6b3a, type: 3}
   chBio: 
   thisUnitElement: 1
   skills: []
