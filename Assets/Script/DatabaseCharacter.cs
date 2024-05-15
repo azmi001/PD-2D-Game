@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DatabaseCharacter : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class DatabaseCharacter : MonoBehaviour
         {
             GameObject go = Instantiate(CharacterPrefabs, ContentParrent);
             go.GetComponentInChildren<TMP_Text>().text = CharacterName[i].unitName;
+            go.GetComponent<Image>().sprite = CharacterName[i].HeroIcon;
         }
     }
 }

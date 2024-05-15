@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 public class Unit : MonoBehaviour
 {
@@ -234,20 +236,32 @@ public class Unit : MonoBehaviour
             case ACTORTYPE.PLAYER:
                 break;
             case ACTORTYPE.ENEMY:
-                ChangeStateEnemy(CharacterState.ATTACK);
+                StartCoroutine(ChangeStateInit());
                 Debug.Log(characterState);
                 break;
         }
     }
 
     // FSM NPC mengatur pergerakan penyerangan Enemy secara auto matis berdasrakan kelemahan element character player
+    IEnumerator ChangeStateInit()
+    {
+        //inialisasi
+        ChangeStateEnemy(CharacterState.IDLE);
+        yield return new WaitForSeconds(1);
+        
+        //merandom state attack/heal/defense
+        int rand = UnityEngine.Random.Range(1, System.Enum.GetValues(typeof(CharacterState)).Length);
+        ChangeStateEnemy((CharacterState)rand);
+
+    }
+
     public void ChangeStateEnemy(CharacterState state)
     {
         characterState = state;
-        
+
         //mengabil data element player
         List<Unit> playerList = Funcs.GetAllPlayerUnit();
-        
+
         //memilah data element player agar jika terdapat element yang sama pada
         // 1 team makan penyerangannya bisa dirandom bukan berdasarakan urutan array
         List<Unit> chElementRndm = new List<Unit>();
@@ -256,6 +270,8 @@ public class Unit : MonoBehaviour
         switch (characterState)
         {
             case CharacterState.IDLE:
+                GetComponentInChildren<Animator>().Play("Idle");// Memutar Animasi Idle
+
                 break;
             case CharacterState.ATTACK:
                 GetComponentInChildren<Animator>().Play("Attack");// Memutar Animasi Attack
@@ -266,7 +282,7 @@ public class Unit : MonoBehaviour
                 {
                     case ElementType.Fire:
                         TargetUnit = Array.Find(playerList.ToArray(), T => T.character.thisUnitElement == ElementType.Leaf);//Mencari Element yang diuntungkan
-                        Debug.Log("character State" + TargetUnit != null );
+                        Debug.Log("character State" + TargetUnit != null);
                         if (TargetUnit == null)
                         {
                             TargetUnit = Array.Find(playerList.ToArray(), T => T.character.thisUnitElement == ElementType.Fire);//mencari element yang sama
@@ -294,7 +310,8 @@ public class Unit : MonoBehaviour
                                 }
                                 TargetUnit = chElementRndm[UnityEngine.Random.Range(0, chElementRndm.Count)];
                             }
-                        } else
+                        }
+                        else
                         {
                             //logic random
                             foreach (var item in playerList)
@@ -417,13 +434,15 @@ public class Unit : MonoBehaviour
                 TargetUnit.TakeDemage(character.damage, TargetUnit._def, character.thisUnitElement);
                 break;
             case CharacterState.HEAL:
+                Heal(100);//jumlah heal nya
                 break;
             case CharacterState.DEFENSE:
+                DefUp(3);//jumlah heal yang dikali dari basestate
                 break;
         }
     }
 }
-public enum ACTORTYPE
+    public enum ACTORTYPE
 {
     PLAYER,
     ENEMY

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01f1faae6c29aea42a39b9f28c72f49f, type: 3}
   m_Name: Sultan Agung Prabu Hanyokrokusumo
   m_EditorClassIdentifier: 
-  unitName: Sultan Agung Prabu Hanyokrokusumo
+  unitName: Sultan Agung
   unitLevel: 1
   unitexp: 0
   deffense: 63

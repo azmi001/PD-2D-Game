@@ -10,7 +10,7 @@ using static UnityEditor.Progress;
 
 public partial class GameSetting : MonoBehaviour
 {
-    [SerializeField] private GameObject[] playerPrefab;
+    //[SerializeField] private GameObject[] playerPrefab;
     //[SerializeField] private GameObject[] enemyPrefab;
 
     [SerializeField] private Transform playerPos;
@@ -72,14 +72,35 @@ public partial class GameSetting : MonoBehaviour
     //setup game
     IEnumerator Init()
     {
-        for (int i = 0; i < playerPrefab.Length; i++)
+        GameObject Hero1 = Instantiate(Funcs.GetAkun().TeamHeroes1, playerPos.GetChild(0));
+        Hero1.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = 0;
+        Hero1.transform.GetChild(1).GetComponent<Canvas>().sortingOrder = 0;
+        Hero1.GetComponent<Unit>().actorType = ACTORTYPE.PLAYER;
+        playerUnit.Add(Hero1.GetComponent<Unit>());
+
+        GameObject Hero2 = Instantiate(Funcs.GetAkun().TeamHeroes2, playerPos.GetChild(1));
+        Hero2.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = 1;
+        Hero2.transform.GetChild(1).GetComponent<Canvas>().sortingOrder = 1;
+        Hero2.GetComponent<Unit>().actorType = ACTORTYPE.PLAYER;
+        playerUnit.Add(Hero2.GetComponent<Unit>());
+
+        GameObject Hero3 = Instantiate(Funcs.GetAkun().TeamHeroes3, playerPos.GetChild(2));
+        Hero3.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = 2;
+        Hero3.transform.GetChild(1).GetComponent<Canvas>().sortingOrder = 2;
+        Hero3.GetComponent<Unit>().actorType = ACTORTYPE.PLAYER;
+        playerUnit.Add(Hero3.GetComponent<Unit>());
+
+
+        /*for (int i = 0; i < playerPrefab.Length; i++)
         {
             GameObject go = Instantiate(playerPrefab[i], playerPos.GetChild(i));
             go.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = i;
             go.transform.GetChild(1).GetComponent<Canvas>().sortingOrder = i;
             go.GetComponent<Unit>().actorType = ACTORTYPE.PLAYER;
             playerUnit.Add(go.GetComponent<Unit>());
-        }
+        }*/
+
+        
 
         //mengambil data enemy dari scribtabke game object story quest
         StoryQuest quest = FindObjectOfType<GameManager>().currentQuest;
@@ -125,13 +146,13 @@ public partial class GameSetting : MonoBehaviour
 
     private void HealUp()
     {
-        currentUnitPlay.Heal(20);
+        currentUnitPlay.Heal(100);//jumlah Hp Heal Player
         Actions.OnUnitUsedAction?.Invoke(currentUnitPlay);
     }
 
     private void DefenseUp()
     {
-        currentUnitPlay.DefUp(3);
+        currentUnitPlay.DefUp(3);//Jumlah def *X dikali brp
         Actions.OnUnitUsedAction?.Invoke(currentUnitPlay);
     }
 
@@ -164,6 +185,8 @@ public partial class GameSetting : MonoBehaviour
                 Destroy(targetunit.transform.parent.gameObject);
                 break;
         }
+        //fix klo enemy nya 1 gak langsung win player jadi harus nunggu semua player kelar turn baru win klo gak di fix
+        ChangeState(BattleState.CHECK);
     }
     private void OnShowHover(bool isShowing, int index, ACTORTYPE actor)
     {

@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     //Nama Scene yang mau di load
     public string scenename;
 
-    Akun akun;
+    [SerializeField] Akun akun;
 
     private void Awake()
     {
