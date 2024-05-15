@@ -11,16 +11,19 @@ public class Akun
     public int akunMoney;
 
     public List<Character> heroes = new();
-    //public List<Character> teamHeroes = new();
-
-    public GameObject TeamHeroes1;
-    public GameObject TeamHeroes2;
-    public GameObject TeamHeroes3;
-
+    public List<GameObject> teamHeroes = new();
     public void AddTeam(GameObject character, int index)
     {
-        if (index == 0) TeamHeroes1 = character;
-        if (index == 1) TeamHeroes2 = character;
-        if (index == 2) TeamHeroes3 = character;
+        if (teamHeroes.Count > index)
+        {
+            if (teamHeroes[index] != null)
+            {
+                teamHeroes[index] = character;
+            }
+        }
+        else
+        {
+            teamHeroes.Add(character);
+        }
     }
 }
