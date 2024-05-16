@@ -6,7 +6,7 @@ using System.Reflection;
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEditor.Progress;
+//using static UnityEditor.Progress;
 
 public partial class GameSetting : MonoBehaviour
 {

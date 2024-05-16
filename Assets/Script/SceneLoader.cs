@@ -19,9 +19,4 @@ public class SceneLoader : MonoBehaviour
     {
         Actions.onQuestStart.Invoke(quest);
     }
-
-    public void QuitGame()
-    {
-        Application.Quit();
-    }
 }
