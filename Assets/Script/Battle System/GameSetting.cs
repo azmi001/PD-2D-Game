@@ -258,6 +258,8 @@ public partial class GameSetting : MonoBehaviour
             case BattleState.WON:
                 Debug.Log("Won");
                 DialogText.text = "Player Win The Battle!";
+                Actions.onQuestFinis?.Invoke(FindObjectOfType<GameManager>().currentQuest);
+
                 break;
             case BattleState.LOST:
                 Debug.Log("Lost");

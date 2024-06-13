@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,5 +20,7 @@ public class DatabaseCharacter : MonoBehaviour
             go.GetComponentInChildren<TMP_Text>().text = CharacterName[i].unitName;
             go.GetComponent<Image>().sprite = CharacterName[i].HeroIcon;
         }
+
+        //JsonHelper.SaveToJSON(CharacterName.ToList(), "DatabaseCharater");
     }
 }

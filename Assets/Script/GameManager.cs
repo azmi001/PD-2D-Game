@@ -12,6 +12,9 @@ public class GameManager : MonoBehaviour
     //Nama Scene yang mau di load
     public string scenename;
 
+    //
+    public Character character;
+
     [SerializeField] Akun akun;
 
     private void Awake()
@@ -21,13 +24,29 @@ public class GameManager : MonoBehaviour
         akun.akunStamina = 100;
         akun.akunExp = 0;
         akun.akunMoney = 0;
+
+        //character.unitName = "ucup";
+
         DontDestroyOnLoad(gameObject);
+    }
+
+    private void Start()
+    {
+        
     }
 
     private void OnEnable()
     {
         Actions.onQuestStart += StartQuest;
         Funcs.GetAkun += GetAccount;
+        Actions.onQuestFinis += OnQuestFinish;
+    }
+
+    //melakukan pengecekan quest complete atau tidak
+    private void OnQuestFinish(StoryQuest quest)
+    {
+        quest.UnlockQuest = true;
+        PlayerPrefs.SetInt(quest.QuestName, quest.UnlockQuest == true?1:0);
     }
 
     private Akun GetAccount()
@@ -39,6 +58,7 @@ public class GameManager : MonoBehaviour
     {
         Actions.onQuestStart -= StartQuest;
         Funcs.GetAkun -= GetAccount;
+        Actions.onQuestFinis -= OnQuestFinish;
     }
 
     private void StartQuest(StoryQuest quest)
@@ -50,6 +70,6 @@ public class GameManager : MonoBehaviour
             return;
         }
         akun.akunStamina -= currentQuest.staminaCost;
-        SceneManager.LoadScene(scenename);
+        //SceneManager.LoadScene(scenename);
     }
 }

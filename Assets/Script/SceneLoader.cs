@@ -12,6 +12,14 @@ public class SceneLoader : MonoBehaviour
 
     private void Start()
     {
+        if (Quest.UnlockQuest)
+        {
+            GetComponent<Button>().interactable = true;
+        }
+        else 
+        {
+            GetComponent<Button>().interactable = false;
+        }
         GetComponent<Button>().onClick.AddListener(() => LoadScene(Quest));   
     }
 

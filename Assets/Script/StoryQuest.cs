@@ -10,4 +10,6 @@ public class StoryQuest : ScriptableObject
     public int money;
     public int exp;
     public int staminaCost;
+
+    public bool UnlockQuest = false;
 }

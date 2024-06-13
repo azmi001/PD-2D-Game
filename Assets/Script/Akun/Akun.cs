@@ -10,7 +10,7 @@ public class Akun
     public int akunStamina;
     public int akunMoney;
 
-    public List<Character> heroes = new();
+    public List<Character> OwnedHeroes = new();
     public List<GameObject> teamHeroes = new();
     public void AddTeam(GameObject character, int index)
     {
