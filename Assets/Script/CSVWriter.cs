@@ -34,7 +34,7 @@ public class CSVWriter : MonoBehaviour
         if(characterList.character.Length > 0)
         {
             TextWriter tw = new StreamWriter(filename, false);
-            tw.WriteLine("Unit Name, Unit Level, Unit Exp, Deffence, Demage, Max HP, Heal");
+            tw.WriteLine("Unit Name, Unit Level, Unit Exp, Deffence, Demage, Max HP, Heal, unlock");
             tw.Close();
 
             tw = new StreamWriter(filename, true);
@@ -47,7 +47,8 @@ public class CSVWriter : MonoBehaviour
                             characterList.character[i].deffense + "," +
                             characterList.character[i].damage + "," +
                             characterList.character[i].maxHP + "," +
-                            characterList.character[i].Heal);
+                            characterList.character[i].Heal + "," +
+                            characterList.character[i].Unlock);
             }
             tw.Close();
         }

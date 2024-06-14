@@ -18,3 +18,4 @@ MonoBehaviour:
   money: 100
   exp: 20
   staminaCost: 50
+  UnlockQuest: 0

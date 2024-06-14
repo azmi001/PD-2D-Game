@@ -39,14 +39,6 @@ public class GameManager : MonoBehaviour
     {
         Actions.onQuestStart += StartQuest;
         Funcs.GetAkun += GetAccount;
-        Actions.onQuestFinis += OnQuestFinish;
-    }
-
-    //melakukan pengecekan quest complete atau tidak
-    private void OnQuestFinish(StoryQuest quest)
-    {
-        quest.UnlockQuest = true;
-        PlayerPrefs.SetInt(quest.QuestName, quest.UnlockQuest == true?1:0);
     }
 
     private Akun GetAccount()
@@ -58,7 +50,6 @@ public class GameManager : MonoBehaviour
     {
         Actions.onQuestStart -= StartQuest;
         Funcs.GetAkun -= GetAccount;
-        Actions.onQuestFinis -= OnQuestFinish;
     }
 
     private void StartQuest(StoryQuest quest)

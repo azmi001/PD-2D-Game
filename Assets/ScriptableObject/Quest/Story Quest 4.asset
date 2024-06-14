@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31db3a479847ffd44a3599f31a9b6a7f, type: 3}
   m_Name: Story Quest 4
   m_EditorClassIdentifier: 
-  QuestName: Story quest 2
+  QuestName: Story Quest 4
   EnemyPrefabs:
   - {fileID: 864842667368195608, guid: 4ca41759f65344b448753b8ff4d3c93b, type: 3}
   money: 100
   exp: 20
   staminaCost: 50
+  UnlockQuest: 0

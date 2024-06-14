@@ -14,6 +14,7 @@ public partial class Character : ScriptableObject
     public int damage;
     public int maxHP;
     public int Heal;
+    public bool Unlock;
 
     public Sprite HeroIcon;
 

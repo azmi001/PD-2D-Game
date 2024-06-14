@@ -1,4 +1,6 @@
-Unit Name, Unit Level, Unit Exp, Deffence, Demage, Max HP, Heal
-Adipati Martapura,1,0,40,58,810,300
-Arya Penangsang,1,0,18,26,360,150
-Jaka Tingkir,1,0,40,58,810,300
+Unit Name, Unit Level, Unit Exp, Deffence, Demage, Max HP, Heal, unlock
+Adipati Martapura,1,0,40,58,810,300,False
+Arya Penangsang,1,0,18,26,360,150,False
+Jaka Tingkir,1,0,40,58,810,300,False
+Prajurit Pemanah,1,0,6,8,110,50,True
+Prajurit Tombak,1,0,6,8,110,50,True

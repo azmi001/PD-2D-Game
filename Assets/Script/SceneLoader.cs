@@ -16,13 +16,17 @@ public class SceneLoader : MonoBehaviour
         {
             GetComponent<Button>().interactable = true;
         }
-        else 
+        else
         {
             GetComponent<Button>().interactable = false;
         }
+
         GetComponent<Button>().onClick.AddListener(() => LoadScene(Quest));   
     }
-
+    private void Update()
+    {
+        
+    }
     public void LoadScene(StoryQuest quest)
     {
         Actions.onQuestStart.Invoke(quest);

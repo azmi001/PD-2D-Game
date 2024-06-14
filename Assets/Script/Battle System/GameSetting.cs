@@ -3,8 +3,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Threading.Tasks;
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 //using static UnityEditor.Progress;
 
@@ -226,7 +228,7 @@ public partial class GameSetting : MonoBehaviour
         currentUnitPlay.GetComponentInChildren<Animator>().Play("Attack");
     }
 
-    public void ChangeState(BattleState newState)
+    public async void ChangeState(BattleState newState)
     {
         currentState = newState;
         switch (currentState)
@@ -259,11 +261,14 @@ public partial class GameSetting : MonoBehaviour
                 Debug.Log("Won");
                 DialogText.text = "Player Win The Battle!";
                 Actions.onQuestFinis?.Invoke(FindObjectOfType<GameManager>().currentQuest);
-
+                await Task.Delay(2000);
+                SceneManager.LoadScene("Hub");
                 break;
             case BattleState.LOST:
                 Debug.Log("Lost");
                 DialogText.text = "Enemy Win The Battle!";
+                await Task.Delay(2000);
+                SceneManager.LoadScene("Hub");
                 break;
             case BattleState.CHECK:
                 if (enemyUnit == null || enemyUnit.Count <= 0)
