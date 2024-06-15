@@ -710,19 +710,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac8582370478dcb4194b112d168bcb41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CharacterName:
-  - {fileID: 11400000, guid: 1840adc74f5e873448e6688739ac93d9, type: 2}
-  - {fileID: 11400000, guid: a145b0104c626724f988b654cb1a7c36, type: 2}
-  - {fileID: 11400000, guid: 602203a110a014b4385be22f32ff9d43, type: 2}
-  - {fileID: 11400000, guid: 95491e0d384f7f94193aa0e774e86c10, type: 2}
-  - {fileID: 11400000, guid: fedd78e8952da53489137862817c775b, type: 2}
-  - {fileID: 11400000, guid: 38d33d71c6a13e1468bc71a09489c5a3, type: 2}
-  - {fileID: 11400000, guid: 15b4560d969527c4bbe87e6c58f6b4eb, type: 2}
-  - {fileID: 11400000, guid: 90b7cc4ee58d84e409f4106440ac70bb, type: 2}
-  - {fileID: 11400000, guid: 975cd01ffad159e49a6f05f07a2bbce3, type: 2}
-  - {fileID: 11400000, guid: ab38af1df8e9ee547be0dd83c7b708a5, type: 2}
-  ContentParrent: {fileID: 473501776}
-  CharacterPrefabs: {fileID: 4509750473974345807, guid: 17d12104dd8b566439d48652027b22d1, type: 3}
+  listCharacter: []
 --- !u!1 &140907058
 GameObject:
   m_ObjectHideFlags: 0
@@ -6234,7 +6222,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1518672896
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7228,30 +7216,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1617550443}
   m_CullTransparentMesh: 1
---- !u!1 &1620834724 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8550072402413270455, guid: f771a53844ed6f64fb457da036292797, type: 3}
-  m_PrefabInstance: {fileID: 1757597787}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1620834727
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1620834724}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6d13c635cf06bb439c4d2d6dab01220, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  characterList:
-    character:
-    - {fileID: 11400000, guid: 1840adc74f5e873448e6688739ac93d9, type: 2}
-    - {fileID: 11400000, guid: a145b0104c626724f988b654cb1a7c36, type: 2}
-    - {fileID: 11400000, guid: 90b7cc4ee58d84e409f4106440ac70bb, type: 2}
-    - {fileID: 11400000, guid: 15b4560d969527c4bbe87e6c58f6b4eb, type: 2}
-    - {fileID: 11400000, guid: 38d33d71c6a13e1468bc71a09489c5a3, type: 2}
 --- !u!1 &1639525647
 GameObject:
   m_ObjectHideFlags: 0
@@ -8342,18 +8306,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1623290597355033176, guid: f771a53844ed6f64fb457da036292797, type: 3}
-      propertyPath: character
-      value: 
-      objectReference: {fileID: 11400000, guid: 1840adc74f5e873448e6688739ac93d9, type: 2}
-    - target: {fileID: 1623290597355033176, guid: f771a53844ed6f64fb457da036292797, type: 3}
-      propertyPath: currentQuest
-      value: 
-      objectReference: {fileID: 11400000, guid: 6af06c37042dfad47b0fea5bfd17d6fc, type: 2}
-    - target: {fileID: 1623290597355033176, guid: f771a53844ed6f64fb457da036292797, type: 3}
-      propertyPath: akun.akunStamina
-      value: 100
-      objectReference: {fileID: 0}
     - target: {fileID: 4385079241931588547, guid: f771a53844ed6f64fb457da036292797, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -8398,17 +8350,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
-    - target: {fileID: 8550072402413270455, guid: f771a53844ed6f64fb457da036292797, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8550072402413270455, guid: f771a53844ed6f64fb457da036292797, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1620834727}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f771a53844ed6f64fb457da036292797, type: 3}
 --- !u!1 &1758302269
 GameObject:

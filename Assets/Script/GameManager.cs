@@ -17,28 +17,48 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] Akun akun;
 
+    public DatabaseSOCharacter GetDatabaseSOCharacter()
+    {
+        DatabaseSOCharacter temp = GetComponentInChildren<DatabaseSOCharacter>();
+        return temp;
+    }
+    public DatabaseUnit GetDatabaseUnit()
+    {
+        DatabaseUnit temp = GetComponentInChildren<DatabaseUnit>();
+        return temp;
+    }
+
     private void Awake()
     {
-        akun = new Akun();
-        akun.akunLvl = 1;
-        akun.akunStamina = 100;
-        akun.akunExp = 0;
-        akun.akunMoney = 0;
-
-        //character.unitName = "ucup";
-
         DontDestroyOnLoad(gameObject);
     }
 
     private void Start()
     {
-        
+        akun = JsonHelper.ReadFromJSON<Akun>("Akun");
+        if (akun == null)
+        {
+            akun = new Akun();
+            akun.akunLvl = 1;
+            akun.akunStamina = 100;
+            akun.akunExp = 0;
+            akun.akunMoney = 0;
+            foreach (var item in GetDatabaseSOCharacter().GetListCharacter())
+            {
+                if (item.Unlock)
+                {
+                    akun.OwnedHeroes.Add(item.charaData);
+                }
+            }
+            JsonHelper.SaveToJSON(akun, "Akun");
+        }
     }
-
     private void OnEnable()
     {
         Actions.onQuestStart += StartQuest;
         Funcs.GetAkun += GetAccount;
+        Funcs.GetDatabaseSOCharacter += GetDatabaseSOCharacter;
+        Funcs.GetDatabaseUnit += GetDatabaseUnit;
     }
 
     private Akun GetAccount()

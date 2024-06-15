@@ -51,15 +51,15 @@ public class Unit : MonoBehaviour
 
     public void Start()
     {
-        _def = character.deffense;
+        _def = character.charaData.deffense;
         float hasil = MathF.Pow(2f / 0.09f, 1.6f);
         Debug.Log(hasil);
     }
     public void InitializedData()
     {
-        currentHP = character.maxHP;
-        currentLv = character.unitLevel;
-        currentXP = character.unitexp;
+        currentHP = character.charaData.maxHP;
+        currentLv = character.charaData.unitLevel;
+        currentXP = character.charaData.unitexp;
         skillList = new List<Skill>(character.skills);
     }
 
@@ -67,11 +67,11 @@ public class Unit : MonoBehaviour
     public bool TakeDemage(int dmg, int def, ElementType attackerElement)
     {
         //Mendubug dmg awal
-        Debug.Log("Demage Murni " + character.unitName + "yang belum dicampur elemen " + dmg);
+        Debug.Log("Demage Murni " + character.charaData.unitName + "yang belum dicampur elemen " + dmg);
 
         //inisialisasi awal logika sitem dmg elemen
         int actualDamage = dmg * 15 /100;
-        Debug.Log("Demage elemen didapat " + character.unitName + "adalah " + actualDamage);
+        Debug.Log("Demage elemen didapat " + character.charaData.unitName + "adalah " + actualDamage);
 
         //fsm logic kalkulasi demg element
         switch (character.thisUnitElement)
@@ -100,7 +100,7 @@ public class Unit : MonoBehaviour
         int finalDmg = dmg + actualDamage;
 
         //mendebug total dmg final dmg
-        Debug.Log("Demage Final " + character.unitName + "yang dicampur elemen " + finalDmg);
+        Debug.Log("Demage Final " + character.charaData.unitName + "yang dicampur elemen " + finalDmg);
 
         //mebuat logika variasi dmg 20% +- dari total finaldmg
         int varian = finalDmg * 20/ 100;
@@ -109,13 +109,13 @@ public class Unit : MonoBehaviour
         int result = UnityEngine.Random.Range(minVarian, maxVarian);
 
         //mendebug nial variasi dmg varian
-        Debug.Log(character.unitName + "Min range -varian dari dmg " + minVarian);
-        Debug.Log(character.unitName + "Min range +varian dari dmg " + maxVarian);
-        Debug.Log(character.unitName +"Variasi dmg tambahan +- " + result);
+        Debug.Log(character.charaData.unitName + "Min range -varian dari dmg " + minVarian);
+        Debug.Log(character.charaData.unitName + "Min range +varian dari dmg " + maxVarian);
+        Debug.Log(character.charaData.unitName +"Variasi dmg tambahan +- " + result);
 
         //mendebug nilai finaldmg yang ditambah oleh nilai variasi 
         int totalDmg = finalDmg + result;
-        Debug.Log("Total Demage yang diberikan oleh " + character.unitName + "adalah " + totalDmg);
+        Debug.Log("Total Demage yang diberikan oleh " + character.charaData.unitName + "adalah " + totalDmg);
 
         //logika rumus pengurangan darah target 
         int finalDmg1 = ((finalDmg + result) * 4);
@@ -139,7 +139,7 @@ public class Unit : MonoBehaviour
             //mengupdate saat ui darah habis saat kondisi mati
             ChHpSlider.value = currentHP;
 
-            //memutar animasi character mati
+            //memutar animasi character.charaData mati
             StartCoroutine(unitdead());
 
             return true;
@@ -148,7 +148,7 @@ public class Unit : MonoBehaviour
         else
         {
             ChHpSlider.value = currentHP;
-            //Memutar animasi character hurt
+            //Memutar animasi character.charaData hurt
             if(isdefup)
             {
                 GetComponentInChildren<Animator>().Play("Block");
@@ -162,7 +162,7 @@ public class Unit : MonoBehaviour
         }
     }
 
-    //memutar animasi character mati
+    //memutar animasi character.charaData mati
     private IEnumerator unitdead()
     {
         GetComponentInChildren<Animator>().Play("KO");
@@ -183,7 +183,7 @@ public class Unit : MonoBehaviour
 
     public void DefDefault()
     {
-        _def = character.deffense;
+        _def = character.charaData.deffense;
         isdefup = false;
     }
 
@@ -191,8 +191,8 @@ public class Unit : MonoBehaviour
     public void Heal(int amount)
     {
         currentHP += amount;
-        if (currentHP > character.maxHP)
-            currentHP = character.maxHP;
+        if (currentHP > character.charaData.maxHP)
+            currentHP = character.charaData.maxHP;
         ChHpSlider.value = currentHP;
 
     }
@@ -223,9 +223,9 @@ public class Unit : MonoBehaviour
 
     public void SetHud()
     {
-        ChNmText.text = character.unitName;
+        ChNmText.text = character.charaData.unitName;
         ChLvlText.text = "" + currentLv;
-        ChHpSlider.maxValue = character.maxHP;
+        ChHpSlider.maxValue = character.charaData.maxHP;
         ChHpSlider.value = currentHP;
     }
 
@@ -431,7 +431,7 @@ public class Unit : MonoBehaviour
                         }
                         break;
                 }
-                TargetUnit.TakeDemage(character.damage, TargetUnit._def, character.thisUnitElement);
+                TargetUnit.TakeDemage(character.charaData.damage, TargetUnit._def, character.thisUnitElement);
                 break;
             case CharacterState.HEAL:
                 Heal(100);//jumlah heal nya

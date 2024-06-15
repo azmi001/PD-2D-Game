@@ -29,12 +29,6 @@ public class QuestManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     //melakukan pengecekan quest complete atau tidak
     private void OnQuestFinish(StoryQuest quest)
     {
@@ -47,6 +41,10 @@ public class QuestManager : MonoBehaviour
                 PlayerPrefs.SetInt(ListQuest[i].QuestName, ListQuest[i].UnlockQuest == true ? 1 : 0);
                 break;
             }
+        }
+        foreach (var item in quest.listQuestReward)
+        {
+            Debug.Log(item.rewardName);
         }
     }
 }

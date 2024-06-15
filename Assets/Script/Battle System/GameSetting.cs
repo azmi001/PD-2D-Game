@@ -76,11 +76,20 @@ public partial class GameSetting : MonoBehaviour
     {
         for (int i = 0; i < Funcs.GetAkun().teamHeroes.Count; i++)
         {
-            GameObject go = Instantiate(Funcs.GetAkun().teamHeroes[i], playerPos.GetChild(i));
-            go.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = i;
-            go.transform.GetChild(1).GetComponent<Canvas>().sortingOrder = i;
-            go.GetComponent<Unit>().actorType = ACTORTYPE.PLAYER;
-            playerUnit.Add(go.GetComponent<Unit>());
+            try
+            {
+                Unit hero = Funcs.GetDatabaseUnit?.Invoke().GetUnit(Funcs.GetAkun().teamHeroes[i]);
+                GameObject go = Instantiate(hero.gameObject, playerPos.GetChild(i));
+                go.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = i;
+                go.transform.GetChild(1).GetComponent<Canvas>().sortingOrder = i;
+                go.GetComponent<Unit>().actorType = ACTORTYPE.PLAYER;
+                playerUnit.Add(go.GetComponent<Unit>());
+
+            }
+            catch
+            {
+                continue;
+            }
         }
         //mengambil data enemy dari scribtabke game object story quest
         StoryQuest quest = FindObjectOfType<GameManager>().currentQuest;
@@ -100,7 +109,7 @@ public partial class GameSetting : MonoBehaviour
         DialogText.text = "The Battle Begin";
         yield return new WaitForSeconds(1f);
         currentUnitPlay.transform.GetChild(0).GetComponentInChildren<SpriteRenderer>().color = Color.yellow;
-        DialogText.text = "Player Turn ! " + currentUnitPlay.character.unitName;
+        DialogText.text = "Player Turn ! " + currentUnitPlay.character.charaData.unitName;
     }
     #region funcs
     private List<Unit> GetAllEnemy()
@@ -222,7 +231,7 @@ public partial class GameSetting : MonoBehaviour
 
     private void OnTargetedUnit(Unit target)
     {
-        target.TakeDemage(currentUnitPlay.character.damage, target._def, currentUnitPlay.character.thisUnitElement);
+        target.TakeDemage(currentUnitPlay.character.charaData.damage, target._def, currentUnitPlay.character.thisUnitElement);
         Actions.OnUnitUsedAction?.Invoke(Funcs.GetCurrentUnitPlay());
         Actions.OnTargetedUnit -= OnTargetedUnit;
         currentUnitPlay.GetComponentInChildren<Animator>().Play("Attack");
@@ -248,12 +257,12 @@ public partial class GameSetting : MonoBehaviour
                     }
                 }
                 currentUnitPlay.transform.GetChild(0).GetComponentInChildren<SpriteRenderer>().color = Color.yellow;
-                DialogText.text = "Player Turn ! " + currentUnitPlay.character.unitName;
+                DialogText.text = "Player Turn ! " + currentUnitPlay.character.charaData.unitName;
                 break;
             case BattleState.ENEMYTURN:
                 currentUnitPlay = enemyUnit[enemyIndex];
                 Actions.IsDisableAllButton?.Invoke(true);
-                DialogText.text = "Enemy Turn ! " + currentUnitPlay.character.unitName;
+                DialogText.text = "Enemy Turn ! " + currentUnitPlay.character.charaData.unitName;
                 currentUnitPlay.transform.GetChild(0).GetComponentInChildren<SpriteRenderer>().color = Color.yellow;
                 StartCoroutine(EnemyAttack());
                 break;

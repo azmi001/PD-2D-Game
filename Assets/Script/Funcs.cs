@@ -9,4 +9,6 @@ public static class Funcs
     public static Func<Unit> GetCurrentUnitPlay;
     public static Func<List<Unit>> GetAllEnemyUnit;
     public static Func<Akun> GetAkun;
+    public static Func<DatabaseUnit> GetDatabaseUnit;
+    public static Func<DatabaseSOCharacter> GetDatabaseSOCharacter;
 }

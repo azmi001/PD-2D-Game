@@ -21,24 +21,31 @@ public class CharacterSelection : MonoBehaviour
 
     List<Button> CharacterButton = new List<Button>();
 
-    public Unit[] CharacterName;
     public Transform ContentParrent;
     public GameObject CharacterPrefabs;
 
-    private void Start()
+    List<Character> tempListCharacter = new();
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    private void Awake()
     {
-        for (int i = 0; i < CharacterName.Length; i++)
+        for (int i = 0; i < Funcs.GetDatabaseSOCharacter().GetListCharacter().Length; i++)
         {
-            GameObject go = Instantiate(CharacterPrefabs, ContentParrent);
-            go.GetComponentInChildren<TMP_Text>().text = CharacterName[i].character.unitName;
-            go.GetComponent<Image>().sprite = CharacterName[i].character.HeroIcon;
+            if (Funcs.GetDatabaseSOCharacter().GetListCharacter()[i].Unlock)
+            {
+                GameObject go = Instantiate(CharacterPrefabs, ContentParrent);
+                go.GetComponentInChildren<TMP_Text>().text = Funcs.GetDatabaseSOCharacter().GetListCharacter()[i].charaData.unitName;
+                go.GetComponent<Image>().sprite = Funcs.GetDatabaseSOCharacter().GetListCharacter()[i].HeroIcon;
 
-            go.GetComponent<Button>().onClick.AddListener(() => SelectTarget(go.transform.GetSiblingIndex()));
+                go.GetComponent<Button>().onClick.AddListener(() => SelectTarget(go.transform.GetSiblingIndex()));
+                tempListCharacter.Add(Funcs.GetDatabaseSOCharacter().GetListCharacter()[i]);
 
-            CharacterButton.Add(go.GetComponent<Button>());
+                CharacterButton.Add(go.GetComponent<Button>());
+
+            }
         }
 
         ContentParrent.gameObject.SetActive(false);
+
 
         ChooseCharacterButton1.onClick.AddListener(() => 
         {
@@ -64,7 +71,119 @@ public class CharacterSelection : MonoBehaviour
             _index = 2;
         });
     }
+    private void OnEnable()
+    {
+        if (Funcs.GetAkun().teamHeroes.Count <= 0)
+            return;
 
+
+        if (Funcs.GetAkun().teamHeroes.Count == 1)
+        {
+            for (int i = 0; i < tempListCharacter.Count; i++)
+            {
+                try
+                {
+                    if (tempListCharacter[i].charaData.unitName == Funcs.GetAkun().teamHeroes[0])
+                    {
+                        CharacterImage1.sprite = tempListCharacter[i].HeroIcon;
+                        CharacterButton[i].interactable = false;
+                        break;
+                    }
+                }
+                catch
+                {
+                    continue;
+                }
+            }
+        }
+        if (Funcs.GetAkun().teamHeroes.Count == 2)
+        {
+            for (int i = 0; i < tempListCharacter.Count; i++)
+            {
+                try
+                {
+                    if (tempListCharacter[i].charaData.unitName == Funcs.GetAkun().teamHeroes[0])
+                    {
+                        CharacterImage1.sprite = tempListCharacter[i].HeroIcon;
+                        CharacterButton[i].interactable = false;
+                        break;
+                    }
+                }
+                catch
+                {
+                    continue;
+                }
+            }
+            for (int i = 0; i < tempListCharacter.Count; i++)
+            {
+                try
+                {
+                    if (tempListCharacter[i].charaData.unitName == Funcs.GetAkun().teamHeroes[1])
+                    {
+                        CharacterImage2.sprite = tempListCharacter[i].HeroIcon;
+                        CharacterButton[i].interactable = false;
+                        break;
+                    }
+                }
+                catch
+                {
+                    continue;
+                }
+            }
+
+        }
+        if (Funcs.GetAkun().teamHeroes.Count == 3)
+        {
+            for (int i = 0; i < tempListCharacter.Count; i++)
+            {
+                try
+                {
+                    if (tempListCharacter[i].charaData.unitName == Funcs.GetAkun().teamHeroes[0])
+                    {
+                        CharacterImage1.sprite = tempListCharacter[i].HeroIcon;
+                        CharacterButton[i].interactable = false;
+                        break;
+                    }
+                }
+                catch
+                {
+                    continue;
+                }
+            }
+            for (int i = 0; i < tempListCharacter.Count; i++)
+            {
+                try
+                {
+                    if (tempListCharacter[i].charaData.unitName == Funcs.GetAkun().teamHeroes[1])
+                    {
+                        CharacterImage2.sprite = tempListCharacter[i].HeroIcon;
+                        CharacterButton[i].interactable = false;
+                        break;
+                    }
+                }
+                catch
+                {
+                    continue;
+                }
+            }
+            for (int i = 0; i < tempListCharacter.Count; i++)
+            {
+                try
+                {
+                    if (tempListCharacter[i].charaData.unitName == Funcs.GetAkun().teamHeroes[2])
+                    {
+                        CharacterImage3.sprite = tempListCharacter[i].HeroIcon;
+                        CharacterButton[i].interactable = false;
+                        break;
+                    }
+                }
+                catch
+                {
+                    continue;
+                }
+            }
+        }
+    }
     private void SelectTarget(int index)
     {
         if (Temp.sprite != null)
@@ -78,11 +197,11 @@ public class CharacterSelection : MonoBehaviour
             }
         }
 
-        Temp.sprite = CharacterName[index].character.HeroIcon;
+        Temp.sprite = tempListCharacter[index].HeroIcon;
 
         ContentParrent.gameObject.SetActive(false);
 
-        Funcs.GetAkun().AddTeam(CharacterName[index].gameObject, _index);
+        Funcs.GetAkun().AddTeam(tempListCharacter[index].charaData.unitName, _index);
         CharacterButton[index].interactable = false;
     }
 }
