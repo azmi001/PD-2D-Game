@@ -8,7 +8,7 @@ public class StoryQuest : ScriptableObject
     public string QuestName;
     public GameObject[] EnemyPrefabs;
     public int money;
-    public int exp;
+    public int heroesExpReward;
     public int staminaCost;
 
     public bool UnlockQuest = false;
@@ -23,7 +23,6 @@ public class QuestReward
     public string rewardName;
     public RewardType rewardType;
     public Sprite rewardIcon;
-    public float unitExp;
     public enum RewardType
     {
         Character,

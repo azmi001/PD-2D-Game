@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    private static GameManager Instance;
     //penyimapan variable data story quest
     public StoryQuest currentQuest;
 
@@ -30,6 +31,14 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
         DontDestroyOnLoad(gameObject);
     }
 

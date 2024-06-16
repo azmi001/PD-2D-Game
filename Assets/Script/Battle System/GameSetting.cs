@@ -74,6 +74,8 @@ public partial class GameSetting : MonoBehaviour
     //setup game
     IEnumerator Init()
     {
+        Unit _hero = Funcs.GetDatabaseUnit?.Invoke().GetUnit(Funcs.GetAkun().teamHeroes[1]);
+        Debug.Log(_hero == null);
         for (int i = 0; i < Funcs.GetAkun().teamHeroes.Count; i++)
         {
             try
@@ -264,6 +266,13 @@ public partial class GameSetting : MonoBehaviour
                 Actions.IsDisableAllButton?.Invoke(true);
                 DialogText.text = "Enemy Turn ! " + currentUnitPlay.character.charaData.unitName;
                 currentUnitPlay.transform.GetChild(0).GetComponentInChildren<SpriteRenderer>().color = Color.yellow;
+                if (currentUnitPlay.CurrentTurn > currentUnitPlay.LastTurn)
+                {
+                    if (currentUnitPlay.isdefup == true)
+                    {
+                        currentUnitPlay.DefDefault();
+                    }
+                }
                 StartCoroutine(EnemyAttack());
                 break;
             case BattleState.WON:

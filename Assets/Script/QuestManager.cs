@@ -42,9 +42,19 @@ public class QuestManager : MonoBehaviour
                 break;
             }
         }
-        foreach (var item in quest.listQuestReward)
+        for (int i = 0; i < Funcs.GetAkun().OwnedHeroes.Count; i++)
         {
-            Debug.Log(item.rewardName);
+            try
+            {
+                if (Funcs.GetAkun().OwnedHeroes[i].unitName == Funcs.GetAkun().teamHeroes[i])
+                {
+                    Funcs.GetAkun().OwnedHeroes[i].AddExp((float)quest.heroesExpReward);
+                }
+            }
+            catch
+            {
+                continue;
+            }
         }
     }
 }

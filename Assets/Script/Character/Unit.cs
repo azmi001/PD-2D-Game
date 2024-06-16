@@ -28,7 +28,7 @@ public class Unit : MonoBehaviour
     //Merenfrensikan dari scriptable object Character untuk mengambil data stat character
     [Header("Data Character")]
     public Character character;
-    [HideInInspector]public int _def;
+    public int _def;
 
     [Header("List Skill Character")]
     public List<Skill> skillList;
@@ -177,8 +177,11 @@ public class Unit : MonoBehaviour
 
     public void DefUp(int amount)
     {
-        _def *= amount;
-        isdefup = true;
+        if (!isdefup)
+        {
+            _def *= amount;
+            isdefup = true;
+        }
     }
 
     public void DefDefault()

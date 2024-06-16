@@ -25,6 +25,7 @@ public class CharacterSelection : MonoBehaviour
     public GameObject CharacterPrefabs;
 
     List<Character> tempListCharacter = new();
+
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private void Awake()
     {
