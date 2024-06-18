@@ -165,14 +165,10 @@ public class Unit : MonoBehaviour
     //memutar animasi character.charaData mati
     private IEnumerator unitdead()
     {
-        GetComponentInChildren<Animator>().Play("KO");
-        /*while (GetComponentInChildren<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime <= 1)
-        {
-            yield return null;
-        }*/
-
-        yield return new WaitForSeconds(1f);
+        Debug.Log("Budi died");
         Actions.OnUnitDied?.Invoke(this);
+
+        yield return null;
     }
 
     public void DefUp(int amount)
