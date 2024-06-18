@@ -707,10 +707,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 113755897}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac8582370478dcb4194b112d168bcb41, type: 3}
+  m_Script: {fileID: 11500000, guid: 606b1798dc088cc429a5eaf9a2a0578a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  listCharacter: []
+  ContentParrent: {fileID: 473501776}
+  CharacterPrefabs: {fileID: 4509750473974345807, guid: 17d12104dd8b566439d48652027b22d1, type: 3}
 --- !u!1 &140907058
 GameObject:
   m_ObjectHideFlags: 0
@@ -935,17 +936,6 @@ MonoBehaviour:
   ChooseCharacterButton1: {fileID: 190293635}
   ChooseCharacterButton2: {fileID: 961059513}
   ChooseCharacterButton3: {fileID: 646847429}
-  CharacterName:
-  - {fileID: 3506219432552147845, guid: 0858548050f620d4e9ab73773188c0d6, type: 3}
-  - {fileID: 864842667368195610, guid: 4ca41759f65344b448753b8ff4d3c93b, type: 3}
-  - {fileID: 3506219432552147845, guid: f4a1efa82c03e824292153ab00860524, type: 3}
-  - {fileID: 864842667368195610, guid: 6cff672497d19d040a8bc888b102ec61, type: 3}
-  - {fileID: 3506219432552147845, guid: 481209c56c7ad8844bed6aca9b6849a7, type: 3}
-  - {fileID: 3506219432552147845, guid: 973f860a5bf792245a45683b42ecc2d9, type: 3}
-  - {fileID: 3506219432552147845, guid: 5c673cd2bceebe146b6c047b72781bcc, type: 3}
-  - {fileID: 3506219432552147845, guid: 079650aef59c53847b594fb08abf353d, type: 3}
-  - {fileID: 3506219432552147845, guid: 1fe4e610f8ac0034ba877f5025f14874, type: 3}
-  - {fileID: 3506219432552147845, guid: c1777626be29e97488ff8d44755c5d6a, type: 3}
   ContentParrent: {fileID: 294119056}
   CharacterPrefabs: {fileID: 1845956415290973609, guid: 8cd9a39aa28d50747af238395ac0530f, type: 3}
 --- !u!1 &190293633
@@ -1704,7 +1694,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 299486987}
   m_HandleRect: {fileID: 299486986}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -9141,17 +9131,6 @@ MonoBehaviour:
   ChooseCharacterButton1: {fileID: 1910013609}
   ChooseCharacterButton2: {fileID: 1701035315}
   ChooseCharacterButton3: {fileID: 27425726}
-  CharacterName:
-  - {fileID: 3506219432552147845, guid: 0858548050f620d4e9ab73773188c0d6, type: 3}
-  - {fileID: 864842667368195610, guid: 4ca41759f65344b448753b8ff4d3c93b, type: 3}
-  - {fileID: 3506219432552147845, guid: f4a1efa82c03e824292153ab00860524, type: 3}
-  - {fileID: 864842667368195610, guid: 6cff672497d19d040a8bc888b102ec61, type: 3}
-  - {fileID: 3506219432552147845, guid: 481209c56c7ad8844bed6aca9b6849a7, type: 3}
-  - {fileID: 3506219432552147845, guid: 973f860a5bf792245a45683b42ecc2d9, type: 3}
-  - {fileID: 3506219432552147845, guid: 5c673cd2bceebe146b6c047b72781bcc, type: 3}
-  - {fileID: 3506219432552147845, guid: 079650aef59c53847b594fb08abf353d, type: 3}
-  - {fileID: 3506219432552147845, guid: 1fe4e610f8ac0034ba877f5025f14874, type: 3}
-  - {fileID: 3506219432552147845, guid: c1777626be29e97488ff8d44755c5d6a, type: 3}
   ContentParrent: {fileID: 1237436805}
   CharacterPrefabs: {fileID: 1845956415290973609, guid: 8cd9a39aa28d50747af238395ac0530f, type: 3}
 --- !u!114 &1931598342
