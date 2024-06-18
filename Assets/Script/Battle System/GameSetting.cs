@@ -166,6 +166,7 @@ public partial class GameSetting : MonoBehaviour
     private async void RefreshListUnit(Unit targetunit)
     {
         Animator animator = targetunit.GetComponentInChildren<Animator>();
+        animator.Play("KO");
         while (!animator.GetCurrentAnimatorStateInfo(0).IsName("KO"))
         {
             await Task.Yield();
