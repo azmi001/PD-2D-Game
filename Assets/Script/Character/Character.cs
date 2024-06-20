@@ -7,13 +7,7 @@ public partial class Character : ScriptableObject
 {
     // atribute stast character
     [Header("Unit Stat")]
-    public string unitName;
-    public int unitLevel;
-    public float unitexp;
-    public int deffense;
-    public int damage;
-    public int maxHP;
-    public int Heal;
+    public CharacterData charaData;
     public bool Unlock;
 
     public Sprite HeroIcon;

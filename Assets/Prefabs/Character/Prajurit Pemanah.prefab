@@ -159,7 +159,7 @@ MonoBehaviour:
   currentXP: 0
   expToLvUp: 0
   currentLv: 0
-  character: {fileID: 11400000, guid: 38d33d71c6a13e1468bc71a09489c5a3, type: 2}
+  character: {fileID: 11400000, guid: 15b4560d969527c4bbe87e6c58f6b4eb, type: 2}
   _def: 0
   skillList: []
   isdefup: 0

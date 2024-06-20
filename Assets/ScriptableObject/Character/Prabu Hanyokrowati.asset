@@ -12,13 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01f1faae6c29aea42a39b9f28c72f49f, type: 3}
   m_Name: Prabu Hanyokrowati
   m_EditorClassIdentifier: 
-  unitName: Prabu Hanyokrowati
-  unitLevel: 1
-  unitexp: 0
-  deffense: 40
-  damage: 58
-  maxHP: 810
-  Heal: 300
+  charaData:
+    unitName: 'Prabu Hanyokrowati '
+    unitLevel: 1
+    unitexp: 0
+    deffense: 40
+    damage: 58
+    maxHP: 810
+    Heal: 300
+  Unlock: 0
   HeroIcon: {fileID: 21300000, guid: cae4a174f9716504e912325ed8cf452e, type: 3}
   chBio: 
   thisUnitElement: 2

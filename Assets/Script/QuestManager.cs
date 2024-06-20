@@ -29,12 +29,6 @@ public class QuestManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     //melakukan pengecekan quest complete atau tidak
     private void OnQuestFinish(StoryQuest quest)
     {
@@ -46,6 +40,20 @@ public class QuestManager : MonoBehaviour
                 ListQuest[i].UnlockQuest = true;
                 PlayerPrefs.SetInt(ListQuest[i].QuestName, ListQuest[i].UnlockQuest == true ? 1 : 0);
                 break;
+            }
+        }
+        for (int i = 0; i < Funcs.GetAkun().OwnedHeroes.Count; i++)
+        {
+            try
+            {
+                if (Funcs.GetAkun().OwnedHeroes[i].unitName == Funcs.GetAkun().teamHeroes[i])
+                {
+                    Funcs.GetAkun().OwnedHeroes[i].AddExp((float)quest.heroesExpReward);
+                }
+            }
+            catch
+            {
+                continue;
             }
         }
     }

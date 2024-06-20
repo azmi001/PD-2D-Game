@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,9 +11,9 @@ public class Akun
     public int akunStamina;
     public int akunMoney;
 
-    public List<Character> OwnedHeroes = new();
-    public List<GameObject> teamHeroes = new();
-    public void AddTeam(GameObject character, int index)
+    public List<CharacterData> OwnedHeroes = new();
+    public List<string> teamHeroes = new();
+    public void AddTeam(string character, int index)
     {
         if (teamHeroes.Count > index)
         {
@@ -25,5 +26,10 @@ public class Akun
         {
             teamHeroes.Add(character);
         }
+        JsonHelper.SaveToJSON(this, "Akun");
+    }
+    public void AddHeroesExp(string heroName)
+    {
+        CharacterData targetHero = Array.Find(OwnedHeroes.ToArray(), t => t.unitName == heroName);
     }
 }

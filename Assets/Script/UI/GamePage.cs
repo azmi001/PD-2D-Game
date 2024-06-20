@@ -70,7 +70,7 @@ public class GamePage : MonoBehaviour
         for (int i = 0; i < listunitTarget.Count; i++)
         {
             GameObject go = Instantiate(Card, contentParent);
-            go.GetComponentInChildren<Text>().text = listunitTarget[i].character.unitName;
+            go.GetComponentInChildren<Text>().text = listunitTarget[i].character.charaData.unitName;
             go.GetComponent<UnitCard>().AddListener(i,actorType);
             
         }

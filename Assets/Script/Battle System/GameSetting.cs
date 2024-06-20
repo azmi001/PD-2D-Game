@@ -74,13 +74,24 @@ public partial class GameSetting : MonoBehaviour
     //setup game
     IEnumerator Init()
     {
+        Unit _hero = Funcs.GetDatabaseUnit?.Invoke().GetUnit(Funcs.GetAkun().teamHeroes[1]);
+        Debug.Log(_hero == null);
         for (int i = 0; i < Funcs.GetAkun().teamHeroes.Count; i++)
         {
-            GameObject go = Instantiate(Funcs.GetAkun().teamHeroes[i], playerPos.GetChild(i));
-            go.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = i;
-            go.transform.GetChild(1).GetComponent<Canvas>().sortingOrder = i;
-            go.GetComponent<Unit>().actorType = ACTORTYPE.PLAYER;
-            playerUnit.Add(go.GetComponent<Unit>());
+            try
+            {
+                Unit hero = Funcs.GetDatabaseUnit?.Invoke().GetUnit(Funcs.GetAkun().teamHeroes[i]);
+                GameObject go = Instantiate(hero.gameObject, playerPos.GetChild(i));
+                go.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = i;
+                go.transform.GetChild(1).GetComponent<Canvas>().sortingOrder = i;
+                go.GetComponent<Unit>().actorType = ACTORTYPE.PLAYER;
+                playerUnit.Add(go.GetComponent<Unit>());
+
+            }
+            catch
+            {
+                continue;
+            }
         }
         //mengambil data enemy dari scribtabke game object story quest
         StoryQuest quest = FindObjectOfType<GameManager>().currentQuest;
@@ -100,7 +111,7 @@ public partial class GameSetting : MonoBehaviour
         DialogText.text = "The Battle Begin";
         yield return new WaitForSeconds(1f);
         currentUnitPlay.transform.GetChild(0).GetComponentInChildren<SpriteRenderer>().color = Color.yellow;
-        DialogText.text = "Player Turn ! " + currentUnitPlay.character.unitName;
+        DialogText.text = "Player Turn ! " + currentUnitPlay.character.charaData.unitName;
     }
     #region funcs
     private List<Unit> GetAllEnemy()
@@ -152,8 +163,17 @@ public partial class GameSetting : MonoBehaviour
             Actions.OnTargetedUnit -= (Action<Unit>)item;
         }
     }
-    private void RefreshListUnit(Unit targetunit)
+    private async void RefreshListUnit(Unit targetunit)
     {
+        Animator animator = targetunit.GetComponentInChildren<Animator>();
+        animator.Play("KO");
+        while (!animator.GetCurrentAnimatorStateInfo(0).IsName("KO"))
+        {
+            await Task.Yield();
+        }
+        float animLength = animator.GetCurrentAnimatorStateInfo(0).length;
+        await Task.Delay((int)(animLength * 1000));
+
         switch (targetunit.actorType)
         {
             case ACTORTYPE.PLAYER:
@@ -201,7 +221,7 @@ public partial class GameSetting : MonoBehaviour
 
         }
     }
-    private void OnUnitUsedAction(Unit targetunit)
+    private async void OnUnitUsedAction(Unit targetunit)
     {
         targetunit.transform.GetChild(0).GetComponentInChildren<SpriteRenderer>().color = Color.white;
         switch (targetunit.actorType)
@@ -216,16 +236,16 @@ public partial class GameSetting : MonoBehaviour
                 break;
         }
         targetunit.LastTurn++;
-
+        await Task.Delay(1000);
         ChangeState(BattleState.CHECK);
     }
 
     private void OnTargetedUnit(Unit target)
     {
-        target.TakeDemage(currentUnitPlay.character.damage, target._def, currentUnitPlay.character.thisUnitElement);
+        currentUnitPlay.GetComponentInChildren<Animator>().Play("Attack");
+        target.TakeDemage(currentUnitPlay.character.charaData.damage, target._def, currentUnitPlay.character.thisUnitElement);
         Actions.OnUnitUsedAction?.Invoke(Funcs.GetCurrentUnitPlay());
         Actions.OnTargetedUnit -= OnTargetedUnit;
-        currentUnitPlay.GetComponentInChildren<Animator>().Play("Attack");
     }
 
     public async void ChangeState(BattleState newState)
@@ -248,13 +268,21 @@ public partial class GameSetting : MonoBehaviour
                     }
                 }
                 currentUnitPlay.transform.GetChild(0).GetComponentInChildren<SpriteRenderer>().color = Color.yellow;
-                DialogText.text = "Player Turn ! " + currentUnitPlay.character.unitName;
+                DialogText.text = "Player Turn ! " + currentUnitPlay.character.charaData.unitName;
                 break;
             case BattleState.ENEMYTURN:
                 currentUnitPlay = enemyUnit[enemyIndex];
                 Actions.IsDisableAllButton?.Invoke(true);
-                DialogText.text = "Enemy Turn ! " + currentUnitPlay.character.unitName;
+                DialogText.text = "Enemy Turn ! " + currentUnitPlay.character.charaData.unitName;
                 currentUnitPlay.transform.GetChild(0).GetComponentInChildren<SpriteRenderer>().color = Color.yellow;
+                currentUnitPlay.CurrentTurn++;
+                if (currentUnitPlay.CurrentTurn > currentUnitPlay.LastTurn)
+                {
+                    if (currentUnitPlay.isdefup == true)
+                    {
+                        currentUnitPlay.DefDefault();
+                    }
+                }
                 StartCoroutine(EnemyAttack());
                 break;
             case BattleState.WON:
