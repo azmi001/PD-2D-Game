@@ -14,6 +14,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Battle Stage.unity
     guid: 6732c488e73fa8a48b3ff829d4a3c7eb
+  - enabled: 1
+    path: Assets/Scenes/Dialogue System Test.unity
+    guid: 2279d2f8b244f734395be3c9031c1a6c
   - enabled: 0
     path: Assets/Scenes/Chapter1/Stage 1.unity
     guid: 2cda990e2423bbf4892e6590ba056729

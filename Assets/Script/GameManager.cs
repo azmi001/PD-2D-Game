@@ -68,6 +68,7 @@ public class GameManager : MonoBehaviour
         Funcs.GetAkun += GetAccount;
         Funcs.GetDatabaseSOCharacter += GetDatabaseSOCharacter;
         Funcs.GetDatabaseUnit += GetDatabaseUnit;
+        Funcs.GetCurrentQuest += GetCurrentQuest;
     }
 
     private Akun GetAccount()
@@ -79,6 +80,14 @@ public class GameManager : MonoBehaviour
     {
         Actions.onQuestStart -= StartQuest;
         Funcs.GetAkun -= GetAccount;
+        Funcs.GetDatabaseSOCharacter -= GetDatabaseSOCharacter;
+        Funcs.GetDatabaseUnit -= GetDatabaseUnit;
+        Funcs.GetCurrentQuest -= GetCurrentQuest;
+    }
+
+    private StoryQuest GetCurrentQuest()
+    {
+        return currentQuest;
     }
 
     private void StartQuest(StoryQuest quest)
