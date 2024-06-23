@@ -4400,6 +4400,7 @@ GameObject:
   - component: {fileID: 1029065494}
   - component: {fileID: 1029065493}
   - component: {fileID: 1029065495}
+  - component: {fileID: 1029065496}
   m_Layer: 5
   m_Name: Stamina Building
   m_TagString: Untagged
@@ -4509,6 +4510,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1029065496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1029065491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d77a81437076dc64c8a4a1da0efb8841, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  alphaTreshold: 0.1
 --- !u!1 &1189615372
 GameObject:
   m_ObjectHideFlags: 0
@@ -5398,6 +5412,7 @@ GameObject:
   - component: {fileID: 1439122193}
   - component: {fileID: 1439122192}
   - component: {fileID: 1439122194}
+  - component: {fileID: 1439122195}
   m_Layer: 5
   m_Name: Heroes
   m_TagString: Untagged
@@ -5519,6 +5534,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &1439122195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1439122190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d77a81437076dc64c8a4a1da0efb8841, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  alphaTreshold: 0.1
 --- !u!1 &1446501170
 GameObject:
   m_ObjectHideFlags: 0
@@ -8939,6 +8967,7 @@ GameObject:
   - component: {fileID: 2084309150}
   - component: {fileID: 2084309149}
   - component: {fileID: 2084309151}
+  - component: {fileID: 2084309152}
   m_Layer: 5
   m_Name: Team
   m_TagString: Untagged
@@ -9060,6 +9089,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &2084309152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2084309147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d77a81437076dc64c8a4a1da0efb8841, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  alphaTreshold: 0.1
 --- !u!1 &2088881786
 GameObject:
   m_ObjectHideFlags: 0
@@ -9206,6 +9248,7 @@ GameObject:
   - component: {fileID: 2089647028}
   - component: {fileID: 2089647027}
   - component: {fileID: 2089647029}
+  - component: {fileID: 2089647030}
   m_Layer: 5
   m_Name: Quest Story
   m_TagString: Untagged
@@ -9327,6 +9370,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &2089647030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2089647025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d77a81437076dc64c8a4a1da0efb8841, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  alphaTreshold: 0.1
 --- !u!1 &2094591062
 GameObject:
   m_ObjectHideFlags: 0
