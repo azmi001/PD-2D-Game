@@ -433,7 +433,7 @@ public class Unit : MonoBehaviour
                 TargetUnit.TakeDemage(character.charaData.damage, TargetUnit._def, character.thisUnitElement);
                 break;
             case CharacterState.HEAL:
-                Heal(100);//jumlah heal nya
+                Heal(character.charaData.Heal);//jumlah heal nya
                 break;
             case CharacterState.DEFENSE:
                 DefUp(3);//jumlah heal yang dikali dari basestate
