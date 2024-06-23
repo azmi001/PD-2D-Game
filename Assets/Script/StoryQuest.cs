@@ -14,6 +14,8 @@ public class StoryQuest : ScriptableObject
     public bool UnlockQuest = false;
 
     public QuestReward[] listQuestReward;
+
+    public Dialogue storyDialogue;
 }
 
 [System.Serializable]

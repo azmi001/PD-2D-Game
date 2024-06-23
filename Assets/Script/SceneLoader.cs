@@ -8,8 +8,6 @@ public class SceneLoader : MonoBehaviour
 {
     public string scenename;
     public StoryQuest Quest;
-
-
     private void Start()
     {
         if (Quest.UnlockQuest)
@@ -21,11 +19,7 @@ public class SceneLoader : MonoBehaviour
             GetComponent<Button>().interactable = false;
         }
 
-        GetComponent<Button>().onClick.AddListener(() => LoadScene(Quest));   
-    }
-    private void Update()
-    {
-        
+        GetComponent<Button>().onClick.AddListener(() => LoadScene(Quest));
     }
     public void LoadScene(StoryQuest quest)
     {

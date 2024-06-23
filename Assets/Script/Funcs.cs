@@ -11,4 +11,5 @@ public static class Funcs
     public static Func<Akun> GetAkun;
     public static Func<DatabaseUnit> GetDatabaseUnit;
     public static Func<DatabaseSOCharacter> GetDatabaseSOCharacter;
+    public static Func<StoryQuest> GetCurrentQuest;
 }

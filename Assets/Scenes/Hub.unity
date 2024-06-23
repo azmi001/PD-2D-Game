@@ -5108,7 +5108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bb36d266dc7b3a49b02b07cd4a99e8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scenename: Battle Stage
+  scenename: Dialogue System Test
 --- !u!1 &1384973747
 GameObject:
   m_ObjectHideFlags: 0

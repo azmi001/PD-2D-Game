@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
@@ -17,7 +18,7 @@ public class DialogueManager : MonoBehaviour
     void Start()
     {
         sentences = new Queue<string>();
-
+        StartDialogue(Funcs.GetCurrentQuest().storyDialogue);
     }
     
     public void StartDialogue (Dialogue dialogue)
@@ -62,6 +63,7 @@ public class DialogueManager : MonoBehaviour
     void EndDialogue()
     {
         animator.SetBool("IsOpen", false);
+        SceneManager.LoadScene("Battle Stage");
     }
 
 }
