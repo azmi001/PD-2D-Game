@@ -20,5 +20,8 @@ public class PanelLobby : MonoBehaviour
         //akunMoneyText.text = "$ " + akun.akunMoney.ToString();
         akunStaminaText.text = akun.akunStamina.ToString();
     }
-
+    public void ClaimStamina()
+    {
+        Actions.ClaimStamina?.Invoke();
+    }
 }

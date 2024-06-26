@@ -18,6 +18,12 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] Akun akun;
 
+    public int StaminaGet = 100;
+    private Akun GetAccount()
+    {
+        return akun;
+    }
+
     public DatabaseSOCharacter GetDatabaseSOCharacter()
     {
         DatabaseSOCharacter temp = GetComponentInChildren<DatabaseSOCharacter>();
@@ -65,26 +71,55 @@ public class GameManager : MonoBehaviour
     private void OnEnable()
     {
         Actions.onQuestStart += StartQuest;
+        Actions.ClaimStamina += OnClaimStamina;
         Funcs.GetAkun += GetAccount;
         Funcs.GetDatabaseSOCharacter += GetDatabaseSOCharacter;
         Funcs.GetDatabaseUnit += GetDatabaseUnit;
         Funcs.GetCurrentQuest += GetCurrentQuest;
     }
 
-    private Akun GetAccount()
-    {
-        return akun;
-    }
-
     private void OnDisable()
     {
         Actions.onQuestStart -= StartQuest;
+        Actions.ClaimStamina -= OnClaimStamina;
         Funcs.GetAkun -= GetAccount;
         Funcs.GetDatabaseSOCharacter -= GetDatabaseSOCharacter;
         Funcs.GetDatabaseUnit -= GetDatabaseUnit;
         Funcs.GetCurrentQuest -= GetCurrentQuest;
     }
 
+    private void OnClaimStamina()
+    {
+        bool canClaim = false;
+        if (PlayerPrefs.HasKey("ClaimedStaminaDate"))
+        {
+            if (DateTime.Now > DateTime.Parse(PlayerPrefs.GetString("ClaimedStaminaDate")))
+            {
+                canClaim = true;
+            }
+            else
+            {
+                canClaim = false;
+            }
+        }
+        else
+        {
+            canClaim = true;
+        }
+        if (canClaim)
+        {
+            string claimedStaminaDate = DateTime.Now.AddHours(2).ToString();
+            PlayerPrefs.SetString("ClaimedStaminaDate", claimedStaminaDate);
+            akun.AddStamina(StaminaGet);
+            Debug.Log("Stamina up +" + akun.akunStamina);
+        }
+        else
+        {
+            TimeSpan timeSpan = DateTime.Now - DateTime.Parse(PlayerPrefs.GetString("ClaimedStaminaDate"));
+            Debug.Log("you can claim after " + timeSpan);
+        }
+
+    }
     private StoryQuest GetCurrentQuest()
     {
         return currentQuest;

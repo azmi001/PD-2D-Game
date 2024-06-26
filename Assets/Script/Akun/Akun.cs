@@ -32,4 +32,9 @@ public class Akun
     {
         CharacterData targetHero = Array.Find(OwnedHeroes.ToArray(), t => t.unitName == heroName);
     }
+    public void AddStamina(int amount)
+    {
+        akunStamina += amount;
+        JsonHelper.SaveToJSON(this, "Akun");
+    }
 }

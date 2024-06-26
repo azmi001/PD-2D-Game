@@ -33,6 +33,7 @@ public static class Actions
     public static Action<StoryQuest> onQuestStart;
     //MEGNGECEK ON QUEST DONE
     public static Action<StoryQuest> onQuestFinis;
+    public static Action ClaimStamina;
 
 
 }
