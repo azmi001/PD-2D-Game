@@ -17,7 +17,7 @@ public class PanelLobby : MonoBehaviour
         Akun akun = Funcs.GetAkun();
         akunLevelText.text = akun.akunLvl.ToString();
         akunExpText.text = akun.akunExp.ToString();
-        akunMoneyText.text = "$ " + akun.akunMoney.ToString();
+        //akunMoneyText.text = "$ " + akun.akunMoney.ToString();
         akunStaminaText.text = akun.akunStamina.ToString();
     }
 
