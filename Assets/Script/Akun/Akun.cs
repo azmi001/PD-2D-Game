@@ -28,6 +28,13 @@ public class Akun
         }
         JsonHelper.SaveToJSON(this, "Akun");
     }
+    public void RemoveHeroFromTeam(string character)
+    {
+        string target = Array.Find(teamHeroes.ToArray(),t=>t == character);
+        if(!string.IsNullOrEmpty(target))
+            teamHeroes.Remove(target);
+        JsonHelper.SaveToJSON(this, "Akun");
+    }
     public void AddHeroesExp(string heroName)
     {
         CharacterData targetHero = Array.Find(OwnedHeroes.ToArray(), t => t.unitName == heroName);
