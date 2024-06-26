@@ -60,6 +60,7 @@ public class CharacterSelection : MonoBehaviour
         });
         CharacterImage3.GetComponent<Button>().onClick.AddListener(() =>
         {
+            if (CharacterImage3.sprite == imageHolder) return;
             Temp = CharacterImage3;
             _index = 2;
             UnSelectTarget(_index);
