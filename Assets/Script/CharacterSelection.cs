@@ -26,7 +26,8 @@ public class CharacterSelection : MonoBehaviour
 
     List<Character> tempListCharacter = new();
 
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    public Sprite imageHolder;
+
     private void Awake()
     {
         for (int i = 0; i < Funcs.GetDatabaseSOCharacter().GetListCharacter().Length; i++)
@@ -44,6 +45,26 @@ public class CharacterSelection : MonoBehaviour
 
             }
         }
+
+        CharacterImage1.GetComponent<Button>().onClick.AddListener(() =>
+        {
+            Temp = CharacterImage1;
+            _index = 0;
+            UnSelectTarget(_index);
+        });
+        CharacterImage2.GetComponent<Button>().onClick.AddListener(() =>
+        {
+            Temp = CharacterImage2;
+            _index = 1;
+            UnSelectTarget(_index);
+        });
+        CharacterImage3.GetComponent<Button>().onClick.AddListener(() =>
+        {
+            Temp = CharacterImage3;
+            _index = 2;
+            UnSelectTarget(_index);
+        });
+
 
         ContentParrent.gameObject.SetActive(false);
 
@@ -73,6 +94,11 @@ public class CharacterSelection : MonoBehaviour
         });
     }
     private void OnEnable()
+    {
+        RefreshUI();
+    }
+
+    private void RefreshUI()
     {
         if (Funcs.GetAkun().teamHeroes.Count <= 0)
             return;
@@ -185,6 +211,7 @@ public class CharacterSelection : MonoBehaviour
             }
         }
     }
+
     private void SelectTarget(int index)
     {
         if (Temp.sprite != null)
@@ -204,5 +231,14 @@ public class CharacterSelection : MonoBehaviour
 
         Funcs.GetAkun().AddTeam(tempListCharacter[index].charaData.unitName, _index);
         CharacterButton[index].interactable = false;
+    }
+    void UnSelectTarget(int index)
+    {
+        if (Temp.sprite != null)
+        {
+            Temp.sprite = imageHolder;
+            CharacterButton[index].interactable = true;
+            Funcs.GetAkun().RemoveHeroFromTeam(tempListCharacter[index].charaData.unitName);
+        }
     }
 }
