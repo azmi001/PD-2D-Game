@@ -25,7 +25,7 @@ public partial class GameSetting : MonoBehaviour
 
     [SerializeField] private Text DialogText;
 
-
+    [SerializeField] private SpriteRenderer bg;
 
     private int playerIndex;
     private int enemyIndex;
@@ -75,7 +75,8 @@ public partial class GameSetting : MonoBehaviour
     IEnumerator Init()
     {
         Unit _hero = Funcs.GetDatabaseUnit?.Invoke().GetUnit(Funcs.GetAkun().teamHeroes[1]);
-        Debug.Log(_hero == null);
+        if(Funcs.GetCurrentQuest().bg!=null)
+            bg.sprite = Funcs.GetCurrentQuest().bg;
         for (int i = 0; i < Funcs.GetAkun().teamHeroes.Count; i++)
         {
             try

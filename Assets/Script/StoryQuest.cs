@@ -10,7 +10,7 @@ public class StoryQuest : ScriptableObject
     public int money;
     public int heroesExpReward;
     public int staminaCost;
-
+    public Sprite bg;
     public bool UnlockQuest = false;
 
     public QuestReward[] listQuestReward;
