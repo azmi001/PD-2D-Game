@@ -49,7 +49,7 @@ public class HeroesPage : MonoBehaviour
     {
         HeroDescriptionPanel.SetActive(true);
         heroView.SetActive(false);
-        heroPlaceholder.sprite = Funcs.GetDatabaseSOCharacter().GetCharacter(item.unitName).HeroIcon;
+        heroPlaceholder.sprite = Funcs.GetDatabaseSOCharacter().GetCharacter(item.unitName).heroIconFullBody;
         heroStatsInfo.text = $"Name : {item.unitName} \n" +
             $"Level : {item.unitLevel} \n" +
             $"Deffense : {item.deffense} \n" +

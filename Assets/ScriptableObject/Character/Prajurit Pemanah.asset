@@ -22,6 +22,7 @@ MonoBehaviour:
     Heal: 55
   Unlock: 1
   HeroIcon: {fileID: 21300000, guid: ef43d15d0e5cc6d4cbc927dcc37ad8d7, type: 3}
+  heroIconFullBody: {fileID: 21300000, guid: f4d3025a981b27c47b7336519a831ee0, type: 3}
   chBio: 
   thisUnitElement: 0
   skills: []

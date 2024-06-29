@@ -11,6 +11,7 @@ public partial class Character : ScriptableObject
     public bool Unlock;
 
     public Sprite HeroIcon;
+    public Sprite heroIconFullBody;
 
     //Character Biography
     [Header("Character Bio")]
