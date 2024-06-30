@@ -17,9 +17,9 @@ MonoBehaviour:
     unitLevel: 1
     unitexp: 0
     deffense: 40
-    damage: 58
+    damage: 101
     maxHP: 810
-    Heal: 300
+    Heal: 48
   Unlock: 0
   HeroIcon: {fileID: 21300000, guid: cae4a174f9716504e912325ed8cf452e, type: 3}
   heroIconFullBody: {fileID: 21300000, guid: 55c48d5fda4dfab4e92187643490322d, type: 3}

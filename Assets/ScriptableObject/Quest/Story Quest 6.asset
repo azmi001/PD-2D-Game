@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 31db3a479847ffd44a3599f31a9b6a7f, type: 3}
-  m_Name: Story Quest 3
+  m_Name: Story Quest 6
   m_EditorClassIdentifier: 
-  QuestName: Story Quest 3
+  QuestName: Story Quest 6
   EnemyPrefabs:
   - {fileID: 3506219432552147847, guid: f4a1efa82c03e824292153ab00860524, type: 3}
-  - {fileID: 3506219432552147847, guid: 079650aef59c53847b594fb08abf353d, type: 3}
-  - {fileID: 3506219432552147847, guid: 5c673cd2bceebe146b6c047b72781bcc, type: 3}
+  - {fileID: 3506219432552147847, guid: f4a1efa82c03e824292153ab00860524, type: 3}
+  - {fileID: 3506219432552147847, guid: f4a1efa82c03e824292153ab00860524, type: 3}
   money: 150
-  heroesExpReward: 572
+  heroesExpReward: 1728
   staminaCost: 1
   bg: {fileID: 0}
   UnlockQuest: 0
@@ -30,14 +30,13 @@ MonoBehaviour:
     rewardType: 1
     rewardIcon: {fileID: 21300000, guid: 9b0e07bc26a4bcf4194a6f522dc4c921, type: 3}
   storyDialogue:
-    name: Stage 3
+    name: Stages 6
     sentences:
-    - Sesampainya di pajang, Sunan Kalijaga dan Ki Pemanahan bertemu dengan sultan
-      hadiwijaya.
-    - Sunan kalijaga bertanya mengapa Sultan Hadiwijaya mengingkari janjinya untuk
-      memberikan tanah mataram kepada kyai pemanahan. dan alasan dibalik ingkarnya
-      janji sultan hadiwijaya adalah karena beliau mendengar sebuah ramalan bahwa
-      di mataram akan muncul seorang raja yang hebat dan akan menyaingi kekuatan
-      beliau.
-    - dan didampingi sunan kalijaga sebagai mediator, ki pemanahan bersumpah untuk
-      tidak melawan kerajaan pajang.
+    - 'Berawal dari ketidakinginan Sutawijaya atau biasa disebut Panembahan Senopati
+      untuk datang menghadap kerajaan pajang, konflik Mataram dan pajang semakin
+      panas. '
+    - Panembahan Senopati yang memiliki bakat sebagai ahli strategi perang berhasil
+      memegang penuh atas   Kerajaan Mataram   setelah   melakukan   perlawanan  
+      terhadap   Kesultanan   Pajang   dan menjadikan  Kerajaan  Mataram  sebagai 
+      kerajaan  yang  mempunyai  kekuasaan penuh  atas  kerajaannya,  kejadian  ini 
+      diperkirakan  pada  tahun  1578-1588  M.

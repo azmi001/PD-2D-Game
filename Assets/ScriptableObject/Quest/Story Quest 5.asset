@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 31db3a479847ffd44a3599f31a9b6a7f, type: 3}
-  m_Name: Story Quest 4
+  m_Name: Story Quest 5
   m_EditorClassIdentifier: 
-  QuestName: Story Quest 4
+  QuestName: Story Quest 5
   EnemyPrefabs:
-  - {fileID: 864842667368195608, guid: 6cff672497d19d040a8bc888b102ec61, type: 3}
+  - {fileID: 3506219432552147847, guid: 481209c56c7ad8844bed6aca9b6849a7, type: 3}
   money: 150
-  heroesExpReward: 1344
+  heroesExpReward: 768
   staminaCost: 1
   bg: {fileID: 0}
   UnlockQuest: 0
@@ -28,10 +28,11 @@ MonoBehaviour:
     rewardType: 1
     rewardIcon: {fileID: 21300000, guid: 9b0e07bc26a4bcf4194a6f522dc4c921, type: 3}
   storyDialogue:
-    name: Stages 4
+    name: Stages 5
     sentences:
-    - Sesampainya di tanah mataram, Kyai Pemanahan melihat sekeliling tanah mataram
-      yang datar tetapi sumber airnya dan pangannya melimpah, beliaupun mengubah
-      namanya menjadi Kyai Ageng Mataram.
-    - Beliau tetap giat menjalankan bertapa, karena jika ramalan tersebut benar,
-      maka keturunannyalah yang akan menjadi raja selanjutnya.
+    - 'Setelah perjalanan panjang membangun mataram sehingga tempat tersebut makmur,
+      sejahtera bahkan dikenal oleh seluruh bupati yang ada di jawa. '
+    - "Pada tahun 1535, ki pemanahan atau ki ageng mataram jatuh sakit. sebelum meninggal
+      ki pemanahan mengatakan \u201Caku mengijinkan anakku, panembahan senopati menjadi
+      penerusku\u201D. kemudian ki pemanahan meninggal dan ditempatkan disebelah
+      barat masjid daerah mataram yang sekarang disebut kotagede."
