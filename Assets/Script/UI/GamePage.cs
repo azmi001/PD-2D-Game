@@ -12,6 +12,7 @@ public class GamePage : MonoBehaviour
     [SerializeField] private Transform contentParent;
     [SerializeField] private GameObject listEnemyPanel;
     [SerializeField] private GameObject listSkillPanel;
+    [SerializeField] private GameObject winPanel, losePanel;
     private void Start()
     {
         closeBTN.onClick.AddListener(() => Actions.CloseListUnit?.Invoke());
@@ -20,23 +21,41 @@ public class GamePage : MonoBehaviour
     {
         Actions.AddListenerToGameButton += AddListener;
         Actions.OpenListUnit += OpenListUnit;
-        Actions.CloseListUnit += () => listEnemyPanel.SetActive(false);
+        Actions.CloseListUnit += CloseEnemyPanel;
         Actions.IsDisableAllButton += DisableAllBTN;
         Actions.CloseListSkill += () => listSkillPanel.SetActive(false);
         Actions.OpenListSkill += () => listSkillPanel.SetActive(true);
+        Actions.OnResultBattle += ResultBattle;
     }
 
+    private void CloseEnemyPanel()
+    {
+        listEnemyPanel.SetActive(false);
+    }
 
     private void OnDisable()
     {
         Actions.AddListenerToGameButton -= AddListener;
         Actions.OpenListUnit -= OpenListUnit;
-        Actions.CloseListUnit -= () => listEnemyPanel.SetActive(false);
+        Actions.CloseListUnit -= CloseEnemyPanel;
         Actions.IsDisableAllButton -= DisableAllBTN;
         Actions.CloseListSkill -= () => listSkillPanel.SetActive(false);
         Actions.OpenListSkill -= () => listSkillPanel.SetActive(true);
+        Actions.OnResultBattle -= ResultBattle;
 
     }
+    private void ResultBattle(bool isWin)
+    {
+        if (isWin)
+        {
+            winPanel.SetActive(true);
+        }
+        else
+        {
+            losePanel.SetActive(true);
+        }
+    }
+
     private void DisableAllBTN(bool isDisable)
     {
         if (isDisable)

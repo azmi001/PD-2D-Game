@@ -34,6 +34,6 @@ public static class Actions
     //MEGNGECEK ON QUEST DONE
     public static Action<StoryQuest> onQuestFinis;
     public static Action ClaimStamina;
-
+    public static Action<bool> OnResultBattle;
 
 }
