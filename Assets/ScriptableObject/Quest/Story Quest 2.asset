@@ -14,12 +14,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   QuestName: Story quest 2
   EnemyPrefabs:
-  - {fileID: 864842667368195608, guid: 4ca41759f65344b448753b8ff4d3c93b, type: 3}
-  money: 100
-  heroesExpReward: 0
+  - {fileID: 3506219432552147847, guid: c1777626be29e97488ff8d44755c5d6a, type: 3}
+  money: 150
+  heroesExpReward: 576
   staminaCost: 1
-  UnlockQuest: 1
-  listQuestReward: []
+  bg: {fileID: 0}
+  UnlockQuest: 0
+  listQuestReward:
+  - rewardName: Coin
+    rewardType: 1
+    rewardIcon: {fileID: 21300000, guid: fb62562cc61db4c4aa943f1172455f92, type: 3}
+  - rewardName: Exp
+    rewardType: 1
+    rewardIcon: {fileID: 21300000, guid: 9b0e07bc26a4bcf4194a6f522dc4c921, type: 3}
+  - rewardName: Sunan Kalijaga
+    rewardType: 0
+    rewardIcon: {fileID: 21300000, guid: 0bf15dcf2c7284f4da3588d30e6b7ed4, type: 3}
   storyDialogue:
-    name: 
-    sentences: []
+    name: Stage 2
+    sentences:
+    - Seiring berjalannya waktu, Sultan Hadiwijaya sering mengadakan audiensi, tetapi
+      tidak kunjung untuk membahas hadiah berupa tanah Mataram di daerah alas Mentaok
+      kepada Ki Pemanahan.
+    - Karena merasa telah ditipu, Ki Pemanahan meninggalkan kerajaan pajang dan bertemu
+      dengan sunan kalijaga di desa Kembanglampir.
