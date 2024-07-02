@@ -105,9 +105,8 @@ public class Unit : MonoBehaviour
         //mebuat logika variasi dmg 20% +- dari total finaldmg
         int varian = finalDmg * 20/ 100;
         int minVarian = -varian;
-        int maxVarian = varian;
+        int maxVarian = 0;
         int result = UnityEngine.Random.Range(minVarian, maxVarian);
-
         //mendebug nial variasi dmg varian
         Debug.Log(character.charaData.unitName + "Min range -varian dari dmg " + minVarian);
         Debug.Log(character.charaData.unitName + "Min range +varian dari dmg " + maxVarian);
