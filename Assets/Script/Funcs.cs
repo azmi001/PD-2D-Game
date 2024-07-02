@@ -13,4 +13,5 @@ public static class Funcs
     public static Func<DatabaseSOCharacter> GetDatabaseSOCharacter;
     public static Func<StoryQuest> GetCurrentQuest;
     public static Func<StoryQuest[]> GetAllQuest;
+    public static Func<DateTime> GetCountdownStamina;
 }
