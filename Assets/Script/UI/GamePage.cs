@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GamePage : MonoBehaviour
@@ -87,5 +88,10 @@ public class GamePage : MonoBehaviour
         defenseBTN.onClick.AddListener(action2);
         healBTN.onClick.AddListener(action3);
         skillBTN.onClick.AddListener(action4);
+    }
+
+    public void ExitGame()
+    {
+        SceneManager.LoadScene("Hub");
     }
 }
