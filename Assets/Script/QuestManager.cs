@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,11 +10,18 @@ public class QuestManager : MonoBehaviour
     private void OnEnable()
     {
         Actions.onQuestFinis += OnQuestFinish;
+        Funcs.GetAllQuest += GetListQuest;
     }
 
     private void OnDisable()
     {
         Actions.onQuestFinis -= OnQuestFinish;
+        Funcs.GetAllQuest -= GetListQuest;
+    }
+
+    private StoryQuest[] GetListQuest()
+    {
+        return ListQuest;
     }
 
     // Start is called before the first frame update

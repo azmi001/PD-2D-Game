@@ -291,13 +291,15 @@ public partial class GameSetting : MonoBehaviour
                 DialogText.text = "Player Win The Battle!";
                 Actions.onQuestFinis?.Invoke(FindObjectOfType<GameManager>().currentQuest);
                 await Task.Delay(2000);
-                SceneManager.LoadScene("Hub");
+                Actions.OnResultBattle?.Invoke(true);
+                //SceneManager.LoadScene("Hub");
                 break;
             case BattleState.LOST:
                 Debug.Log("Lost");
                 DialogText.text = "Enemy Win The Battle!";
                 await Task.Delay(2000);
-                SceneManager.LoadScene("Hub");
+                Actions.OnResultBattle?.Invoke(false);
+                //SceneManager.LoadScene("Hub");
                 break;
             case BattleState.CHECK:
                 if (enemyUnit == null || enemyUnit.Count <= 0)
