@@ -2281,7 +2281,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1176466965}
-        m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
+        m_TargetAssemblyTypeName: SceneLoader1, Assembly-CSharp
         m_MethodName: QuitGame
         m_Mode: 1
         m_Arguments:
@@ -2339,11 +2339,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1176466960}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9eb58dd795654fd41b7a486b60da0c0d, type: 3}
+  m_Script: {fileID: 11500000, guid: 7bb36d266dc7b3a49b02b07cd4a99e8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   scenename: 
-  Quest: {fileID: 0}
 --- !u!1 &1207066575
 GameObject:
   m_ObjectHideFlags: 0
