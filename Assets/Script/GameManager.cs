@@ -46,6 +46,8 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
         DontDestroyOnLoad(gameObject);
+
+        //load akun
         akun = JsonHelper.ReadFromJSON<Akun>("Akun");
         if (akun == null)
         {
@@ -63,8 +65,19 @@ public class GameManager : MonoBehaviour
             }
             JsonHelper.SaveToJSON(akun, "Akun");
         }
-    }
 
+    }
+    private void Start()
+    {
+        foreach (var item in akun.OwnedHeroes)
+        {
+            item.Init();
+            Character target = Array.Find(Funcs.GetDatabaseSOCharacter().GetListCharacter(), t => t.charaData.unitName == item.unitName);
+            if (target == null) return;
+            target.LoadData(item);
+        }
+
+    }
     private void OnEnable()
     {
         Actions.onQuestStart += StartQuest;
@@ -85,6 +98,11 @@ public class GameManager : MonoBehaviour
         Funcs.GetDatabaseUnit -= GetDatabaseUnit;
         Funcs.GetCurrentQuest -= GetCurrentQuest;
         Funcs.GetCountdownStamina -= GetCountdownStamina;
+
+        foreach (var item in akun.OwnedHeroes)
+        {
+            item.ResetData();
+        }
     }
 
     private DateTime GetCountdownStamina()

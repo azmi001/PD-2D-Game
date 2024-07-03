@@ -58,9 +58,6 @@ public class Unit : MonoBehaviour
     public void InitializedData()
     {
         currentHP = character.charaData.maxHP;
-
-        currentHP = character.charaData.BaseHP + (character.charaData.unitLevel - 1) * character.charaData.GrowthRateHP;
-
         currentLv = character.charaData.unitLevel;
         currentXP = character.charaData.unitexp;
         skillList = new List<Skill>(character.skills);

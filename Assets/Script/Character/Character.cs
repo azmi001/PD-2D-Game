@@ -25,4 +25,9 @@ public partial class Character : ScriptableObject
 
     [Header("List Skill Character")]
     public List<Skill> skills;
+
+    public void LoadData(CharacterData newChara)
+    {
+        charaData = newChara;
+    }
 }
