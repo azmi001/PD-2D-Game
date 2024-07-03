@@ -18,7 +18,7 @@ public class Unit : MonoBehaviour
 
     //data darah yang sekarang akan terupdate dalam game
     [Header("Status Darah")]
-    public int currentHP;
+    public float currentHP;
 
     [Header("Status Level Charcter")]
     public float currentXP;
@@ -28,7 +28,7 @@ public class Unit : MonoBehaviour
     //Merenfrensikan dari scriptable object Character untuk mengambil data stat character
     [Header("Data Character")]
     public Character character;
-    public int _def;
+    public float _def;
 
     [Header("List Skill Character")]
     public List<Skill> skillList;
@@ -58,19 +58,22 @@ public class Unit : MonoBehaviour
     public void InitializedData()
     {
         currentHP = character.charaData.maxHP;
+
+        currentHP = character.charaData.BaseHP + (character.charaData.unitLevel - 1) * character.charaData.GrowthRateHP;
+
         currentLv = character.charaData.unitLevel;
         currentXP = character.charaData.unitexp;
         skillList = new List<Skill>(character.skills);
     }
 
     //logika penyerangan
-    public bool TakeDemage(int dmg, int def, ElementType attackerElement)
+    public bool TakeDemage(float dmg, float def, ElementType attackerElement)
     {
         //Mendubug dmg awal
         Debug.Log("Demage Murni " + character.charaData.unitName + "yang belum dicampur elemen " + dmg);
 
         //inisialisasi awal logika sitem dmg elemen
-        int actualDamage = dmg * 15 /100;
+        float actualDamage = dmg * 15 /100;
         Debug.Log("Demage elemen didapat " + character.charaData.unitName + "adalah " + actualDamage);
 
         //fsm logic kalkulasi demg element
@@ -97,28 +100,28 @@ public class Unit : MonoBehaviour
         }
 
         //total dmg yang sudah ditambah dari dmg element
-        int finalDmg = dmg + actualDamage;
+        float finalDmg = dmg + actualDamage;
 
         //mendebug total dmg final dmg
         Debug.Log("Demage Final " + character.charaData.unitName + "yang dicampur elemen " + finalDmg);
 
         //mebuat logika variasi dmg 20% +- dari total finaldmg
-        int varian = finalDmg * 20/ 100;
-        int minVarian = -varian;
-        int maxVarian = 0;
-        int result = UnityEngine.Random.Range(minVarian, maxVarian);
+        float varian = finalDmg * 20/ 100;
+        float minVarian = -varian;
+        float maxVarian = 0;
+        float result = UnityEngine.Random.Range(minVarian, maxVarian);
         //mendebug nial variasi dmg varian
         Debug.Log(character.charaData.unitName + "Min range -varian dari dmg " + minVarian);
         Debug.Log(character.charaData.unitName + "Min range +varian dari dmg " + maxVarian);
         Debug.Log(character.charaData.unitName +"Variasi dmg tambahan +- " + result);
 
         //mendebug nilai finaldmg yang ditambah oleh nilai variasi 
-        int totalDmg = finalDmg + result;
+        float totalDmg = finalDmg + result;
         Debug.Log("Total Demage yang diberikan oleh " + character.charaData.unitName + "adalah " + totalDmg);
 
         //logika rumus pengurangan darah target 
-        int finalDmg1 = ((finalDmg + result) * 4);
-        int def1 = (def * 2);
+        float finalDmg1 = ((finalDmg + result) * 4);
+        float def1 = (def * 2);
 
         //menbuat logika jika dmg nya minus gak akan menambah darah target yang diserang
         //dan dmg yang diterima adalah 0
@@ -186,7 +189,7 @@ public class Unit : MonoBehaviour
     }
 
     //logika skill heal
-    public void Heal(int amount)
+    public void Heal(float amount)
     {
         currentHP += amount;
         if (currentHP > character.charaData.maxHP)
