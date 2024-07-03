@@ -216,3 +216,4 @@ MonoBehaviour:
     akunMoney: 0
     OwnedHeroes: []
     teamHeroes: []
+  StaminaGet: 1

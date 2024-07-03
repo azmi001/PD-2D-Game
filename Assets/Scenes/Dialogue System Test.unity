@@ -914,6 +914,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameText: {fileID: 2048129007}
   dialogueText: {fileID: 403482821}
+  bg: {fileID: 1616470727}
   animator: {fileID: 1458363020}
 --- !u!4 &1604446515
 Transform:

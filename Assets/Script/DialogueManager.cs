@@ -9,7 +9,7 @@ public class DialogueManager : MonoBehaviour
 {
     public Text nameText;
     public Text dialogueText;
-
+    public SpriteRenderer bg;
     public Animator animator;
 
     private Queue<string> sentences;
@@ -18,6 +18,7 @@ public class DialogueManager : MonoBehaviour
     void Start()
     {
         sentences = new Queue<string>();
+        bg.sprite = Funcs.GetCurrentQuest().bg;
         StartDialogue(Funcs.GetCurrentQuest().storyDialogue);
     }
     

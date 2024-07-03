@@ -46,10 +46,6 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
         DontDestroyOnLoad(gameObject);
-    }
-
-    private void Start()
-    {
         akun = JsonHelper.ReadFromJSON<Akun>("Akun");
         if (akun == null)
         {
@@ -68,6 +64,7 @@ public class GameManager : MonoBehaviour
             JsonHelper.SaveToJSON(akun, "Akun");
         }
     }
+
     private void OnEnable()
     {
         Actions.onQuestStart += StartQuest;
@@ -76,6 +73,7 @@ public class GameManager : MonoBehaviour
         Funcs.GetDatabaseSOCharacter += GetDatabaseSOCharacter;
         Funcs.GetDatabaseUnit += GetDatabaseUnit;
         Funcs.GetCurrentQuest += GetCurrentQuest;
+        Funcs.GetCountdownStamina += GetCountdownStamina;
     }
 
     private void OnDisable()
@@ -86,9 +84,16 @@ public class GameManager : MonoBehaviour
         Funcs.GetDatabaseSOCharacter -= GetDatabaseSOCharacter;
         Funcs.GetDatabaseUnit -= GetDatabaseUnit;
         Funcs.GetCurrentQuest -= GetCurrentQuest;
+        Funcs.GetCountdownStamina -= GetCountdownStamina;
     }
 
-    private void OnClaimStamina()
+    private DateTime GetCountdownStamina()
+    {
+        DateTime.TryParse(PlayerPrefs.GetString("ClaimedStaminaDate"),out var result);
+        return result;
+    }
+
+    private void OnClaimStamina(Action OnClaimed)
     {
         bool canClaim = false;
         if (PlayerPrefs.HasKey("ClaimedStaminaDate"))
@@ -118,6 +123,7 @@ public class GameManager : MonoBehaviour
             TimeSpan timeSpan = DateTime.Now - DateTime.Parse(PlayerPrefs.GetString("ClaimedStaminaDate"));
             Debug.Log("you can claim after " + timeSpan);
         }
+        OnClaimed.Invoke();
 
     }
     private StoryQuest GetCurrentQuest()
