@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 [System.Serializable]
@@ -35,9 +36,11 @@ public class Akun
             teamHeroes.Remove(target);
         JsonHelper.SaveToJSON(this, "Akun");
     }
-    public void AddHeroesExp(string heroName)
+    public async void AddHeroesExp(string heroName, float heroesExpReward)
     {
         CharacterData targetHero = Array.Find(OwnedHeroes.ToArray(), t => t.unitName == heroName);
+        await Task.Run(()=>targetHero.AddExp(heroesExpReward));
+        JsonHelper.SaveToJSON(this, "Akun");
     }
     public void AddStamina(int amount)
     {

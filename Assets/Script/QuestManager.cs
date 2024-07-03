@@ -56,7 +56,7 @@ public class QuestManager : MonoBehaviour
             {
                 if (Funcs.GetAkun().OwnedHeroes[i].unitName == Funcs.GetAkun().teamHeroes[i])
                 {
-                    Funcs.GetAkun().OwnedHeroes[i].AddExp((float)quest.heroesExpReward);
+                    Funcs.GetAkun().AddHeroesExp(Funcs.GetAkun().OwnedHeroes[i].unitName,(float)quest.heroesExpReward);
                 }
             }
             catch
