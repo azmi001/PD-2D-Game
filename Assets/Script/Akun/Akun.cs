@@ -40,11 +40,13 @@ public class Akun
     {
         CharacterData targetHero = Array.Find(OwnedHeroes.ToArray(), t => t.unitName == heroName);
         await Task.Run(()=>targetHero.AddExp(heroesExpReward));
+        //menyimpan data hero ke akun
         JsonHelper.SaveToJSON(this, "Akun");
     }
     public void AddStamina(int amount)
     {
         akunStamina += amount;
+        // Menyimpan data stamina
         JsonHelper.SaveToJSON(this, "Akun");
     }
 }

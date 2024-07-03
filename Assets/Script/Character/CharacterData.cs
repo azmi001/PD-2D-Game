@@ -58,6 +58,8 @@ public class CharacterData
             //rumus naikin stats char
             maxHP = BaseHP + (unitLevel - 1) * GrowthRateHP;
             damage = (maxHP * BaseAttackModifier) / (ConstantAttack);
+            deffense = damage * DeffenceModifier;
+            Heal = maxHP * HealModifier;
 
             targetExp = (int)Mathf.Pow(unitLevel / 0.09f, 1.6f);
         }

@@ -69,6 +69,7 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
+        //Buat load Data
         foreach (var item in akun.OwnedHeroes)
         {
             item.Init();
