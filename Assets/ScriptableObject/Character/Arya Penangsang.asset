@@ -13,6 +13,12 @@ MonoBehaviour:
   m_Name: Arya Penangsang
   m_EditorClassIdentifier: 
   charaData:
+    BaseHP: 110
+    GrowthRateHP: 50
+    BaseAttackModifier: 0.05
+    ConstantAttack: 0.4
+    DeffenceModifier: 0.4
+    HealModifier: 0.06
     unitName: 'Arya Penangsang '
     unitLevel: 1
     unitexp: 0
@@ -23,7 +29,10 @@ MonoBehaviour:
   Unlock: 0
   HeroIcon: {fileID: 21300000, guid: ed6aef037c185024294cce3608311c27, type: 3}
   heroIconFullBody: {fileID: 21300000, guid: 79202cdb6f766ab419190049dedf7316, type: 3}
-  chBio: 
+  chBio: Arya Penangsang merupakan cucu dari Raden Patah, pendiri Kesultanan Demak.
+    Setelah kematian Sultan Trenggana, terjadi perebutan kekuasaan di mana Arya Penangsang,
+    yang merasa berhak atas takhta, menantang Hadiwijaya. Konflik ini berujung pada
+    serangkaian pertempuran yang menentukan penguasa baru Kesultanan Demak.
   thisUnitElement: 0
   skills:
   - {fileID: 11400000, guid: e09764fbfdcf85248957c49940ec18bf, type: 2}

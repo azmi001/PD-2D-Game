@@ -13,6 +13,12 @@ MonoBehaviour:
   m_Name: Adipati Martapura
   m_EditorClassIdentifier: 
   charaData:
+    BaseHP: 110
+    GrowthRateHP: 50
+    BaseAttackModifier: 0.05
+    ConstantAttack: 0.4
+    DeffenceModifier: 0.4
+    HealModifier: 0.06
     unitName: Adipati Martapura
     unitLevel: 1
     unitexp: 0
@@ -23,6 +29,8 @@ MonoBehaviour:
   Unlock: 0
   HeroIcon: {fileID: 21300000, guid: ef72358ca865bff4098d6dbe9a4d6b3a, type: 3}
   heroIconFullBody: {fileID: 21300000, guid: fd1d30e003c11e24f953bfd14623deb7, type: 3}
-  chBio: 
-  thisUnitElement: 1
+  chBio: "Martapura menjadi raja Mataram untuk memenuhi janji ayahnya, Sultan Hadiwijaya,
+    namun segera menyerahkan tahta kepada saudaranya, Rad\xE8n Mas Rangsang, yang
+    kemudian dikenal sebagai Sultan Agung."
+  thisUnitElement: 0
   skills: []

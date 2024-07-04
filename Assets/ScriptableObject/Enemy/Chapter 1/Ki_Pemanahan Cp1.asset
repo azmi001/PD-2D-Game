@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01f1faae6c29aea42a39b9f28c72f49f, type: 3}
+  m_Name: Ki_Pemanahan Cp1
+  m_EditorClassIdentifier: 
+  charaData:
+    BaseHP: 306
+    GrowthRateHP: 50
+    BaseAttackModifier: 0.05
+    ConstantAttack: 0.4
+    DeffenceModifier: 0.4
+    HealModifier: 0.06
+    unitName: 'Ki Pemanahan '
+    unitLevel: 1
+    unitexp: 0
+    deffense: 18
+    damage: 26
+    maxHP: 360
+    Heal: 150
+  Unlock: 0
+  HeroIcon: {fileID: 21300000, guid: 33b0167fea26fda4d9b2aa97cee75747, type: 3}
+  heroIconFullBody: {fileID: 21300000, guid: 93eac616f98fbc8459deff61a402ad10, type: 3}
+  chBio: Ki Ageng Pemanahan adalah seorang bangsawan dan panglima pada masa Kesultanan
+    Pajang. Ia dikenal sebagai ayah dari Panembahan Senapati, pendiri Kesultanan
+    Mataram Islam.
+  thisUnitElement: 0
+  skills:
+  - {fileID: 11400000, guid: e09764fbfdcf85248957c49940ec18bf, type: 2}
+  - {fileID: 11400000, guid: 56fa8d400019fe14da9c707879386e9f, type: 2}
+  - {fileID: 11400000, guid: 8e1b2148b65d23349b51eb5b4e14fb52, type: 2}
+  - {fileID: 11400000, guid: d08d0b3e0e52ad246a0db39d4128f413, type: 2}

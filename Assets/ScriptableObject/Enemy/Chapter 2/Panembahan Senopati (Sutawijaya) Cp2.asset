@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01f1faae6c29aea42a39b9f28c72f49f, type: 3}
+  m_Name: Panembahan Senopati (Sutawijaya) Cp2
+  m_EditorClassIdentifier: 
+  charaData:
+    BaseHP: 252
+    GrowthRateHP: 50
+    BaseAttackModifier: 0.05
+    ConstantAttack: 0.4
+    DeffenceModifier: 0.4
+    HealModifier: 0.06
+    unitName: 'Panembahan Senopati '
+    unitLevel: 1
+    unitexp: 0
+    deffense: 18
+    damage: 26
+    maxHP: 360
+    Heal: 150
+  Unlock: 0
+  HeroIcon: {fileID: 21300000, guid: 94c8b1b8877877241ab7cb957f0ae2f8, type: 3}
+  heroIconFullBody: {fileID: 21300000, guid: 37a1d924427f55641abc17b5573402bb, type: 3}
+  chBio: Panembahan Senapati adalah Raja pertama sekaligus bapak dari wangsa Mataram
+    Dan pemimpin pertama dari Mataram, yang di masanya masih berupa kadipaten. Ia
+    mewarisi jabatan ayahnya sebagai adipati Mataram di bawah Kesultanan Pajang
+  thisUnitElement: 0
+  skills: []
