@@ -112,13 +112,29 @@ public class Unit : MonoBehaviour
         Debug.Log(character.charaData.unitName + "Min range +varian dari dmg " + maxVarian);
         Debug.Log(character.charaData.unitName +"Variasi dmg tambahan +- " + result);
 
+
         //mendebug nilai finaldmg yang ditambah oleh nilai variasi 
         float totalDmg = finalDmg + result;
         Debug.Log("Total Demage yang diberikan oleh " + character.charaData.unitName + "adalah " + totalDmg);
 
         //logika rumus pengurangan darah target 
         float finalDmg1 = ((finalDmg + result) * 4);
+
         float def1 = (def * 2);
+
+        //mebuat logika variasi def 20% +- dari total finaldmg
+        float varianDef = def1 * 20 / 100;
+        float minVarianDef = -varianDef;
+        float maxVarianDef = 0;
+        float resultDef = UnityEngine.Random.Range(minVarianDef, maxVarianDef);
+        //mendebug nial variasi def varian
+        Debug.Log(character.charaData.unitName + "Min range -varian dari Def " + minVarianDef);
+        Debug.Log(character.charaData.unitName + "Min range +varian dari Def " + maxVarianDef);
+        Debug.Log(character.charaData.unitName + "Variasi Def tambahan +- " + resultDef);
+
+        Debug.Log(character.charaData.unitName + "Sebelum pake variasi deff" + def1);
+        def1 = def1 + resultDef;
+        Debug.Log(character.charaData.unitName + "Hasil dari def 1 + Variasi" + def1);
 
         //menbuat logika jika dmg nya minus gak akan menambah darah target yang diserang
         //dan dmg yang diterima adalah 0
@@ -188,6 +204,20 @@ public class Unit : MonoBehaviour
     //logika skill heal
     public void Heal(float amount)
     {
+        //mebuat logika variasi Heal 20% +- dari total finaldmg
+        float varianHeal = amount * 20 / 100;
+        float minVarianHeal = -varianHeal;
+        float maxVarianHeal = 0;
+        float resultHeal = UnityEngine.Random.Range(minVarianHeal, maxVarianHeal);
+        //mendebug nial variasi def varian
+        Debug.Log(character.charaData.unitName + "Min range -varian dari Heal " + minVarianHeal);
+        Debug.Log(character.charaData.unitName + "Min range +varian dari Heal " + maxVarianHeal);
+        Debug.Log(character.charaData.unitName + "Variasi Def tambahan +- " + resultHeal);
+
+        Debug.Log(character.charaData.unitName + "Sebelum pake variasi Heal" + amount);
+        amount = amount + resultHeal;
+        Debug.Log(character.charaData.unitName + "Hasil dari Heal + Variasi" + amount);
+
         currentHP += amount;
         if (currentHP > character.charaData.maxHP)
             currentHP = character.charaData.maxHP;
