@@ -22,10 +22,10 @@ MonoBehaviour:
     unitName: Adipati Martapura
     unitLevel: 1
     unitexp: 0
-    deffense: 40
-    damage: 58
-    maxHP: 810
-    Heal: 300
+    deffense: 28
+    damage: 72
+    maxHP: 576
+    Heal: 34
   Unlock: 0
   HeroIcon: {fileID: 21300000, guid: ef72358ca865bff4098d6dbe9a4d6b3a, type: 3}
   heroIconFullBody: {fileID: 21300000, guid: fd1d30e003c11e24f953bfd14623deb7, type: 3}
