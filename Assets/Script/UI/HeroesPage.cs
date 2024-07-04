@@ -56,6 +56,7 @@ public class HeroesPage : MonoBehaviour
             $"Damage : {item.damage} \n" +
             $"HP : {item.maxHP} \n" +
             $"Heal : {item.Heal} \n" +
-            $"Description : {Funcs.GetDatabaseSOCharacter().GetCharacter(item.unitName).chBio}";
+            "\n"+
+            $"Description : \n {Funcs.GetDatabaseSOCharacter().GetCharacter(item.unitName).chBio}";
     }
 }
