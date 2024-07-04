@@ -18,7 +18,7 @@ MonoBehaviour:
   money: 100
   heroesExpReward: 50
   staminaCost: 1
-  bg: {fileID: 21300000, guid: 7f995ec34c7811047b933cccb29c1863, type: 3}
+  bg: {fileID: 21300000, guid: 33dfc8502ac8d2a47bf7f262a7455798, type: 3}
   UnlockQuest: 1
   listQuestReward:
   - rewardName: Exp
