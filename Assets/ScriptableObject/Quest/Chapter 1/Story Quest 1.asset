@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31db3a479847ffd44a3599f31a9b6a7f, type: 3}
+  m_Name: Story Quest 1
+  m_EditorClassIdentifier: 
+  QuestName: Story quest 1
+  EnemyPrefabs:
+  - {fileID: 864842667368195608, guid: f4b536306abc3c648b7511884c15993e, type: 3}
+  money: 150
+  heroesExpReward: 576
+  staminaCost: 1
+  bg: {fileID: 21300000, guid: ea7d3dfb2119c3146a12fd905971870a, type: 3}
+  UnlockQuest: 1
+  listQuestReward:
+  - rewardName: Exp
+    rewardType: 1
+    rewardIcon: {fileID: 21300000, guid: 9b0e07bc26a4bcf4194a6f522dc4c921, type: 3}
+  - rewardName: Prajurit Pemanah
+    rewardType: 0
+    rewardIcon: {fileID: 21300000, guid: 8e2b1576e114eb24690a666fadbbd01b, type: 3}
+  storyDialogue:
+    name: Chapter 1 Stages 1
+    sentences:
+    - Kerajaan  Mataram  bermula  dari  tanah  perdikan  yang  diberikan  oleh Sultan 
+      Hadiwijaya (Jaka Tingkir) dari  Kesultanan  Pajang terhadap  Ki  Pemanahan
+      sebagai balas jasa karena telah membantu Sultan Pajang untuk menghadapi perlawanan
+      Arya  Penangsang dari Jipang.

@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31db3a479847ffd44a3599f31a9b6a7f, type: 3}
+  m_Name: Story Quest 12
+  m_EditorClassIdentifier: 
+  QuestName: Story quest 6 Cp2
+  EnemyPrefabs:
+  - {fileID: 3506219432552147847, guid: 5c56ca678dc84b848ac229d5ca46244b, type: 3}
+  - {fileID: 3506219432552147847, guid: 315d348d9daaebe4db1bb6e4dae5a884, type: 3}
+  money: 300
+  heroesExpReward: 1920
+  staminaCost: 1
+  bg: {fileID: 21300000, guid: 1bed216b242b2d945abed54de7f78d5a, type: 3}
+  UnlockQuest: 1
+  listQuestReward:
+  - rewardName: Exp
+    rewardType: 1
+    rewardIcon: {fileID: 21300000, guid: 9b0e07bc26a4bcf4194a6f522dc4c921, type: 3}
+  - rewardName: Prabu Hanyokrowati
+    rewardType: 0
+    rewardIcon: {fileID: 21300000, guid: b2260925ffd92554091286554a1c1a65, type: 3}
+  storyDialogue:
+    name: Chapter 2 Stages 6
+    sentences:
+    - setelah menaklukan bagian timur jawa dan memperluas kekuatan kerajaan mataram,
+      dalam masalah internal terdapat macam pemberontakan terhadap panembahan senopati,
+      tetapi dapat dihentikan oleh senopati dan anak-anaknya.
+    - sampai ketika sakit parah, Raja meminta agar semua anak dan kerabatnya hidup
+      bersama secara baik-baik.
+    - Ia meninggal pada tahun 1565 dan dimakamkan di sebelah barat masjid, di kaki
+      kuburan ayahnya.

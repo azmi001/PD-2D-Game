@@ -13,6 +13,12 @@ MonoBehaviour:
   m_Name: Sunan Kalijaga
   m_EditorClassIdentifier: 
   charaData:
+    BaseHP: 110
+    GrowthRateHP: 50
+    BaseAttackModifier: 0.05
+    ConstantAttack: 0.4
+    DeffenceModifier: 0.4
+    HealModifier: 0.06
     unitName: 'Sunan Kalijaga '
     unitLevel: 1
     unitexp: 0
@@ -23,6 +29,9 @@ MonoBehaviour:
   Unlock: 0
   HeroIcon: {fileID: 21300000, guid: 05134e476e474c84db1e10593b5f9972, type: 3}
   heroIconFullBody: {fileID: 21300000, guid: ddde18d8940d21d4b98dfb5fedde97d0, type: 3}
-  chBio: 
-  thisUnitElement: 2
+  chBio: 'Sunan Kalijaga, atau Raden Mas Syahid, adalah salah satu Wali Songo terkenal
+    dalam penyebaran Islam di Jawa pada abad ke-15. Metode dakwahnya kreatif dan
+    toleran, menggunakan kesenian lokal seperti wayang kulit, gamelan, dan tembang
+    untuk mengajarkan Islam. '
+  thisUnitElement: 0
   skills: []

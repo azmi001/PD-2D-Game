@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31db3a479847ffd44a3599f31a9b6a7f, type: 3}
+  m_Name: Story Quest 7
+  m_EditorClassIdentifier: 
+  QuestName: Story quest 1 Cp2
+  EnemyPrefabs:
+  - {fileID: 3506219432552147847, guid: f3e9a53a9c73a9c418973b497c174c30, type: 3}
+  money: 300
+  heroesExpReward: 1152
+  staminaCost: 1
+  bg: {fileID: 21300000, guid: 1bed216b242b2d945abed54de7f78d5a, type: 3}
+  UnlockQuest: 1
+  listQuestReward:
+  - rewardName: Exp
+    rewardType: 1
+    rewardIcon: {fileID: 21300000, guid: 9b0e07bc26a4bcf4194a6f522dc4c921, type: 3}
+  storyDialogue:
+    name: Chapter 2 Stages 1
+    sentences:
+    - Setelah kematian Sultan Hadiwijaya (Jaka Tingkir) dan kejatuhan Kesultanan
+      Pajang, Sunan Kudus menanyakan kepada para bupati siapa yang sebaiknya menggantikan
+      raja Pajang.
+    - "Para bupati menunjuk Pang\xE9ran Banawa karena dia putra sulung, namun Sunan
+      Kudus tidak setuju dan mendukung adipati Demak sebagai penerus karena dianggap
+      lebih layak. "
+    - "Akibatnya, Pang\xE9ran Banawa diasingkan ke Jipang dan membuatnya sangat sedih"
