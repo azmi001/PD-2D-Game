@@ -22,10 +22,10 @@ MonoBehaviour:
     unitName: 'Arya Penangsang '
     unitLevel: 1
     unitexp: 0
-    deffense: 18
-    damage: 26
-    maxHP: 360
-    Heal: 150
+    deffense: 4
+    damage: 11
+    maxHP: 90
+    Heal: 5
   Unlock: 0
   HeroIcon: {fileID: 21300000, guid: ed6aef037c185024294cce3608311c27, type: 3}
   heroIconFullBody: {fileID: 21300000, guid: 79202cdb6f766ab419190049dedf7316, type: 3}
