@@ -118,7 +118,7 @@ public class Unit : MonoBehaviour
         Debug.Log("Total Demage yang diberikan oleh " + character.charaData.unitName + "adalah " + totalDmg);
 
         //logika rumus pengurangan darah target 
-        float finalDmg1 = ((finalDmg + result) * 4);
+        float finalDmg1 = (finalDmg + result) * 2;
 
         float def1 = (def * 2);
 

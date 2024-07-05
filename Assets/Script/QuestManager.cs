@@ -44,10 +44,17 @@ public class QuestManager : MonoBehaviour
         {
             if (ListQuest[i].QuestName == quest.QuestName)
             {
-                i++;
-                ListQuest[i].UnlockQuest = true;
-                PlayerPrefs.SetInt(ListQuest[i].QuestName, ListQuest[i].UnlockQuest == true ? 1 : 0);
-                break;
+                try
+                {
+                    i++;
+                    ListQuest[i].UnlockQuest = true;
+                    PlayerPrefs.SetInt(ListQuest[i].QuestName, ListQuest[i].UnlockQuest == true ? 1 : 0);
+                    break;
+                }
+                catch
+                {
+                    continue;
+                }
             }
         }
         for (int i = 0; i < Funcs.GetAkun().OwnedHeroes.Count; i++)

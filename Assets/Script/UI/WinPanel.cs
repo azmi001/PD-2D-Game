@@ -41,7 +41,10 @@ public class WinPanel : MonoBehaviour
         }
         else
         {
-            nextBTN.gameObject.SetActive(false);
+
+            nextBTN.onClick.AddListener(() => {
+                SceneManager.LoadScene("Hub");
+            });
         }
 
         for (int i = 0; i < lvTexts.Length; i++)

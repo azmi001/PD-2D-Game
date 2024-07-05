@@ -74,7 +74,7 @@ public partial class GameSetting : MonoBehaviour
     //setup game
     IEnumerator Init()
     {
-        Unit _hero = Funcs.GetDatabaseUnit?.Invoke().GetUnit(Funcs.GetAkun().teamHeroes[1]);
+        //Unit _hero = Funcs.GetDatabaseUnit?.Invoke().GetUnit(Funcs.GetAkun().teamHeroes[1]);
         if(Funcs.GetCurrentQuest().bg!=null)
             bg.sprite = Funcs.GetCurrentQuest().bg;
         for (int i = 0; i < Funcs.GetAkun().teamHeroes.Count; i++)

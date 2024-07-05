@@ -1278,7 +1278,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -8.826218}
+  m_AnchoredPosition: {x: 0, y: -8.826233}
   m_SizeDelta: {x: -275.1741, y: -51.6104}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2462817899055795134
@@ -5995,7 +5995,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -10.713089}
+  m_AnchoredPosition: {x: 0, y: -10.713074}
   m_SizeDelta: {x: -275.1741, y: -51.7773}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7176580535378527633
@@ -6777,7 +6777,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5028785145419414022}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8629471644946910489}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8667163313202479236
 GameObject:
   m_ObjectHideFlags: 0
@@ -7085,7 +7097,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -5.9999847}
+  m_AnchoredPosition: {x: 0, y: -6}
   m_SizeDelta: {x: -267.8755, y: -52.0752}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &861051494518384992

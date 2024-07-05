@@ -11,6 +11,7 @@ public class CharacterData
     public float DeffenceModifier = 0.4f;
     public float HealModifier = 0.06f;
 
+    [Header("Data Berubah")]
     public string unitName;
     private string _unitName;
     public int unitLevel;
@@ -35,6 +36,11 @@ public class CharacterData
         _damage = damage;
         _maxHP = maxHP;
         _Heal  = Heal;
+
+        maxHP = BaseHP + (unitLevel - 1) * GrowthRateHP;
+        damage = (maxHP * BaseAttackModifier) / (ConstantAttack);
+        deffense = damage * DeffenceModifier;
+        Heal = maxHP * HealModifier;
     }
     public void ResetData()
     {
