@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31db3a479847ffd44a3599f31a9b6a7f, type: 3}
+  m_Name: Story Quest 14
+  m_EditorClassIdentifier: 
+  QuestName: Story quest 1 Cp3
+  EnemyPrefabs:
+  - {fileID: 3506219432552147847, guid: 0bf5396baac91c24b838c9acfdd31a3f, type: 3}
+  - {fileID: 3506219432552147847, guid: 57860085f1a517a4c8ac3931a25405b9, type: 3}
+  money: 500
+  heroesExpReward: 1728
+  staminaCost: 1
+  bg: {fileID: 21300000, guid: 1bed216b242b2d945abed54de7f78d5a, type: 3}
+  UnlockQuest: 1
+  listQuestReward:
+  - rewardName: Exp
+    rewardType: 1
+    rewardIcon: {fileID: 21300000, guid: 9b0e07bc26a4bcf4194a6f522dc4c921, type: 3}
+  storyDialogue:
+    name: Chapter 3 Stages 1
+    sentences:
+    - Sesudah naik tahta Mas Rangsang bergelar Sultan Agung Prabu Hanyokrokusumo
+      atau lebih dikenal dengan sebutan Sultan Agung.
+    - Pada masa pemerintahan Sultan Agung para ulama yang berada di kasultanan terbagi
+      dalam tiga bagian, yaitu ulama yang masih berdarah bangsawan, ulama yang bekerja
+      sebagai tenaga birokrasi, dan ulama pedesaan yang tidak menjadi tenaga brokrasi.
+    - Sebagai penguasa Sultan Agung sangat menghargai para ulama karena mereka memiki
+      moral dan ilmu pengetahuan yang tinggi

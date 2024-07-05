@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31db3a479847ffd44a3599f31a9b6a7f, type: 3}
+  m_Name: Story Quest 16
+  m_EditorClassIdentifier: 
+  QuestName: Story quest 3 Cp3
+  EnemyPrefabs:
+  - {fileID: 3506219432552147847, guid: 4853ffb02dd78dc4da79c4d5c04ae61a, type: 3}
+  - {fileID: 3506219432552147847, guid: 4853ffb02dd78dc4da79c4d5c04ae61a, type: 3}
+  - {fileID: 3506219432552147847, guid: 4853ffb02dd78dc4da79c4d5c04ae61a, type: 3}
+  money: 500
+  heroesExpReward: 1728
+  staminaCost: 1
+  bg: {fileID: 21300000, guid: 1bed216b242b2d945abed54de7f78d5a, type: 3}
+  UnlockQuest: 1
+  listQuestReward:
+  - rewardName: Exp
+    rewardType: 1
+    rewardIcon: {fileID: 21300000, guid: 9b0e07bc26a4bcf4194a6f522dc4c921, type: 3}
+  storyDialogue:
+    name: Chapter 3 Stages 3
+    sentences:
+    - setelah beberapa lama, terdengar kabar seorang bupati dari Jawa Timur sedang
+      merencanakan penyerangan terhadap kerajaan Mataram, kabar itupun terdengar
+      oleh Sultan Agung dari seorang mata-mata pathi.
+    - Sultan Agung langsung memberikan perintah untuk mempersiapkan pasukannya.
+    - namun pasukan musuh yang sangat banyak sudah berhasil sampai di pajang dan
+      berkemah disana.
