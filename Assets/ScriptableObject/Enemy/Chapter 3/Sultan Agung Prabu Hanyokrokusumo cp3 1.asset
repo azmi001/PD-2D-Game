@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01f1faae6c29aea42a39b9f28c72f49f, type: 3}
+  m_Name: Sultan Agung Prabu Hanyokrokusumo cp3 1
+  m_EditorClassIdentifier: 
+  charaData:
+    BaseHP: 110
+    GrowthRateHP: 50
+    BaseAttackModifier: 0.05
+    ConstantAttack: 0.4
+    DeffenceModifier: 0.4
+    HealModifier: 0.06
+    unitName: 'Sultan Agung '
+    unitLevel: 1
+    unitexp: 0
+    deffense: 17
+    damage: 42
+    maxHP: 342
+    Heal: 20
+  Unlock: 0
+  HeroIcon: {fileID: 21300000, guid: c3623d89a971c8143875167c12924c8d, type: 3}
+  heroIconFullBody: {fileID: 21300000, guid: a0173667cc150164a9c61107852a2ccd, type: 3}
+  chBio: Sultan Agung dikenal sebagai penguasa yang kuat, memperluas wilayah Mataram
+    secara signifikan. Dia memusatkan kekuatan politik dan militer, menaklukkan kerajaan-kerajaan
+    di Jawa, termasuk Surabaya dan Madura
+  thisUnitElement: 0
+  skills: []
