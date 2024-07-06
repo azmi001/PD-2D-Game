@@ -212,7 +212,7 @@ MonoBehaviour:
   akun:
     akunLvl: 0
     akunExp: 0
-    akunStamina: 100
+    akunStamina: 10
     akunMoney: 0
     OwnedHeroes: []
     teamHeroes: []

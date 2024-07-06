@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] Akun akun;
 
-    public int StaminaGet = 100;
+    public int StaminaGet = 1;
     private Akun GetAccount()
     {
         return akun;
@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
         {
             akun = new Akun();
             akun.akunLvl = 1;
-            akun.akunStamina = 100;
+            akun.akunStamina = akun.akunStaminaMax;
             akun.akunExp = 0;
             akun.akunMoney = 0;
             foreach (var item in GetDatabaseSOCharacter().GetListCharacter())
@@ -77,7 +77,6 @@ public class GameManager : MonoBehaviour
             if (target == null) return;
             target.LoadData(item);
         }
-
     }
     private void OnEnable()
     {

@@ -19,8 +19,8 @@ MonoBehaviour:
     ConstantAttack: 0.4
     DeffenceModifier: 0.4
     HealModifier: 0.06
-    unitName: 'Prajurit Tombak '
-    unitLevel: 1
+    unitName: Prajurit Tombak
+    unitLevel: 5
     unitexp: 0
     deffense: 5.5
     damage: 13.75

@@ -13,29 +13,17 @@ public class CharacterData
 
     [Header("Data Berubah")]
     public string unitName;
-    private string _unitName;
     public int unitLevel;
-    private int _unitLevel;
     public float unitexp;
-    private float _unitexp;
     public float deffense;
-    private float _deffense;
     public float damage;
-    private float _damage;
     public float maxHP;
-    private float _maxHP;
     public float Heal;
-    private float _Heal;
 
     public void Init()
     {
-        _unitName = unitName;
-        _unitLevel = unitLevel;
-        _unitexp = unitexp;
-        _deffense = deffense;
-        _damage = damage;
-        _maxHP = maxHP;
-        _Heal  = Heal;
+        PlayerPrefs.SetString(unitName, unitName);
+        PlayerPrefs.SetInt("unitLevel", unitLevel);
 
         maxHP = BaseHP + (unitLevel - 1) * GrowthRateHP;
         damage = (maxHP * BaseAttackModifier) / (ConstantAttack);
@@ -44,13 +32,8 @@ public class CharacterData
     }
     public void ResetData()
     {
-        unitName = _unitName;
-        unitLevel = _unitLevel;
-        unitexp = _unitexp;
-        deffense = _deffense;
-        damage = _damage;
-        maxHP = _maxHP;
-        Heal = _Heal;
+        unitName = PlayerPrefs.GetString(unitName, unitName);
+        unitLevel = PlayerPrefs.GetInt("unitLevel",1);
     }
     public void AddExp(float amount)
     {

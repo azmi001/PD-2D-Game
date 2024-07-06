@@ -40,6 +40,7 @@ public class QuestManager : MonoBehaviour
     //melakukan pengecekan quest complete atau tidak
     private void OnQuestFinish(StoryQuest quest)
     {
+        //unlock next quest
         for (int i = 0; i < ListQuest.Length; i++) 
         {
             if (ListQuest[i].QuestName == quest.QuestName)
@@ -57,18 +58,20 @@ public class QuestManager : MonoBehaviour
                 }
             }
         }
-        for (int i = 0; i < Funcs.GetAkun().OwnedHeroes.Count; i++)
+        foreach (var item in quest.listQuestReward)
         {
-            try
+            Debug.Log(item.rewardType);
+            switch (item.rewardType)
             {
-                if (Funcs.GetAkun().OwnedHeroes[i].unitName == Funcs.GetAkun().teamHeroes[i])
-                {
-                    Funcs.GetAkun().AddHeroesExp(Funcs.GetAkun().OwnedHeroes[i].unitName,(float)quest.heroesExpReward);
-                }
-            }
-            catch
-            {
-                continue;
+                case QuestReward.RewardType.Character:
+                    Funcs.GetAkun().AddHeroes(item.rewardName);
+                    break;
+                case QuestReward.RewardType.Currencies:
+                    Debug.Log("budi");
+                    Funcs.GetAkun().AddHeroesExp((float)quest.heroesExpReward);
+                    break;
+                default:
+                    break;
             }
         }
     }

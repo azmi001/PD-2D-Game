@@ -20,7 +20,7 @@ public class PanelLobby : MonoBehaviour
         akunLevelText.text = akun.akunLvl.ToString();
         akunExpText.text = akun.akunExp.ToString();
         //akunMoneyText.text = "$ " + akun.akunMoney.ToString();
-        akunStaminaText.text = $"{akun.akunStamina} / 100";
+        akunStaminaText.text = $"{akun.akunStamina} / {akun.akunStaminaMax}";
     }
     private void Update()
     {

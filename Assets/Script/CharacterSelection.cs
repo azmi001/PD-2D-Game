@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -234,11 +235,19 @@ public class CharacterSelection : MonoBehaviour
     }
     void UnSelectTarget(int index)
     {
-        if (Temp.sprite != null)
+        try
         {
-            Temp.sprite = imageHolder;
-            CharacterButton[index].interactable = true;
-            Funcs.GetAkun().RemoveHeroFromTeam(tempListCharacter[index].charaData.unitName);
+            if (Temp.sprite != null)
+            {
+                Temp.sprite = imageHolder;
+                int target = tempListCharacter.FindIndex(t => t.charaData.unitName == Funcs.GetAkun().teamHeroes[index]);
+                CharacterButton[target].interactable = true;
+                Funcs.GetAkun().RemoveHeroFromTeam(tempListCharacter[index].charaData.unitName);
+            }
+        }
+        catch
+        {
+
         }
     }
 }

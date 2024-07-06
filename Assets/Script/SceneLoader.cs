@@ -10,6 +10,7 @@ public class SceneLoader : MonoBehaviour
     public StoryQuest Quest;
     private void Start()
     {
+        if (Quest == null) return;
         if (Quest.UnlockQuest)
         {
             GetComponent<Button>().interactable = true;
