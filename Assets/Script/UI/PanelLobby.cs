@@ -42,7 +42,7 @@ public class PanelLobby : MonoBehaviour
     {
         Actions.ClaimStamina?.Invoke(() =>
         {
-            akunStaminaText.text = $"{Funcs.GetAkun().akunStamina} / 100";
+            akunStaminaText.text = $"{Funcs.GetAkun().akunStamina} / {Funcs.GetAkun().akunStaminaMax}";
 
         });
     }
