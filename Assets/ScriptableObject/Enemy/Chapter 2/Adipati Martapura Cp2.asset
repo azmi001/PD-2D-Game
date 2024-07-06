@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Adipati Martapura Cp2
   m_EditorClassIdentifier: 
   charaData:
-    BaseHP: 396
+    BaseHP: 2670
     GrowthRateHP: 50
     BaseAttackModifier: 0.05
     ConstantAttack: 0.4
@@ -22,10 +22,10 @@ MonoBehaviour:
     unitName: Adipati Martapura
     unitLevel: 1
     unitexp: 0
-    deffense: 19
-    damage: 49
-    maxHP: 396
-    Heal: 23
+    deffense: 133
+    damage: 334
+    maxHP: 2670
+    Heal: 160
   Unlock: 0
   HeroIcon: {fileID: 21300000, guid: ef72358ca865bff4098d6dbe9a4d6b3a, type: 3}
   heroIconFullBody: {fileID: 21300000, guid: fd1d30e003c11e24f953bfd14623deb7, type: 3}

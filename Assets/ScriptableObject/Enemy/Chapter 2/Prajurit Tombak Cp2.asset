@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Prajurit Tombak Cp2
   m_EditorClassIdentifier: 
   charaData:
-    BaseHP: 144
+    BaseHP: 572
     GrowthRateHP: 50
     BaseAttackModifier: 0.05
     ConstantAttack: 0.4
@@ -22,11 +22,11 @@ MonoBehaviour:
     unitName: 'Prajurit Tombak '
     unitLevel: 1
     unitexp: 0
-    deffense: 7
-    damage: 18
-    maxHP: 144
-    Heal: 8
-  Unlock: 1
+    deffense: 29
+    damage: 71
+    maxHP: 572
+    Heal: 34
+  Unlock: 0
   HeroIcon: {fileID: 21300000, guid: 7fbfacf349c5d234396e307a930b69e0, type: 3}
   heroIconFullBody: {fileID: 21300000, guid: 825261a181e2d144f9731522635aa162, type: 3}
   chBio: Seorang prajurit tombak yang hebat pada masa pemerintahan Kerajaan Mataram

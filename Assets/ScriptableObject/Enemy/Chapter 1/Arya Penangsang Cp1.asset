@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Arya Penangsang Cp1
   m_EditorClassIdentifier: 
   charaData:
-    BaseHP: 90
+    BaseHP: 117
     GrowthRateHP: 50
     BaseAttackModifier: 0.05
     ConstantAttack: 0.4
@@ -22,10 +22,10 @@ MonoBehaviour:
     unitName: 'Arya Penangsang '
     unitLevel: 1
     unitexp: 0
-    deffense: 4
-    damage: 11
-    maxHP: 90
-    Heal: 5
+    deffense: 6
+    damage: 15
+    maxHP: 117
+    Heal: 7
   Unlock: 0
   HeroIcon: {fileID: 21300000, guid: ed6aef037c185024294cce3608311c27, type: 3}
   heroIconFullBody: {fileID: 21300000, guid: 79202cdb6f766ab419190049dedf7316, type: 3}

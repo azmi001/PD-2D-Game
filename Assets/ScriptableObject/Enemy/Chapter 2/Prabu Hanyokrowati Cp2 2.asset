@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Prabu Hanyokrowati Cp2 2
   m_EditorClassIdentifier: 
   charaData:
-    BaseHP: 576
+    BaseHP: 3262
     GrowthRateHP: 50
     BaseAttackModifier: 0.05
     ConstantAttack: 0.4
@@ -22,10 +22,10 @@ MonoBehaviour:
     unitName: 'Prabu Hanyokrowati '
     unitLevel: 1
     unitexp: 0
-    deffense: 28
-    damage: 72
-    maxHP: 576
-    Heal: 34
+    deffense: 408
+    damage: 163
+    maxHP: 3262
+    Heal: 150
   Unlock: 0
   HeroIcon: {fileID: 21300000, guid: cae4a174f9716504e912325ed8cf452e, type: 3}
   heroIconFullBody: {fileID: 21300000, guid: 55c48d5fda4dfab4e92187643490322d, type: 3}

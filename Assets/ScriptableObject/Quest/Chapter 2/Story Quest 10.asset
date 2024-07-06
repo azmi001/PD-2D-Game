@@ -21,7 +21,7 @@ MonoBehaviour:
   heroesExpReward: 1920
   staminaCost: 1
   bg: {fileID: 21300000, guid: 1bed216b242b2d945abed54de7f78d5a, type: 3}
-  UnlockQuest: 1
+  UnlockQuest: 0
   listQuestReward:
   - rewardName: Exp
     rewardType: 1

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Sultan Agung Prabu Hanyokrokusumo cp3 3
   m_EditorClassIdentifier: 
   charaData:
-    BaseHP: 110
+    BaseHP: 6380
     GrowthRateHP: 50
     BaseAttackModifier: 0.05
     ConstantAttack: 0.4
@@ -22,10 +22,10 @@ MonoBehaviour:
     unitName: 'Sultan Agung '
     unitLevel: 1
     unitexp: 0
-    deffense: 36
-    damage: 92
-    maxHP: 738
-    Heal: 44
+    deffense: 319
+    damage: 798
+    maxHP: 6380
+    Heal: 383
   Unlock: 0
   HeroIcon: {fileID: 21300000, guid: c3623d89a971c8143875167c12924c8d, type: 3}
   heroIconFullBody: {fileID: 21300000, guid: a0173667cc150164a9c61107852a2ccd, type: 3}

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Panembahan Senopati (Sutawijaya) Cp2 1
   m_EditorClassIdentifier: 
   charaData:
-    BaseHP: 324
+    BaseHP: 1656
     GrowthRateHP: 50
     BaseAttackModifier: 0.05
     ConstantAttack: 0.4
@@ -22,10 +22,10 @@ MonoBehaviour:
     unitName: 'Panembahan Senopati '
     unitLevel: 1
     unitexp: 0
-    deffense: 16
-    damage: 40
-    maxHP: 324
-    Heal: 19
+    deffense: 83
+    damage: 207
+    maxHP: 1656
+    Heal: 99
   Unlock: 0
   HeroIcon: {fileID: 21300000, guid: 94c8b1b8877877241ab7cb957f0ae2f8, type: 3}
   heroIconFullBody: {fileID: 21300000, guid: 37a1d924427f55641abc17b5573402bb, type: 3}
