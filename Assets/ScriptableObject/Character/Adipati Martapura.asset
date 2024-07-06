@@ -20,8 +20,8 @@ MonoBehaviour:
     DeffenceModifier: 0.4
     HealModifier: 0.06
     unitName: Adipati Martapura
-    unitLevel: 5
-    unitexp: 257
+    unitLevel: 1
+    unitexp: 0
     deffense: 15.5
     damage: 38.75
     maxHP: 310

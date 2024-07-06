@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class QuestManager : MonoBehaviour
@@ -38,7 +39,7 @@ public class QuestManager : MonoBehaviour
     }
 
     //melakukan pengecekan quest complete atau tidak
-    private void OnQuestFinish(StoryQuest quest)
+    private async void OnQuestFinish(StoryQuest quest)
     {
         //unlock next quest
         for (int i = 0; i < ListQuest.Length; i++) 
@@ -60,6 +61,7 @@ public class QuestManager : MonoBehaviour
         }
         foreach (var item in quest.listQuestReward)
         {
+            await Task.Delay(500); // jeda 0.5 detik
             Debug.Log(item.rewardType);
             switch (item.rewardType)
             {
