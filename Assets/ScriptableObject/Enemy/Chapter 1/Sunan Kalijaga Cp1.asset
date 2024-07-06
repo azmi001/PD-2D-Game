@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Sunan Kalijaga Cp1
   m_EditorClassIdentifier: 
   charaData:
-    BaseHP: 126
+    BaseHP: 222
     GrowthRateHP: 50
     BaseAttackModifier: 0.05
     ConstantAttack: 0.4
@@ -22,10 +22,10 @@ MonoBehaviour:
     unitName: 'Sunan Kalijaga '
     unitLevel: 1
     unitexp: 0
-    deffense: 6
-    damage: 15
-    maxHP: 126
-    Heal: 7
+    deffense: 11
+    damage: 28
+    maxHP: 222
+    Heal: 13
   Unlock: 0
   HeroIcon: {fileID: 21300000, guid: 05134e476e474c84db1e10593b5f9972, type: 3}
   heroIconFullBody: {fileID: 21300000, guid: ddde18d8940d21d4b98dfb5fedde97d0, type: 3}

@@ -4,8 +4,8 @@
 public class CharacterData
 {
     [Header("Base Value")]
-    public float BaseHP = 110;
-    public float GrowthRateHP = 50;
+    public float BaseHP = 200;
+    public float GrowthRateHP = 150;
     public float BaseAttackModifier = 0.05f;
     public float ConstantAttack = 0.4f;
     public float DeffenceModifier = 0.4f;
@@ -37,7 +37,7 @@ public class CharacterData
     }
     public void AddExp(float amount)
     {
-        int targetExp = (int)Mathf.Pow(unitLevel / 0.09f, 1.6f);
+        int targetExp = (int)Mathf.Pow(unitLevel / 0.09f, 1.3f);
         unitexp += amount;
         while (unitexp > targetExp)
         {
@@ -50,7 +50,7 @@ public class CharacterData
             deffense = damage * DeffenceModifier;
             Heal = maxHP * HealModifier;
 
-            targetExp = (int)Mathf.Pow(unitLevel / 0.09f, 1.6f);
+            targetExp = (int)Mathf.Pow(unitLevel / 0.09f, 1.3f);
         }
     }
 }

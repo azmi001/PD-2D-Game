@@ -159,6 +159,22 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9919efe814123db4ab14157915d6ff41, type: 2}
   - {fileID: 11400000, guid: 7fdb049cea0c83b40b7c38ebd17ffd13, type: 2}
   - {fileID: 11400000, guid: cf2c6de57a54d644ab0c8eba342ce8aa, type: 2}
+  - {fileID: 11400000, guid: 350434ad3b151444e98a5b19144f5238, type: 2}
+  - {fileID: 11400000, guid: ef8adcff46f6dda4982e33666b20c037, type: 2}
+  - {fileID: 11400000, guid: 2da3c1b9c7bcc384684502babb774f3f, type: 2}
+  - {fileID: 11400000, guid: 4b69fe59f962bb2498ea9ac61b7ec128, type: 2}
+  - {fileID: 11400000, guid: e81e05eace2313941b436fbfbd39590e, type: 2}
+  - {fileID: 11400000, guid: 869c8556db3ba5c46a0e79755617abc6, type: 2}
+  - {fileID: 11400000, guid: 819cbe5751aa5ff4289f6283b16f1c1a, type: 2}
+  - {fileID: 11400000, guid: ca17b988400be2f4eb2a0964af265d5d, type: 2}
+  - {fileID: 11400000, guid: 2c00f587d7dba4d409a32343fd24e719, type: 2}
+  - {fileID: 11400000, guid: aa4a969f1547e714db43165cb08f7f86, type: 2}
+  - {fileID: 11400000, guid: b93a37df2e7ade847ade505b20eae9c7, type: 2}
+  - {fileID: 11400000, guid: 35cfead67fe8b2f4eb73aeb4690bde9c, type: 2}
+  - {fileID: 11400000, guid: ac516d0897fd38d4eba639899af48037, type: 2}
+  - {fileID: 11400000, guid: 7f228d987f7e97f49b4abdf1609ce386, type: 2}
+  - {fileID: 11400000, guid: 0ae281a57e786b3499d32dca75d4db14, type: 2}
+  - {fileID: 11400000, guid: 30598984b3edb0e4da9ca619dfb21030, type: 2}
 --- !u!1 &8550072402413270455
 GameObject:
   m_ObjectHideFlags: 0
@@ -213,6 +229,7 @@ MonoBehaviour:
     akunLvl: 0
     akunExp: 0
     akunStamina: 10
+    akunStaminaMax: 10
     akunMoney: 0
     OwnedHeroes: []
     teamHeroes: []
