@@ -47,6 +47,7 @@ public class HeroesPage : MonoBehaviour
 
     private void OpenHeroDescription(CharacterData item)
     {
+        AudioManager.instance.Play("Button");
         HeroDescriptionPanel.SetActive(true);
         heroView.SetActive(false);
         heroPlaceholder.sprite = Funcs.GetDatabaseSOCharacter().GetCharacter(item.unitName).heroIconFullBody;

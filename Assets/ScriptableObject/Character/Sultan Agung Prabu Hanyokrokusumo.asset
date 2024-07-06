@@ -26,7 +26,7 @@ MonoBehaviour:
     damage: 157
     maxHP: 1260
     Heal: 75
-  Unlock: 0
+  Unlock: 1
   HeroIcon: {fileID: 21300000, guid: c3623d89a971c8143875167c12924c8d, type: 3}
   heroIconFullBody: {fileID: 21300000, guid: a0173667cc150164a9c61107852a2ccd, type: 3}
   chBio: Sultan Agung dikenal sebagai penguasa yang kuat, memperluas wilayah Mataram
