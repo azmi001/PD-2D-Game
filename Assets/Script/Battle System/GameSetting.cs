@@ -297,7 +297,7 @@ public partial class GameSetting : MonoBehaviour
                 winning = true;
                 Debug.Log("Won");
                 DialogText.text = "Player Win The Battle!";
-                Actions.onQuestFinis?.Invoke(FindObjectOfType<GameManager>().currentQuest);
+                Actions.onQuestFinish?.Invoke(FindObjectOfType<GameManager>().currentQuest);
                 await Task.Delay(2000);
                 Actions.OnResultBattle?.Invoke(true);
                 //SceneManager.LoadScene("Hub");

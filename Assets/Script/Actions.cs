@@ -32,7 +32,7 @@ public static class Actions
     //MENGURANGI STAMINA UNTUK MELAKUKAN QUEST
     public static Action<StoryQuest> onQuestStart;
     //MEGNGECEK ON QUEST DONE
-    public static Action<StoryQuest> onQuestFinis;
+    public static Action<StoryQuest> onQuestFinish;
     public static Action<Action> ClaimStamina;
     public static Action<bool> OnResultBattle;
 

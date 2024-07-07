@@ -10,13 +10,13 @@ public class QuestManager : MonoBehaviour
 
     private void OnEnable()
     {
-        Actions.onQuestFinis += OnQuestFinish;
+        Actions.onQuestFinish += OnQuestFinish;
         Funcs.GetAllQuest += GetListQuest;
     }
 
     private void OnDisable()
     {
-        Actions.onQuestFinis -= OnQuestFinish;
+        Actions.onQuestFinish -= OnQuestFinish;
         Funcs.GetAllQuest -= GetListQuest;
     }
 

@@ -28,6 +28,7 @@ public class Unit : MonoBehaviour
     //Merenfrensikan dari scriptable object Character untuk mengambil data stat character
     [Header("Data Character")]
     public Character character;
+    private Character _character;
     public float _def;
 
     [Header("List Skill Character")]
@@ -43,38 +44,36 @@ public class Unit : MonoBehaviour
     public CharacterState characterState;
 
     //inisialisasi awal darah
-    public void Awake()
-    {
-        InitializedData();
-        SetHud();
-    }
 
     public void Start()
     {
-        _def = character.charaData.deffense;
-        float hasil = MathF.Pow(2f / 0.09f, 1.6f);
-        Debug.Log(hasil);
+        _character = ScriptableObject.Instantiate(character);
+        if(actorType == ACTORTYPE.PLAYER)
+            _character.charaData = Array.Find(Funcs.GetAkun().OwnedHeroes.ToArray(), t => t.unitName == _character.charaData.unitName);
+        InitializedData();
+        SetHud();
     }
     public void InitializedData()
     {
-        currentHP = character.charaData.maxHP;
-        currentLv = character.charaData.unitLevel;
-        currentXP = character.charaData.unitexp;
-        skillList = new List<Skill>(character.skills);
+        _def = _character.charaData.deffense;
+        currentHP = _character.charaData.maxHP;
+        currentLv = _character.charaData.unitLevel;
+        currentXP = _character.charaData.unitexp;
+        skillList = new List<Skill>(_character.skills);
     }
 
     //logika penyerangan
     public bool TakeDemage(float dmg, float def, ElementType attackerElement)
     {
         //Mendubug dmg awal
-        Debug.Log("Demage Murni " + character.charaData.unitName + "yang belum dicampur elemen " + dmg);
+        Debug.Log("Demage Murni " + _character.charaData.unitName + "yang belum dicampur elemen " + dmg);
 
         //inisialisasi awal logika sitem dmg elemen
         float actualDamage = dmg * 15 /100;
-        Debug.Log("Demage elemen didapat " + character.charaData.unitName + "adalah " + actualDamage);
+        Debug.Log("Demage elemen didapat " + _character.charaData.unitName + "adalah " + actualDamage);
 
         //fsm logic kalkulasi demg element
-        switch (character.thisUnitElement)
+        switch (_character.thisUnitElement)
         {
             case ElementType.Fire:
                 if (attackerElement == ElementType.Leaf)
@@ -100,7 +99,7 @@ public class Unit : MonoBehaviour
         float finalDmg = dmg + actualDamage;
 
         //mendebug total dmg final dmg
-        Debug.Log("Demage Final " + character.charaData.unitName + "yang dicampur elemen " + finalDmg);
+        Debug.Log("Demage Final " + _character.charaData.unitName + "yang dicampur elemen " + finalDmg);
 
         //mebuat logika variasi dmg 20% +- dari total finaldmg
         float varian = finalDmg * 20/ 100;
@@ -108,14 +107,14 @@ public class Unit : MonoBehaviour
         float maxVarian = 0;
         float result = UnityEngine.Random.Range(minVarian, maxVarian);
         //mendebug nial variasi dmg varian
-        Debug.Log(character.charaData.unitName + "Min range -varian dari dmg " + minVarian);
-        Debug.Log(character.charaData.unitName + "Min range +varian dari dmg " + maxVarian);
-        Debug.Log(character.charaData.unitName +"Variasi dmg tambahan +- " + result);
+        Debug.Log(_character.charaData.unitName + "Min range -varian dari dmg " + minVarian);
+        Debug.Log(_character.charaData.unitName + "Min range +varian dari dmg " + maxVarian);
+        Debug.Log(_character.charaData.unitName +"Variasi dmg tambahan +- " + result);
 
 
         //mendebug nilai finaldmg yang ditambah oleh nilai variasi 
         float totalDmg = finalDmg + result;
-        Debug.Log("Total Demage yang diberikan oleh " + character.charaData.unitName + "adalah " + totalDmg);
+        Debug.Log("Total Demage yang diberikan oleh " + _character.charaData.unitName + "adalah " + totalDmg);
 
         //logika rumus pengurangan darah target 
         float finalDmg1 = (finalDmg + result) * 2;
@@ -128,13 +127,13 @@ public class Unit : MonoBehaviour
         float maxVarianDef = 0;
         float resultDef = UnityEngine.Random.Range(minVarianDef, maxVarianDef);
         //mendebug nial variasi def varian
-        Debug.Log(character.charaData.unitName + "Min range -varian dari Def " + minVarianDef);
-        Debug.Log(character.charaData.unitName + "Min range +varian dari Def " + maxVarianDef);
-        Debug.Log(character.charaData.unitName + "Variasi Def tambahan +- " + resultDef);
+        Debug.Log(_character.charaData.unitName + "Min range -varian dari Def " + minVarianDef);
+        Debug.Log(_character.charaData.unitName + "Min range +varian dari Def " + maxVarianDef);
+        Debug.Log(_character.charaData.unitName + "Variasi Def tambahan +- " + resultDef);
 
-        Debug.Log(character.charaData.unitName + "Sebelum pake variasi deff" + def1);
+        Debug.Log(_character.charaData.unitName + "Sebelum pake variasi deff" + def1);
         def1 = def1 + resultDef;
-        Debug.Log(character.charaData.unitName + "Hasil dari def 1 + Variasi" + def1);
+        Debug.Log(_character.charaData.unitName + "Hasil dari def 1 + Variasi" + def1);
 
         //menbuat logika jika dmg nya minus gak akan menambah darah target yang diserang
         //dan dmg yang diterima adalah 0
@@ -154,7 +153,7 @@ public class Unit : MonoBehaviour
             //mengupdate saat ui darah habis saat kondisi mati
             ChHpSlider.value = currentHP;
 
-            //memutar animasi character.charaData mati
+            //memutar animasi _character.charaData mati
             StartCoroutine(unitdead());
 
             return true;
@@ -163,7 +162,7 @@ public class Unit : MonoBehaviour
         else
         {
             ChHpSlider.value = currentHP;
-            //Memutar animasi character.charaData hurt
+            //Memutar animasi _character.charaData hurt
             if(isdefup)
             {
                 GetComponentInChildren<Animator>().Play("Block");
@@ -177,7 +176,7 @@ public class Unit : MonoBehaviour
         }
     }
 
-    //memutar animasi character.charaData mati
+    //memutar animasi _character.charaData mati
     private IEnumerator unitdead()
     {
         Debug.Log("Budi died");
@@ -197,7 +196,7 @@ public class Unit : MonoBehaviour
 
     public void DefDefault()
     {
-        _def = character.charaData.deffense;
+        _def = _character.charaData.deffense;
         isdefup = false;
     }
 
@@ -210,17 +209,17 @@ public class Unit : MonoBehaviour
         float maxVarianHeal = 0;
         float resultHeal = UnityEngine.Random.Range(minVarianHeal, maxVarianHeal);
         //mendebug nial variasi def varian
-        Debug.Log(character.charaData.unitName + "Min range -varian dari Heal " + minVarianHeal);
-        Debug.Log(character.charaData.unitName + "Min range +varian dari Heal " + maxVarianHeal);
-        Debug.Log(character.charaData.unitName + "Variasi Def tambahan +- " + resultHeal);
+        Debug.Log(_character.charaData.unitName + "Min range -varian dari Heal " + minVarianHeal);
+        Debug.Log(_character.charaData.unitName + "Min range +varian dari Heal " + maxVarianHeal);
+        Debug.Log(_character.charaData.unitName + "Variasi Def tambahan +- " + resultHeal);
 
-        Debug.Log(character.charaData.unitName + "Sebelum pake variasi Heal" + amount);
+        Debug.Log(_character.charaData.unitName + "Sebelum pake variasi Heal" + amount);
         amount = amount + resultHeal;
-        Debug.Log(character.charaData.unitName + "Hasil dari Heal + Variasi" + amount);
+        Debug.Log(_character.charaData.unitName + "Hasil dari Heal + Variasi" + amount);
 
         currentHP += amount;
-        if (currentHP > character.charaData.maxHP)
-            currentHP = character.charaData.maxHP;
+        if (currentHP > _character.charaData.maxHP)
+            currentHP = _character.charaData.maxHP;
         ChHpSlider.value = currentHP;
 
     }
@@ -251,9 +250,9 @@ public class Unit : MonoBehaviour
 
     public void SetHud()
     {
-        ChNmText.text = character.charaData.unitName;
+        ChNmText.text = _character.charaData.unitName;
         ChLvlText.text = "" + currentLv;
-        ChHpSlider.maxValue = character.charaData.maxHP;
+        ChHpSlider.maxValue = _character.charaData.maxHP;
         ChHpSlider.value = currentHP;
     }
 
@@ -306,20 +305,20 @@ public class Unit : MonoBehaviour
                 Unit TargetUnit = new Unit();
 
                 //FSM logic Element Attact Target
-                switch (character.thisUnitElement)
+                switch (_character.thisUnitElement)
                 {
                     case ElementType.Fire:
-                        TargetUnit = Array.Find(playerList.ToArray(), T => T.character.thisUnitElement == ElementType.Leaf);//Mencari Element yang diuntungkan
+                        TargetUnit = Array.Find(playerList.ToArray(), T => T._character.thisUnitElement == ElementType.Leaf);//Mencari Element yang diuntungkan
                         Debug.Log("character State" + TargetUnit != null);
                         if (TargetUnit == null)
                         {
-                            TargetUnit = Array.Find(playerList.ToArray(), T => T.character.thisUnitElement == ElementType.Fire);//mencari element yang sama
+                            TargetUnit = Array.Find(playerList.ToArray(), T => T._character.thisUnitElement == ElementType.Fire);//mencari element yang sama
                             if (TargetUnit == null)
                             {
                                 //logic random
                                 foreach (var item in playerList)
                                 {
-                                    if (item.character.thisUnitElement == ElementType.Water)//element yang dirugikan
+                                    if (item._character.thisUnitElement == ElementType.Water)//element yang dirugikan
                                     {
                                         chElementRndm.Add(item);
                                     }
@@ -331,7 +330,7 @@ public class Unit : MonoBehaviour
                                 //logic random
                                 foreach (var item in playerList)
                                 {
-                                    if (item.character.thisUnitElement == ElementType.Fire)//element yang sama
+                                    if (item._character.thisUnitElement == ElementType.Fire)//element yang sama
                                     {
                                         chElementRndm.Add(item);
                                     }
@@ -344,7 +343,7 @@ public class Unit : MonoBehaviour
                             //logic random
                             foreach (var item in playerList)
                             {
-                                if (item.character.thisUnitElement == ElementType.Leaf)//element yang diuntungkan
+                                if (item._character.thisUnitElement == ElementType.Leaf)//element yang diuntungkan
                                 {
                                     chElementRndm.Add(item);
                                 }
@@ -353,7 +352,7 @@ public class Unit : MonoBehaviour
                         }
                         break;
                     case ElementType.Leaf:
-                        TargetUnit = Array.Find(playerList.ToArray(), T => T.character.thisUnitElement == ElementType.Water);//Mencari Element yang diuntungkan
+                        TargetUnit = Array.Find(playerList.ToArray(), T => T._character.thisUnitElement == ElementType.Water);//Mencari Element yang diuntungkan
                         Debug.Log("character State" + TargetUnit != null);
                         /*if (TargetUnit == null)
                         {
@@ -366,13 +365,13 @@ public class Unit : MonoBehaviour
                         }*/
                         if (TargetUnit == null)
                         {
-                            TargetUnit = Array.Find(playerList.ToArray(), T => T.character.thisUnitElement == ElementType.Leaf);//mencari element yang sama
+                            TargetUnit = Array.Find(playerList.ToArray(), T => T._character.thisUnitElement == ElementType.Leaf);//mencari element yang sama
                             if (TargetUnit == null)
                             {
                                 //logic random
                                 foreach (var item in playerList)
                                 {
-                                    if (item.character.thisUnitElement == ElementType.Fire)//element yang dirugikan
+                                    if (item._character.thisUnitElement == ElementType.Fire)//element yang dirugikan
                                     {
                                         chElementRndm.Add(item);
                                     }
@@ -384,7 +383,7 @@ public class Unit : MonoBehaviour
                                 //logic random
                                 foreach (var item in playerList)
                                 {
-                                    if (item.character.thisUnitElement == ElementType.Leaf)//element yang sama
+                                    if (item._character.thisUnitElement == ElementType.Leaf)//element yang sama
                                     {
                                         chElementRndm.Add(item);
                                     }
@@ -397,7 +396,7 @@ public class Unit : MonoBehaviour
                             //logic random
                             foreach (var item in playerList)
                             {
-                                if (item.character.thisUnitElement == ElementType.Water)//element yang diuntungkan
+                                if (item._character.thisUnitElement == ElementType.Water)//element yang diuntungkan
                                 {
                                     chElementRndm.Add(item);
                                 }
@@ -406,7 +405,7 @@ public class Unit : MonoBehaviour
                         }
                         break;
                     case ElementType.Water:
-                        TargetUnit = Array.Find(playerList.ToArray(), T => T.character.thisUnitElement == ElementType.Fire);//Mencari Element yang diuntungkan
+                        TargetUnit = Array.Find(playerList.ToArray(), T => T._character.thisUnitElement == ElementType.Fire);//Mencari Element yang diuntungkan
                         Debug.Log("character State" + TargetUnit != null);
                         /*if (TargetUnit == null)
                         {
@@ -419,13 +418,13 @@ public class Unit : MonoBehaviour
                         }*/
                         if (TargetUnit == null)
                         {
-                            TargetUnit = Array.Find(playerList.ToArray(), T => T.character.thisUnitElement == ElementType.Water);//mencari element yang sama
+                            TargetUnit = Array.Find(playerList.ToArray(), T => T._character.thisUnitElement == ElementType.Water);//mencari element yang sama
                             if (TargetUnit == null)
                             {
                                 //logic random
                                 foreach (var item in playerList)
                                 {
-                                    if (item.character.thisUnitElement == ElementType.Leaf)//element yang dirugikan
+                                    if (item._character.thisUnitElement == ElementType.Leaf)//element yang dirugikan
                                     {
                                         chElementRndm.Add(item);
                                     }
@@ -437,7 +436,7 @@ public class Unit : MonoBehaviour
                                 //logic random
                                 foreach (var item in playerList)
                                 {
-                                    if (item.character.thisUnitElement == ElementType.Water)//element yang sama
+                                    if (item._character.thisUnitElement == ElementType.Water)//element yang sama
                                     {
                                         chElementRndm.Add(item);
                                     }
@@ -450,7 +449,7 @@ public class Unit : MonoBehaviour
                             //logic random
                             foreach (var item in playerList)
                             {
-                                if (item.character.thisUnitElement == ElementType.Fire)//element yang diuntungkan
+                                if (item._character.thisUnitElement == ElementType.Fire)//element yang diuntungkan
                                 {
                                     chElementRndm.Add(item);
                                 }
@@ -459,7 +458,7 @@ public class Unit : MonoBehaviour
                         }
                         break;
                 }
-                TargetUnit.TakeDemage(character.charaData.damage, TargetUnit._def, character.thisUnitElement);
+                TargetUnit.TakeDemage(_character.charaData.damage, TargetUnit._def, _character.thisUnitElement);
                 break;
             case CharacterState.HEAL:
                 Heal(character.charaData.Heal);//jumlah heal nya
