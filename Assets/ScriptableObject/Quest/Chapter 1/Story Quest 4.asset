@@ -16,7 +16,7 @@ MonoBehaviour:
   EnemyPrefabs:
   - {fileID: 864842667368195608, guid: f00907b94f73a384ab776bd8fffb4da9, type: 3}
   money: 150
-  heroesExpReward: 50
+  heroesExpReward: 100
   staminaCost: 1
   bg: {fileID: 21300000, guid: ea7d3dfb2119c3146a12fd905971870a, type: 3}
   UnlockQuest: 0
