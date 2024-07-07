@@ -1465,7 +1465,6 @@ GameObject:
   - component: {fileID: 7825553736048396258}
   - component: {fileID: 4731358142783583542}
   - component: {fileID: 2189837507994866661}
-  - component: {fileID: 1512177271737316270}
   m_Layer: 5
   m_Name: ButtonYa
   m_TagString: Untagged
@@ -1575,7 +1574,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1512177271737316270}
+      - m_Target: {fileID: 8467566869822565143}
         m_TargetAssemblyTypeName: GamePage, Assembly-CSharp
         m_MethodName: ExitGame
         m_Mode: 1
@@ -1587,29 +1586,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &1512177271737316270
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1941031254458504766}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4925419698caf144b8ea00614d01de6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackBTN: {fileID: 0}
-  defenseBTN: {fileID: 0}
-  healBTN: {fileID: 0}
-  skillBTN: {fileID: 0}
-  closeBTN: {fileID: 0}
-  Card: {fileID: 0}
-  contentParent: {fileID: 0}
-  listEnemyPanel: {fileID: 0}
-  listSkillPanel: {fileID: 0}
-  winPanel: {fileID: 0}
-  losePanel: {fileID: 0}
 --- !u!1 &2149887648865664858
 GameObject:
   m_ObjectHideFlags: 0
