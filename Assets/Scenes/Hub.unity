@@ -565,6 +565,22 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 1129076882}
+    - target: {fileID: 1552878192788585002, guid: 9c1dc5763351f204eb0814933125cd6a, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 258.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 1552878192788585002, guid: 9c1dc5763351f204eb0814933125cd6a, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 217.3249
+      objectReference: {fileID: 0}
+    - target: {fileID: 1552878192788585002, guid: 9c1dc5763351f204eb0814933125cd6a, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.4099853
+      objectReference: {fileID: 0}
+    - target: {fileID: 1552878192788585002, guid: 9c1dc5763351f204eb0814933125cd6a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -1307.9624
+      objectReference: {fileID: 0}
     - target: {fileID: 1585794421231395740, guid: 9c1dc5763351f204eb0814933125cd6a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
@@ -637,6 +653,29 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1129076882}
+    - target: {fileID: 4375158456189361849, guid: 9c1dc5763351f204eb0814933125cd6a, type: 3}
+      propertyPath: m_Text
+      value: 'The One Almighty God, Allah SWT
+
+
+        Dosen Pembimbing I
+
+        Prilly
+        Fitria Aziz, S.Kom., M.Kom.
+
+        Yeni Nurhasanah, S.Pd.,M.T.
+
+        Yuyun
+        Khairunisa, M.Kom
+
+
+        Dosen Pembimbing II
+
+        Muhammad Sakir,
+        S.Pd., M.T.
+
+        Eka Desy asgawanti, S.S., M.Pd'
+      objectReference: {fileID: 0}
     - target: {fileID: 4425893368330268615, guid: 9c1dc5763351f204eb0814933125cd6a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
@@ -751,15 +790,15 @@ PrefabInstance:
       objectReference: {fileID: 1129076882}
     - target: {fileID: 8409700670180871163, guid: 9c1dc5763351f204eb0814933125cd6a, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8409700670180871163, guid: 9c1dc5763351f204eb0814933125cd6a, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8409700670180871163, guid: 9c1dc5763351f204eb0814933125cd6a, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: -17
       objectReference: {fileID: 0}
     - target: {fileID: 8567217932105446653, guid: 9c1dc5763351f204eb0814933125cd6a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
