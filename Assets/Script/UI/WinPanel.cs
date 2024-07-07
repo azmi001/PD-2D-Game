@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -46,18 +47,18 @@ public class WinPanel : MonoBehaviour
                 SceneManager.LoadScene("Hub");
             });
         }
-
-        for (int i = 0; i < lvTexts.Length; i++)
+        for (int i = 0; i < Funcs.GetAkun().teamHeroes.Count; i++)
         {
             try
             {
-                lvTexts[i].text = "Level : "+ Funcs.GetAllPlayerUnit()[i].character.charaData.unitLevel.ToString();
-                int targetExp = (int)Mathf.Pow(Funcs.GetAllPlayerUnit()[i].character.charaData.unitLevel / 0.09f, 1.6f);
+                CharacterData target = Array.Find(Funcs.GetAkun().OwnedHeroes.ToArray(), t => t.unitName == Funcs.GetAkun().teamHeroes[i]);
+                lvTexts[i].text = $"Level : {target.unitLevel}";
+                int targetExp = (int)Mathf.Pow(target.unitLevel / 0.09f, 1.3f);
                 expSliders[i].maxValue = targetExp;
-                expSliders[i].value = Funcs.GetAllPlayerUnit()[i].character.charaData.unitexp;
-                heroesIcon[i].sprite = Funcs.GetAllPlayerUnit()[i].character.HeroIcon;
+                expSliders[i].value = target.unitexp;
+                heroesIcon[i].sprite = Funcs.GetDatabaseSOCharacter().GetCharacter(target.unitName).HeroIcon;
             }
-            catch 
+            catch
             {
                 continue;
             }

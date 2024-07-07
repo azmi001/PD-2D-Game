@@ -43,6 +43,7 @@ public class CharacterData
         int targetExp = (int)Mathf.Pow(unitLevel / 0.09f, 1.3f);
         unitexp += amount;
         Debug.Log(amount + " Exp yg didapat");
+        Debug.Log(targetExp + " Next Exp yang didapat");
         while (unitexp > targetExp)
         {
             float expRemain = unitexp - targetExp;
