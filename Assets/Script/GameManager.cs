@@ -58,7 +58,6 @@ public class GameManager : MonoBehaviour
             akun.akunMoney = 0;
             foreach (var item in GetDatabaseSOCharacter().GetListCharacter())
             {
-                Debug.Log(item.charaData.Unlock);
                 if (item.charaData.Unlock)
                 {
                     akun.OwnedHeroes.Add(item.charaData);

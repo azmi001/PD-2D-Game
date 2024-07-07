@@ -46,4 +46,10 @@ public class PanelLobby : MonoBehaviour
 
         });
     }
+    public void ResetData()
+    {
+        JsonHelper.DeleteJSON("Akun");
+        PlayerPrefs.DeleteAll();
+        Application.Quit();
+    }
 }

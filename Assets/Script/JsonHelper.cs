@@ -80,7 +80,7 @@ public static class JsonHelper
 
     private static string GetPath(string filename)
     {
-        return Application.dataPath + "/" + filename + ".json";
+        return Application.persistentDataPath + "/" + filename + ".json";
     }
 
     private static void WriteFile(string path, string content)
