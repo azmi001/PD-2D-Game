@@ -39,6 +39,7 @@ public class CharacterData
     {
         int targetExp = (int)Mathf.Pow(unitLevel / 0.09f, 1.3f);
         unitexp += amount;
+        Debug.Log(amount + " Exp yg didapat");
         while (unitexp > targetExp)
         {
             float expRemain = unitexp - targetExp;
@@ -51,6 +52,8 @@ public class CharacterData
             Heal = maxHP * HealModifier;
 
             targetExp = (int)Mathf.Pow(unitLevel / 0.09f, 1.3f);
+            Debug.Log(targetExp + " Next Exp yang didapat");
+            Debug.Log(expRemain + " Sisa Exp yang didapat");
         }
     }
 }
