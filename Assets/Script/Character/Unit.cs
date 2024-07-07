@@ -65,6 +65,9 @@ public class Unit : MonoBehaviour
     //logika penyerangan
     public bool TakeDemage(float dmg, float def, ElementType attackerElement)
     {
+        //memutar sfx attack untuk player dan enemy
+        AudioManager.instance.Play("Attack");
+
         //Mendubug dmg awal
         Debug.Log("Demage Murni " + _character.charaData.unitName + "yang belum dicampur elemen " + dmg);
 
@@ -166,6 +169,8 @@ public class Unit : MonoBehaviour
             if(isdefup)
             {
                 GetComponentInChildren<Animator>().Play("Block");
+                //memutar sfx defense
+                AudioManager.instance.Play("Defense");
             }
             else
             {
@@ -203,6 +208,9 @@ public class Unit : MonoBehaviour
     //logika skill heal
     public void Heal(float amount)
     {
+        //memutar sfx heal
+        AudioManager.instance.Play("Heal");
+
         //mebuat logika variasi Heal 20% +- dari total finaldmg
         float varianHeal = amount * 20 / 100;
         float minVarianHeal = -varianHeal;
@@ -461,7 +469,7 @@ public class Unit : MonoBehaviour
                 TargetUnit.TakeDemage(_character.charaData.damage, TargetUnit._def, _character.thisUnitElement);
                 break;
             case CharacterState.HEAL:
-                Heal(character.charaData.Heal);//jumlah heal nya
+                Heal(character.charaData.Heal);//jumlah heal 
                 break;
             case CharacterState.DEFENSE:
                 DefUp(3);//jumlah heal yang dikali dari basestate

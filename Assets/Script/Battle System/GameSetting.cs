@@ -145,12 +145,14 @@ public partial class GameSetting : MonoBehaviour
     {
         currentUnitPlay.Heal(100);//jumlah Hp Heal Player
         Actions.OnUnitUsedAction?.Invoke(currentUnitPlay);
+        
     }
 
     private void DefenseUp()
     {
         currentUnitPlay.DefUp(3);//Jumlah def *X dikali brp
         Actions.OnUnitUsedAction?.Invoke(currentUnitPlay);
+        
     }
 
     private void PlayerAttack()
@@ -297,6 +299,7 @@ public partial class GameSetting : MonoBehaviour
                 winning = true;
                 Debug.Log("Won");
                 DialogText.text = "Player Win The Battle!";
+                AudioManager.instance.Play("Win");
                 Actions.onQuestFinish?.Invoke(FindObjectOfType<GameManager>().currentQuest);
                 await Task.Delay(2000);
                 Actions.OnResultBattle?.Invoke(true);
@@ -306,6 +309,7 @@ public partial class GameSetting : MonoBehaviour
                 if (loosing) return;
                 loosing = true;
                 Debug.Log("Lost");
+                AudioManager.instance.Play("Lose");
                 DialogText.text = "Enemy Win The Battle!";
                 await Task.Delay(2000);
                 Actions.OnResultBattle?.Invoke(false);

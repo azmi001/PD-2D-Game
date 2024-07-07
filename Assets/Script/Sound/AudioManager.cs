@@ -33,6 +33,7 @@ public class AudioManager : MonoBehaviour
             // If an instance already exists, destroy this one
             Destroy(gameObject);
         }
+        DontDestroyOnLoad(gameObject);
     }
 
     public void Play(string name)
@@ -67,6 +68,14 @@ public class AudioManager : MonoBehaviour
             return s.source.isPlaying;
         }
         return false;
+    }
+
+    public void StopAll()
+    {
+        foreach (var item in sounds)
+        {
+            item.source.Stop();
+        }
     }
 
     /*public void PlaySound(int clipIndex)
