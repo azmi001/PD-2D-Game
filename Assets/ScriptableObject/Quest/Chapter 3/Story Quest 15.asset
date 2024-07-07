@@ -18,7 +18,7 @@ MonoBehaviour:
   - {fileID: 3506219432552147847, guid: a20b4aa8226ab754596d690a1e996b5e, type: 3}
   - {fileID: 3506219432552147847, guid: a20b4aa8226ab754596d690a1e996b5e, type: 3}
   money: 500
-  heroesExpReward: 2880
+  heroesExpReward: 750
   staminaCost: 1
   bg: {fileID: 21300000, guid: ea7d3dfb2119c3146a12fd905971870a, type: 3}
   UnlockQuest: 0
