@@ -8,7 +8,6 @@ public partial class Character : ScriptableObject
     // atribute stast character
     [Header("Unit Stat")]
     public CharacterData charaData;
-    public bool Unlock;
 
     public Sprite HeroIcon;
     public Sprite heroIconFullBody;

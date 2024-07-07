@@ -33,7 +33,8 @@ public class CharacterSelection : MonoBehaviour
     {
         for (int i = 0; i < Funcs.GetDatabaseSOCharacter().GetListCharacter().Length; i++)
         {
-            if (Funcs.GetDatabaseSOCharacter().GetListCharacter()[i].Unlock)
+            CharacterData target = Array.Find(Funcs.GetAkun().OwnedHeroes.ToArray(), t => t.unitName == Funcs.GetDatabaseSOCharacter().GetListCharacter()[i].charaData.unitName);
+            if (target != null&&target.Unlock)
             {
                 GameObject go = Instantiate(CharacterPrefabs, ContentParrent);
                 go.GetComponentInChildren<TMP_Text>().text = Funcs.GetDatabaseSOCharacter().GetListCharacter()[i].charaData.unitName;

@@ -33,10 +33,15 @@ public partial class GameSetting : MonoBehaviour
     private bool playerTurnIsDone = false;
     private bool enemyTurnIsDone = true;
 
+    private bool winning = false;
+    private bool loosing = false;
+
     [SerializeField] private BattleState currentState = BattleState.PLAYERTRURN;
 
     private void Start()
     {
+        winning = false;
+        loosing = false;
         StartCoroutine(Init());
     }
     private void OnEnable()
@@ -268,6 +273,7 @@ public partial class GameSetting : MonoBehaviour
                         currentUnitPlay.DefDefault();
                     }
                 }
+                if (currentUnitPlay == null) return;
                 currentUnitPlay.transform.GetChild(0).GetComponentInChildren<SpriteRenderer>().color = Color.yellow;
                 DialogText.text = "Player Turn ! " + currentUnitPlay.character.charaData.unitName;
                 break;
@@ -287,6 +293,8 @@ public partial class GameSetting : MonoBehaviour
                 StartCoroutine(EnemyAttack());
                 break;
             case BattleState.WON:
+                if (winning) return;
+                winning = true;
                 Debug.Log("Won");
                 DialogText.text = "Player Win The Battle!";
                 Actions.onQuestFinis?.Invoke(FindObjectOfType<GameManager>().currentQuest);
@@ -295,6 +303,8 @@ public partial class GameSetting : MonoBehaviour
                 //SceneManager.LoadScene("Hub");
                 break;
             case BattleState.LOST:
+                if (loosing) return;
+                loosing = true;
                 Debug.Log("Lost");
                 DialogText.text = "Enemy Win The Battle!";
                 await Task.Delay(2000);

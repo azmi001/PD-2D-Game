@@ -19,12 +19,13 @@ public class CharacterData
     public float damage;
     public float maxHP;
     public float Heal;
+    public bool Unlock;
 
     public void Init()
     {
-        PlayerPrefs.SetString(unitName, unitName);
-        PlayerPrefs.SetInt("unitLevel", unitLevel);
-
+        //PlayerPrefs.SetString(unitName, unitName);
+        //PlayerPrefs.SetInt("unitLevel", unitLevel);
+        //PlayerPrefs.SetInt("unitUnlock", Unlock == true?1:0);
         maxHP = BaseHP + (unitLevel - 1) * GrowthRateHP;
         damage = (maxHP * BaseAttackModifier) / (ConstantAttack);
         deffense = damage * DeffenceModifier;
@@ -32,8 +33,10 @@ public class CharacterData
     }
     public void ResetData()
     {
-        unitName = PlayerPrefs.GetString(unitName, unitName);
-        unitLevel = PlayerPrefs.GetInt("unitLevel",1);
+        //unitName = PlayerPrefs.GetString(unitName, unitName);
+        //unitLevel = PlayerPrefs.GetInt("unitLevel",1);
+        //unitexp = 0;
+        //Unlock = PlayerPrefs.GetInt("unitUnlock")==1?true:false;
     }
     public void AddExp(float amount)
     {

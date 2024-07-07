@@ -33,7 +33,8 @@ public class Akun
     }
     public void AddHeroes(string heroName)
     {
-        CharacterData target = Funcs.GetDatabaseSOCharacter().GetCharacter(heroName).charaData;
+        Character temp = ScriptableObject.Instantiate(Funcs.GetDatabaseSOCharacter().GetCharacter(heroName));
+        CharacterData target = temp.charaData;
         Debug.Log(target == null);
         if (target != null)
         {
@@ -41,6 +42,7 @@ public class Akun
             if (checkOwn == null)
             {
                 Debug.Log("Character Ditambahkan");
+                target.Unlock = true;
                 OwnedHeroes.Add(target);
             }
             else

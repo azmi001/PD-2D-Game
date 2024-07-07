@@ -58,7 +58,8 @@ public class GameManager : MonoBehaviour
             akun.akunMoney = 0;
             foreach (var item in GetDatabaseSOCharacter().GetListCharacter())
             {
-                if (item.Unlock)
+                Debug.Log(item.charaData.Unlock);
+                if (item.charaData.Unlock)
                 {
                     akun.OwnedHeroes.Add(item.charaData);
                 }
@@ -73,7 +74,8 @@ public class GameManager : MonoBehaviour
         foreach (var item in akun.OwnedHeroes)
         {
             item.Init();
-            Character target = Array.Find(Funcs.GetDatabaseSOCharacter().GetListCharacter(), t => t.charaData.unitName == item.unitName);
+            Character target = ScriptableObject.Instantiate(Funcs.GetDatabaseSOCharacter().GetCharacter(item.unitName));
+            target.charaData = item;
             if (target == null) return;
             target.LoadData(item);
         }
