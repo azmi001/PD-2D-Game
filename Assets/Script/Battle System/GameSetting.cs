@@ -117,7 +117,7 @@ public partial class GameSetting : MonoBehaviour
         DialogText.text = "The Battle Begin";
         yield return new WaitForSeconds(1f);
         currentUnitPlay.transform.GetChild(0).GetComponentInChildren<SpriteRenderer>().color = Color.yellow;
-        DialogText.text = "Player Turn ! " + currentUnitPlay.character.charaData.unitName;
+        DialogText.text = "Player Turn ! " + currentUnitPlay._character.charaData.unitName;
     }
     #region funcs
     private List<Unit> GetAllEnemy()
@@ -251,7 +251,7 @@ public partial class GameSetting : MonoBehaviour
     private void OnTargetedUnit(Unit target)
     {
         currentUnitPlay.GetComponentInChildren<Animator>().Play("Attack");
-        target.TakeDemage(currentUnitPlay.character.charaData.damage, target._def, currentUnitPlay.character.thisUnitElement);
+        target.TakeDemage(currentUnitPlay._character.charaData.damage, target._def, currentUnitPlay._character.thisUnitElement);
         Actions.OnUnitUsedAction?.Invoke(Funcs.GetCurrentUnitPlay());
         Actions.OnTargetedUnit -= OnTargetedUnit;
     }
@@ -277,12 +277,12 @@ public partial class GameSetting : MonoBehaviour
                 }
                 if (currentUnitPlay == null) return;
                 currentUnitPlay.transform.GetChild(0).GetComponentInChildren<SpriteRenderer>().color = Color.yellow;
-                DialogText.text = "Player Turn ! " + currentUnitPlay.character.charaData.unitName;
+                DialogText.text = "Player Turn ! " + currentUnitPlay._character.charaData.unitName;
                 break;
             case BattleState.ENEMYTURN:
                 currentUnitPlay = enemyUnit[enemyIndex];
                 Actions.IsDisableAllButton?.Invoke(true);
-                DialogText.text = "Enemy Turn ! " + currentUnitPlay.character.charaData.unitName;
+                DialogText.text = "Enemy Turn ! " + currentUnitPlay._character.charaData.unitName;
                 currentUnitPlay.transform.GetChild(0).GetComponentInChildren<SpriteRenderer>().color = Color.yellow;
                 currentUnitPlay.CurrentTurn++;
                 if (currentUnitPlay.CurrentTurn > currentUnitPlay.LastTurn)

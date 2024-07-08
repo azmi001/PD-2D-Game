@@ -28,7 +28,7 @@ public class Unit : MonoBehaviour
     //Merenfrensikan dari scriptable object Character untuk mengambil data stat character
     [Header("Data Character")]
     public Character character;
-    private Character _character;
+    public Character _character;
     public float _def;
 
     [Header("List Skill Character")]
@@ -48,8 +48,13 @@ public class Unit : MonoBehaviour
     public void Start()
     {
         _character = ScriptableObject.Instantiate(character);
-        if(actorType == ACTORTYPE.PLAYER)
+        Debug.Log(_character.charaData.damage);
+        if (actorType == ACTORTYPE.PLAYER)
+        {
             _character.charaData = Array.Find(Funcs.GetAkun().OwnedHeroes.ToArray(), t => t.unitName == _character.charaData.unitName);
+            Debug.Log(_character.charaData.damage);
+
+        }
         InitializedData();
         SetHud();
     }
@@ -469,7 +474,7 @@ public class Unit : MonoBehaviour
                 TargetUnit.TakeDemage(_character.charaData.damage, TargetUnit._def, _character.thisUnitElement);
                 break;
             case CharacterState.HEAL:
-                Heal(character.charaData.Heal);//jumlah heal 
+                Heal(_character.charaData.Heal);//jumlah heal 
                 break;
             case CharacterState.DEFENSE:
                 DefUp(3);//jumlah heal yang dikali dari basestate
