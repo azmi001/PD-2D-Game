@@ -264,11 +264,21 @@ public partial class GameSetting : MonoBehaviour
             case BattleState.START:
                 break;
             case BattleState.PLAYERTRURN:
+                //mengaktifkan seluruh button yang ada pada game
+                //
                 Actions.IsDisableAllButton?.Invoke(false);
+                // memberikan fungsi pada setiap button action seperti attack,heal,dll
+                //
                 Actions.AddListenerToGameButton?.Invoke(PlayerAttack, DefenseUp, HealUp, OpenSkill);
+                //aktor yang bermain sekarang berganti ke karakter player sesuai urutan index.
+                //
                 currentUnitPlay = playerUnit[playerIndex];
+                //menambahkan turn pada unit yang berjalan sekarang
+                //
                 currentUnitPlay.CurrentTurn++;
-                if (currentUnitPlay.CurrentTurn> currentUnitPlay.LastTurn)
+                // pemberian if statement jika turn sekarang lebih tinggi dari last turn dan jika karakter sedang defense up, maka defense dikembalikan ke normal
+                //
+                if (currentUnitPlay.CurrentTurn> currentUnitPlay.LastTurn) 
                 {
                     if(currentUnitPlay.isdefup == true)
                     {
@@ -276,15 +286,31 @@ public partial class GameSetting : MonoBehaviour
                     }
                 }
                 if (currentUnitPlay == null) return;
+                //karakter yang berjalan akan mempunyai highlight kuning
+                //
                 currentUnitPlay.transform.GetChild(0).GetComponentInChildren<SpriteRenderer>().color = Color.yellow;
+                //mengganti dialog teks yang sesuai dibutuhkan
+                //
                 DialogText.text = "Player Turn ! " + currentUnitPlay._character.charaData.unitName;
                 break;
             case BattleState.ENEMYTURN:
+                //aktor yang bermain sekarang berganti ke karakter enemy sesuai urutan index.
+                //
                 currentUnitPlay = enemyUnit[enemyIndex];
+                //menonaktifkan seluruh button yang ada pada game
+                //
                 Actions.IsDisableAllButton?.Invoke(true);
+                //mengganti dialog teks yang sesuai dibutuhkan
+                //
                 DialogText.text = "Enemy Turn ! " + currentUnitPlay._character.charaData.unitName;
+                //karakter yang berjalan akan mempunyai highlight kuning
+                //
                 currentUnitPlay.transform.GetChild(0).GetComponentInChildren<SpriteRenderer>().color = Color.yellow;
+                // pemberian if statement jika turn sekarang lebih tinggi dari last turn dan jika karakter sedang defense up, maka defense dikembalikan ke normal
+                //
                 currentUnitPlay.CurrentTurn++;
+                // pemberian if statement jika turn sekarang lebih tinggi dari last turn dan jika karakter sedang defense up, maka defense dikembalikan ke normal
+                //
                 if (currentUnitPlay.CurrentTurn > currentUnitPlay.LastTurn)
                 {
                     if (currentUnitPlay.isdefup == true)
@@ -292,40 +318,72 @@ public partial class GameSetting : MonoBehaviour
                         currentUnitPlay.DefDefault();
                     }
                 }
+                //menjalankan aksi enemy secara otomatis dengan menjalankan korotin
+                //
                 StartCoroutine(EnemyAttack());
                 break;
             case BattleState.WON:
+                //jika fungsi wining sudah dipanggil maka tidak akan berjalan lagi
+                //
                 if (winning) return;
+                //jike belum maka wining = benar
+                //
                 winning = true;
                 Debug.Log("Won");
+                //mengganti dialog teks yang sesuai dibutuhkan
+                //
                 DialogText.text = "Player Win The Battle!";
+                //menyalakan musik kemenangan
+                //
                 AudioManager.instance.Play("Win");
+                //Memberikan sinyal OnQuestFinish agar QuestManager menangkap sinyal tersebut lalu menjalankan perintah sesuai dengan sinyal tersebut
+                //
                 Actions.onQuestFinish?.Invoke(FindObjectOfType<GameManager>().currentQuest);
+                //mendelay game selama 2 detik
+                //
                 await Task.Delay(2000);
+                //memberikan sinyal OnResultBattle dengan parameter boolean yang dimana jika true maka result battle = win
+                //
                 Actions.OnResultBattle?.Invoke(true);
-                //SceneManager.LoadScene("Hub");
                 break;
             case BattleState.LOST:
+                //jika fungsi loosing sudah dipanggil maka tidak akan berjalan lagi
+                //
                 if (loosing) return;
+                //jike belum maka wining = benar
+                //
                 loosing = true;
                 Debug.Log("Lost");
+                //menyalakan musik kekalahan
+                //
                 AudioManager.instance.Play("Lose");
+                //mengganti dialog teks yang sesuai dibutuhkan
+                //
                 DialogText.text = "Enemy Win The Battle!";
+                //mendelay game selama 2 detik
+                //
                 await Task.Delay(2000);
+                //memberikan sinyal OnResultBattle dengan parameter boolean yang dimana jika false maka result battle = lose
+                //
                 Actions.OnResultBattle?.Invoke(false);
-                //SceneManager.LoadScene("Hub");
                 break;
             case BattleState.CHECK:
+                //if statement jika semua enemy unit habis maka state diubah ke win
+                //
                 if (enemyUnit == null || enemyUnit.Count <= 0)
                 {
                     ChangeState(BattleState.WON);
                     return;
                 }
-                if(playerUnit == null || playerUnit.Count <= 0)
+                //if statement jika semua player unit habis maka state diubah ke lose
+                //
+                if (playerUnit == null || playerUnit.Count <= 0)
                 {
                     ChangeState(BattleState.LOST);
                     return;
                 }
+                //if statement jika semua player sudah berjalan maka pindah ke enemy turn
+                //
                 if (playerTurnIsDone && !enemyTurnIsDone)
                 {
                     if (enemyIndex >= enemyUnit.Count)
@@ -340,7 +398,9 @@ public partial class GameSetting : MonoBehaviour
                         ChangeState(BattleState.ENEMYTURN);
                     }
                 }
-                if(!playerTurnIsDone && enemyTurnIsDone)
+                //if statement jika semua enemy sudah berjalan maka pindah ke player turn
+                //
+                if (!playerTurnIsDone && enemyTurnIsDone)
                 {
                     if (playerIndex >= playerUnit.Count)
                     {
@@ -353,7 +413,6 @@ public partial class GameSetting : MonoBehaviour
                     {
                         ChangeState(BattleState.PLAYERTRURN);
                     }
-                    break;
                 }
                 break;
             default:
