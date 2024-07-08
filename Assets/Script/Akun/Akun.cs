@@ -50,6 +50,7 @@ public class Akun
             }
 
         }
+        target.Init();
         JsonHelper.SaveToJSON(this, "Akun");
     }
     public void RemoveHeroFromTeam(string character)
