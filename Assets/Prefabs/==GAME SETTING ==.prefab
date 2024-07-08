@@ -44,14 +44,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07d346965d231164bacf3f3b7d42cc21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab:
-  - {fileID: 864842667368195608, guid: 4ca41759f65344b448753b8ff4d3c93b, type: 3}
-  - {fileID: 864842667368195608, guid: 6cff672497d19d040a8bc888b102ec61, type: 3}
-  - {fileID: 3506219432552147847, guid: f4a1efa82c03e824292153ab00860524, type: 3}
   playerPos: {fileID: 0}
   enemyPos: {fileID: 0}
   playerUnit: []
   enemyUnit: []
   currentUnitPlay: {fileID: 0}
   DialogText: {fileID: 0}
+  bg: {fileID: 0}
+  attackPosition: {x: -0.2, y: 0.12, z: 0.04632888}
   currentState: 1

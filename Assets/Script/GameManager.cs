@@ -49,6 +49,7 @@ public class GameManager : MonoBehaviour
 
         //load akun
         akun = JsonHelper.ReadFromJSON<Akun>("Akun");
+        //Save data
         if (akun == null)
         {
             akun = new Akun();

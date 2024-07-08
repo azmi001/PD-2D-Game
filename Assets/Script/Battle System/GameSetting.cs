@@ -36,6 +36,9 @@ public partial class GameSetting : MonoBehaviour
     private bool winning = false;
     private bool loosing = false;
 
+    private Vector3 defaultPosition;
+    public Vector3 attackPosition;
+
     [SerializeField] private BattleState currentState = BattleState.PLAYERTRURN;
 
     private void Start()
@@ -248,9 +251,13 @@ public partial class GameSetting : MonoBehaviour
         ChangeState(BattleState.CHECK);
     }
 
+    //attack player
+
     private void OnTargetedUnit(Unit target)
     {
         currentUnitPlay.GetComponentInChildren<Animator>().Play("Attack");
+        defaultPosition = gameObject.transform.position;
+        transform.position = attackPosition;
         target.TakeDemage(currentUnitPlay.character.charaData.damage, target._def, currentUnitPlay.character.thisUnitElement);
         Actions.OnUnitUsedAction?.Invoke(Funcs.GetCurrentUnitPlay());
         Actions.OnTargetedUnit -= OnTargetedUnit;
@@ -268,6 +275,9 @@ public partial class GameSetting : MonoBehaviour
                 Actions.AddListenerToGameButton?.Invoke(PlayerAttack, DefenseUp, HealUp, OpenSkill);
                 currentUnitPlay = playerUnit[playerIndex];
                 currentUnitPlay.CurrentTurn++;
+
+                transform.position = defaultPosition;
+                
                 if (currentUnitPlay.CurrentTurn> currentUnitPlay.LastTurn)
                 {
                     if(currentUnitPlay.isdefup == true)

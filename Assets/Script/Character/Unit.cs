@@ -43,6 +43,9 @@ public class Unit : MonoBehaviour
 
     public CharacterState characterState;
 
+    private Vector3 defaultPosition;
+    public Vector3 attackPosition;
+
     //inisialisasi awal darah
 
     public void Start()
@@ -306,10 +309,13 @@ public class Unit : MonoBehaviour
         {
             case CharacterState.IDLE:
                 GetComponentInChildren<Animator>().Play("Idle");// Memutar Animasi Idle
+                transform.position = defaultPosition;
 
                 break;
             case CharacterState.ATTACK:
                 GetComponentInChildren<Animator>().Play("Attack");// Memutar Animasi Attack
+                defaultPosition = gameObject.transform.position;
+                transform.position = attackPosition;
                 Unit TargetUnit = new Unit();
 
                 //FSM logic Element Attact Target
