@@ -23,27 +23,15 @@ public class CharacterData
 
     public void Init()
     {
-        //PlayerPrefs.SetString(unitName, unitName);
-        //PlayerPrefs.SetInt("unitLevel", unitLevel);
-        //PlayerPrefs.SetInt("unitUnlock", Unlock == true?1:0);
         maxHP = BaseHP + (unitLevel - 1) * GrowthRateHP;
         damage = (maxHP * BaseAttackModifier) / (ConstantAttack);
         deffense = damage * DeffenceModifier;
         Heal = maxHP * HealModifier;
     }
-    public void ResetData()
-    {
-        //unitName = PlayerPrefs.GetString(unitName, unitName);
-        //unitLevel = PlayerPrefs.GetInt("unitLevel",1);
-        //unitexp = 0;
-        //Unlock = PlayerPrefs.GetInt("unitUnlock")==1?true:false;
-    }
     public void AddExp(float amount)
     {
         int targetExp = (int)Mathf.Pow(unitLevel / 0.09f, 1.3f);
         unitexp += amount;
-        Debug.Log(amount + " Exp yg didapat");
-        Debug.Log(targetExp + " Next Exp yang didapat");
         while (unitexp > targetExp)
         {
             float expRemain = unitexp - targetExp;
@@ -56,8 +44,6 @@ public class CharacterData
             Heal = maxHP * HealModifier;
 
             targetExp = (int)Mathf.Pow(unitLevel / 0.09f, 1.3f);
-            Debug.Log(targetExp + " Next Exp yang didapat");
-            Debug.Log(expRemain + " Sisa Exp yang didapat");
         }
     }
 }

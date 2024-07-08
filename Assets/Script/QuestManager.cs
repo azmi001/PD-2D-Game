@@ -69,7 +69,6 @@ public class QuestManager : MonoBehaviour
                     Funcs.GetAkun().AddHeroes(item.rewardName);
                     break;
                 case QuestReward.RewardType.Currencies:
-                    Debug.Log("budi");
                     Funcs.GetAkun().AddHeroesExp((float)quest.heroesExpReward);
                     break;
                 default:

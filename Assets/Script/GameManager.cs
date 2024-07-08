@@ -99,11 +99,6 @@ public class GameManager : MonoBehaviour
         Funcs.GetDatabaseUnit -= GetDatabaseUnit;
         Funcs.GetCurrentQuest -= GetCurrentQuest;
         Funcs.GetCountdownStamina -= GetCountdownStamina;
-
-        foreach (var item in akun.OwnedHeroes)
-        {
-            item.ResetData();
-        }
     }
 
     private DateTime GetCountdownStamina()
