@@ -248,12 +248,25 @@ public partial class GameSetting : MonoBehaviour
         ChangeState(BattleState.CHECK);
     }
 
-    private void OnTargetedUnit(Unit target)
+    private async void OnTargetedUnit(Unit target)
     {
+        Transform firstParent = currentUnitPlay.transform.parent;
         currentUnitPlay.GetComponentInChildren<Animator>().Play("Attack");
+        currentUnitPlay.transform.SetParent(target.opponentPos,false);
         target.TakeDemage(currentUnitPlay._character.charaData.damage, target._def, currentUnitPlay._character.thisUnitElement);
+        await WaitForAnimation(currentUnitPlay.GetComponentInChildren<Animator>());
+        currentUnitPlay.transform.SetParent(firstParent, false);
         Actions.OnUnitUsedAction?.Invoke(Funcs.GetCurrentUnitPlay());
         Actions.OnTargetedUnit -= OnTargetedUnit;
+    }
+
+    private async Task WaitForAnimation(Animator anim)
+    {
+        // Mendapatkan panjang animasi dari clip yang sedang dimainkan
+        float animationLength = anim.GetCurrentAnimatorStateInfo(0).length;
+
+        // Tunggu sesuai panjang animasi
+        await Task.Delay((int)(animationLength * 1000));
     }
 
     public async void ChangeState(BattleState newState)

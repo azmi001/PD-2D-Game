@@ -43,17 +43,24 @@ public class Unit : MonoBehaviour
 
     public CharacterState characterState;
 
+    public Transform opponentPos;
+
     //inisialisasi awal darah
 
     public void Start()
     {
         _character = ScriptableObject.Instantiate(character);
         Debug.Log(_character.charaData.damage);
-        if (actorType == ACTORTYPE.PLAYER)
+        switch (actorType)
         {
-            _character.charaData = Array.Find(Funcs.GetAkun().OwnedHeroes.ToArray(), t => t.unitName == _character.charaData.unitName);
-            Debug.Log(_character.charaData.damage);
-
+            case ACTORTYPE.PLAYER:
+                _character.charaData = Array.Find(Funcs.GetAkun().OwnedHeroes.ToArray(), t => t.unitName == _character.charaData.unitName);
+                break;
+            case ACTORTYPE.ENEMY:
+                opponentPos.localPosition = new Vector3(-1.35f, 0, 0);
+                break;
+            default:
+                break;
         }
         InitializedData();
         SetHud();

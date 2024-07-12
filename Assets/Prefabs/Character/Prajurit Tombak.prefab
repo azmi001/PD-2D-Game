@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2756611222101195641
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7733076609202549546}
+  m_Layer: 0
+  m_Name: OpponentPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7733076609202549546
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2756611222101195641}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.35, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3506219432552147846}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2982316210023296112
 GameObject:
   m_ObjectHideFlags: 0
@@ -138,6 +169,7 @@ Transform:
   m_Children:
   - {fileID: 4893610873688226304}
   - {fileID: 4119687695758585045}
+  - {fileID: 7733076609202549546}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3506219432552147845
@@ -160,6 +192,7 @@ MonoBehaviour:
   expToLvUp: 0
   currentLv: 0
   character: {fileID: 11400000, guid: 38d33d71c6a13e1468bc71a09489c5a3, type: 2}
+  _character: {fileID: 0}
   _def: 0
   skillList: []
   isdefup: 0
@@ -167,6 +200,7 @@ MonoBehaviour:
   CurrentTurn: 0
   actorType: 0
   characterState: 0
+  opponentPos: {fileID: 7733076609202549546}
 --- !u!1001 &4085133415004276905
 PrefabInstance:
   m_ObjectHideFlags: 0
