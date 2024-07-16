@@ -253,10 +253,12 @@ public partial class GameSetting : MonoBehaviour
         Transform firstParent = currentUnitPlay.transform.parent;
         currentUnitPlay.GetComponentInChildren<Animator>().Play("Attack");
         currentUnitPlay.transform.SetParent(target.opponentPos,false);
+        Actions.IsDisableAllButton?.Invoke(true);
         target.TakeDemage(currentUnitPlay._character.charaData.damage, target._def, currentUnitPlay._character.thisUnitElement);
         await WaitForAnimation(currentUnitPlay.GetComponentInChildren<Animator>());
         currentUnitPlay.transform.SetParent(firstParent, false);
         Actions.OnUnitUsedAction?.Invoke(Funcs.GetCurrentUnitPlay());
+        Actions.IsDisableAllButton?.Invoke(false);
         Actions.OnTargetedUnit -= OnTargetedUnit;
     }
 
