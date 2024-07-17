@@ -85,21 +85,21 @@ public class Unit : MonoBehaviour
         {
             case ElementType.Fire:
                 if (attackerElement == ElementType.Leaf)
-                    actualDamage *= -1; // Double damage
+                    actualDamage *= -1; // Demage berkurang
                 else if (attackerElement == ElementType.Water)
-                    actualDamage *= 1; // Half damage
+                    actualDamage *= 1; // Demage bertambah
                 break;
             case ElementType.Leaf:
                 if (attackerElement == ElementType.Water)
-                    actualDamage *= -1; // Double damage
+                    actualDamage *= -1; // Demage berkurang
                 else if (attackerElement == ElementType.Fire)
-                    actualDamage *= 1; // Half damage
+                    actualDamage *= 1; // Demage bertambah
                 break;
             case ElementType.Water:
                 if (attackerElement == ElementType.Fire)
-                    actualDamage *= -1; // Double damage
+                    actualDamage *= -1; // Demage berkurang
                 else if (attackerElement == ElementType.Leaf)
-                    actualDamage *= 1; // Half damage
+                    actualDamage *= 1; // Demage bertambah
                 break;
         }
 
