@@ -77,6 +77,7 @@ public class GamePage : MonoBehaviour
     }
     private void OpenListUnit(List<Unit>listunitTarget)
     {
+        if (listEnemyPanel.activeInHierarchy) return;
         ACTORTYPE actorType = listunitTarget[0].actorType;
         Debug.Log(actorType);
         listEnemyPanel.SetActive(true);

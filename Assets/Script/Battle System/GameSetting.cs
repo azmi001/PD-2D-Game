@@ -158,6 +158,7 @@ public partial class GameSetting : MonoBehaviour
     private void PlayerAttack()
     {
         Actions.OpenListUnit?.Invoke(enemyUnit);
+        Actions.OnTargetedUnit -= OnTargetedUnit;
         Actions.OnTargetedUnit += OnTargetedUnit;
     }
 
@@ -286,9 +287,6 @@ public partial class GameSetting : MonoBehaviour
                 //mengaktifkan seluruh button yang ada pada game
                 //
                 Actions.IsDisableAllButton?.Invoke(false);
-                // memberikan fungsi pada setiap button action seperti attack,heal,dll
-                //
-                Actions.AddListenerToGameButton?.Invoke(PlayerAttack, DefenseUp, HealUp, OpenSkill);
                 //aktor yang bermain sekarang berganti ke karakter player sesuai urutan index.
                 //
                 currentUnitPlay = playerUnit[playerIndex];

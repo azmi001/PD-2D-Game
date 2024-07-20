@@ -149,7 +149,7 @@ public class Unit : MonoBehaviour
         Debug.Log(_character.charaData.unitName + "Sebelum pake variasi deff" + def1);
         def1 = def1 + resultDef;
         Debug.Log(_character.charaData.unitName + "Hasil dari def 1 + Variasi" + def1);
-
+        Debug.LogWarning(finalDmg1);
         //menbuat logika jika dmg nya minus gak akan menambah darah target yang diserang
         //dan dmg yang diterima adalah 0
         if (def1 >= finalDmg1)
