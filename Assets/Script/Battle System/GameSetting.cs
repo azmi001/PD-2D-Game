@@ -248,20 +248,24 @@ public partial class GameSetting : MonoBehaviour
         ChangeState(BattleState.CHECK);
     }
 
-    private async void OnTargetedUnit(Unit target)
+    private void OnTargetedUnit(Unit target)
     {
-        Transform firstParent = currentUnitPlay.transform.parent;
+        StartCoroutine(OnTargetedUnitCoroutine(target));
+    }
+
+    IEnumerator OnTargetedUnitCoroutine(Unit target)
+    {
         currentUnitPlay.GetComponentInChildren<Animator>().Play("Attack");
-        currentUnitPlay.transform.SetParent(target.opponentPos,false);
+        currentUnitPlay.transform.position = target.opponentPos.position;
         Actions.IsDisableAllButton?.Invoke(true);
         target.TakeDemage(currentUnitPlay._character.charaData.damage, target._def, currentUnitPlay._character.thisUnitElement);
-        await WaitForAnimation(currentUnitPlay.GetComponentInChildren<Animator>());
-        currentUnitPlay.transform.SetParent(firstParent, false);
+        float animLength = currentUnitPlay.GetComponentInChildren<Animator>().GetCurrentAnimatorStateInfo(0).length;
+        yield return new WaitForSeconds(animLength);
+        currentUnitPlay.transform.localPosition = Vector3.zero;
         Actions.OnUnitUsedAction?.Invoke(Funcs.GetCurrentUnitPlay());
         Actions.IsDisableAllButton?.Invoke(false);
         Actions.OnTargetedUnit -= OnTargetedUnit;
     }
-
     private async Task WaitForAnimation(Animator anim)
     {
         // Mendapatkan panjang animasi dari clip yang sedang dimainkan
