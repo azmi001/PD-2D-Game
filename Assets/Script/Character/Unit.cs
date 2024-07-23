@@ -302,7 +302,7 @@ public class Unit : MonoBehaviour
 
     }
 
-    public void ChangeStateEnemy(CharacterState state)
+    public async void ChangeStateEnemy(CharacterState state)
     {
         characterState = state;
 
@@ -479,6 +479,9 @@ public class Unit : MonoBehaviour
                         break;
                 }
                 TargetUnit.TakeDemage(_character.charaData.damage, TargetUnit._def, _character.thisUnitElement);
+                transform.position = TargetUnit.transform.position;
+                await WaitForAnimation(GetComponentInChildren<Animator>());
+                transform.localPosition = Vector3.zero;
                 break;
             case CharacterState.HEAL:
                 Heal(_character.charaData.Heal);//jumlah heal 
@@ -488,8 +491,17 @@ public class Unit : MonoBehaviour
                 break;
         }
     }
+    private async Task WaitForAnimation(Animator anim)
+    {
+        // Mendapatkan panjang animasi dari clip yang sedang dimainkan
+        float animationLength = anim.GetCurrentAnimatorStateInfo(0).length;
+
+        // Tunggu sesuai panjang animasi
+        await Task.Delay((int)(animationLength * 1000));
+    }
+
 }
-    public enum ACTORTYPE
+public enum ACTORTYPE
 {
     PLAYER,
     ENEMY
