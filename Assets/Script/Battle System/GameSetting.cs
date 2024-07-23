@@ -264,7 +264,6 @@ public partial class GameSetting : MonoBehaviour
         yield return new WaitForSeconds(animLength);
         currentUnitPlay.transform.localPosition = Vector3.zero;
         Actions.OnUnitUsedAction?.Invoke(Funcs.GetCurrentUnitPlay());
-        Actions.IsDisableAllButton?.Invoke(false);
         Actions.OnTargetedUnit -= OnTargetedUnit;
     }
     private async Task WaitForAnimation(Animator anim)
