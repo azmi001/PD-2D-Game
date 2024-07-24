@@ -106,6 +106,37 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &3113369470756754950
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7522200308447698338}
+  m_Layer: 0
+  m_Name: OpponentPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7522200308447698338
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3113369470756754950}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.35, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3506219432552147846}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3506219432552147847
 GameObject:
   m_ObjectHideFlags: 0
@@ -136,6 +167,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 7522200308447698338}
   - {fileID: 4893610873688226304}
   - {fileID: 4119687695758585045}
   m_Father: {fileID: 0}
@@ -160,6 +192,7 @@ MonoBehaviour:
   expToLvUp: 0
   currentLv: 0
   character: {fileID: 11400000, guid: 56276cea45d219c4fb2c99661eafab34, type: 2}
+  _character: {fileID: 0}
   _def: 0
   skillList: []
   isdefup: 0
@@ -167,6 +200,7 @@ MonoBehaviour:
   CurrentTurn: 0
   actorType: 0
   characterState: 0
+  opponentPos: {fileID: 7522200308447698338}
 --- !u!1001 &4085133415004276905
 PrefabInstance:
   m_ObjectHideFlags: 0

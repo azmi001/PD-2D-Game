@@ -32,6 +32,7 @@ Transform:
   m_Children:
   - {fileID: 8403372955914676989}
   - {fileID: 6107899016566725165}
+  - {fileID: 6639641220891598809}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &864842667368195610
@@ -54,9 +55,46 @@ MonoBehaviour:
   expToLvUp: 0
   currentLv: 0
   character: {fileID: 11400000, guid: a145b0104c626724f988b654cb1a7c36, type: 2}
+  _character: {fileID: 0}
   _def: 0
   skillList: []
+  isdefup: 0
+  LastTurn: 0
+  CurrentTurn: 0
   actorType: 0
+  characterState: 0
+  opponentPos: {fileID: 6639641220891598809}
+--- !u!1 &6355828751063005212
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6639641220891598809}
+  m_Layer: 0
+  m_Name: OpponentPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6639641220891598809
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6355828751063005212}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.35, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 864842667368195609}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8890152910749936478
 GameObject:
   m_ObjectHideFlags: 0

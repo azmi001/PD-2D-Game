@@ -88,8 +88,8 @@ public partial class GameSetting : MonoBehaviour
             {
                 Unit hero = Funcs.GetDatabaseUnit?.Invoke().GetUnit(Funcs.GetAkun().teamHeroes[i]);
                 GameObject go = Instantiate(hero.gameObject, playerPos.GetChild(i));
-                go.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = i;
-                go.transform.GetChild(1).GetComponent<Canvas>().sortingOrder = i;
+                go.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = i+1;
+                go.transform.GetChild(1).GetComponent<Canvas>().sortingOrder = i+1;
                 go.GetComponent<Unit>().actorType = ACTORTYPE.PLAYER;
                 playerUnit.Add(go.GetComponent<Unit>());
 
@@ -151,6 +151,7 @@ public partial class GameSetting : MonoBehaviour
     private void DefenseUp()
     {
         currentUnitPlay.DefUp(3);//Jumlah def *X dikali brp
+        VFXManager.instance.EffetDef(currentUnitPlay.transform.position);
         Actions.OnUnitUsedAction?.Invoke(currentUnitPlay);
         
     }
@@ -158,6 +159,7 @@ public partial class GameSetting : MonoBehaviour
     private void PlayerAttack()
     {
         Actions.OpenListUnit?.Invoke(enemyUnit);
+        Actions.OnTargetedUnit -= OnTargetedUnit;
         Actions.OnTargetedUnit += OnTargetedUnit;
     }
 
@@ -250,10 +252,29 @@ public partial class GameSetting : MonoBehaviour
 
     private void OnTargetedUnit(Unit target)
     {
+        StartCoroutine(OnTargetedUnitCoroutine(target));
+    }
+
+    IEnumerator OnTargetedUnitCoroutine(Unit target)
+    {
         currentUnitPlay.GetComponentInChildren<Animator>().Play("Attack");
+        currentUnitPlay.transform.position = target.opponentPos.position;
+        VFXManager.instance.EffetPuch(target.transform.position);// vfx keserang
+        Actions.IsDisableAllButton?.Invoke(true);
         target.TakeDemage(currentUnitPlay._character.charaData.damage, target._def, currentUnitPlay._character.thisUnitElement);
+        float animLength = currentUnitPlay.GetComponentInChildren<Animator>().GetCurrentAnimatorStateInfo(0).length;
+        yield return new WaitForSeconds(animLength);
+        currentUnitPlay.transform.localPosition = Vector3.zero;
         Actions.OnUnitUsedAction?.Invoke(Funcs.GetCurrentUnitPlay());
         Actions.OnTargetedUnit -= OnTargetedUnit;
+    }
+    private async Task WaitForAnimation(Animator anim)
+    {
+        // Mendapatkan panjang animasi dari clip yang sedang dimainkan
+        float animationLength = anim.GetCurrentAnimatorStateInfo(0).length;
+
+        // Tunggu sesuai panjang animasi
+        await Task.Delay((int)(animationLength * 1000));
     }
 
     public async void ChangeState(BattleState newState)

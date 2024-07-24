@@ -43,17 +43,24 @@ public class Unit : MonoBehaviour
 
     public CharacterState characterState;
 
+    public Transform opponentPos;
+
     //inisialisasi awal darah
 
     public void Start()
     {
         _character = ScriptableObject.Instantiate(character);
         Debug.Log(_character.charaData.damage);
-        if (actorType == ACTORTYPE.PLAYER)
+        switch (actorType)
         {
-            _character.charaData = Array.Find(Funcs.GetAkun().OwnedHeroes.ToArray(), t => t.unitName == _character.charaData.unitName);
-            Debug.Log(_character.charaData.damage);
-
+            case ACTORTYPE.PLAYER:
+                _character.charaData = Array.Find(Funcs.GetAkun().OwnedHeroes.ToArray(), t => t.unitName == _character.charaData.unitName);
+                break;
+            case ACTORTYPE.ENEMY:
+                opponentPos.localPosition = new Vector3(-1.15f, 0, 0);
+                break;
+            default:
+                break;
         }
         InitializedData();
         SetHud();
@@ -142,7 +149,7 @@ public class Unit : MonoBehaviour
         Debug.Log(_character.charaData.unitName + "Sebelum pake variasi deff" + def1);
         def1 = def1 + resultDef;
         Debug.Log(_character.charaData.unitName + "Hasil dari def 1 + Variasi" + def1);
-
+        Debug.LogWarning(finalDmg1);
         //menbuat logika jika dmg nya minus gak akan menambah darah target yang diserang
         //dan dmg yang diterima adalah 0
         if (def1 >= finalDmg1)
@@ -295,7 +302,7 @@ public class Unit : MonoBehaviour
 
     }
 
-    public void ChangeStateEnemy(CharacterState state)
+    public async void ChangeStateEnemy(CharacterState state)
     {
         characterState = state;
 
@@ -315,6 +322,7 @@ public class Unit : MonoBehaviour
                 break;
             case CharacterState.ATTACK:
                 GetComponentInChildren<Animator>().Play("Attack");// Memutar Animasi Attack
+                
                 Unit TargetUnit = new Unit();
 
                 //FSM logic Element Attact Target
@@ -472,17 +480,31 @@ public class Unit : MonoBehaviour
                         break;
                 }
                 TargetUnit.TakeDemage(_character.charaData.damage, TargetUnit._def, _character.thisUnitElement);
+                transform.position = TargetUnit.transform.position;
+                VFXManager.instance.EffetPuch(TargetUnit.transform.position);// vfx keserang
+                await WaitForAnimation(GetComponentInChildren<Animator>());
+                transform.localPosition = Vector3.zero;
                 break;
             case CharacterState.HEAL:
                 Heal(_character.charaData.Heal);//jumlah heal 
                 break;
             case CharacterState.DEFENSE:
                 DefUp(3);//jumlah heal yang dikali dari basestate
+                VFXManager.instance.EffetDef(transform.position);//vfx def
                 break;
         }
     }
+    private async Task WaitForAnimation(Animator anim)
+    {
+        // Mendapatkan panjang animasi dari clip yang sedang dimainkan
+        float animationLength = anim.GetCurrentAnimatorStateInfo(0).length;
+
+        // Tunggu sesuai panjang animasi
+        await Task.Delay((int)(animationLength * 1000));
+    }
+
 }
-    public enum ACTORTYPE
+public enum ACTORTYPE
 {
     PLAYER,
     ENEMY

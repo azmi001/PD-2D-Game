@@ -23,7 +23,7 @@ MonoBehaviour:
     unitLevel: 1
     unitexp: 0
     deffense: 25
-    damage: 62.5
+    damage: 67.3
     maxHP: 500
     Heal: 30
     Unlock: 1
