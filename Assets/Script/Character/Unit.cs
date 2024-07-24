@@ -57,7 +57,7 @@ public class Unit : MonoBehaviour
                 _character.charaData = Array.Find(Funcs.GetAkun().OwnedHeroes.ToArray(), t => t.unitName == _character.charaData.unitName);
                 break;
             case ACTORTYPE.ENEMY:
-                opponentPos.localPosition = new Vector3(-1.35f, 0, 0);
+                opponentPos.localPosition = new Vector3(-1.15f, 0, 0);
                 break;
             default:
                 break;

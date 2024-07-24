@@ -88,8 +88,8 @@ public partial class GameSetting : MonoBehaviour
             {
                 Unit hero = Funcs.GetDatabaseUnit?.Invoke().GetUnit(Funcs.GetAkun().teamHeroes[i]);
                 GameObject go = Instantiate(hero.gameObject, playerPos.GetChild(i));
-                go.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = i;
-                go.transform.GetChild(1).GetComponent<Canvas>().sortingOrder = i;
+                go.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = i+1;
+                go.transform.GetChild(1).GetComponent<Canvas>().sortingOrder = i+1;
                 go.GetComponent<Unit>().actorType = ACTORTYPE.PLAYER;
                 playerUnit.Add(go.GetComponent<Unit>());
 
