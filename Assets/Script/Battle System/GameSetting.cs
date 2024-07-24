@@ -151,6 +151,7 @@ public partial class GameSetting : MonoBehaviour
     private void DefenseUp()
     {
         currentUnitPlay.DefUp(3);//Jumlah def *X dikali brp
+        VFXManager.instance.EffetDef(currentUnitPlay.transform.position);
         Actions.OnUnitUsedAction?.Invoke(currentUnitPlay);
         
     }
@@ -258,6 +259,7 @@ public partial class GameSetting : MonoBehaviour
     {
         currentUnitPlay.GetComponentInChildren<Animator>().Play("Attack");
         currentUnitPlay.transform.position = target.opponentPos.position;
+        VFXManager.instance.EffetPuch(target.transform.position);// vfx keserang
         Actions.IsDisableAllButton?.Invoke(true);
         target.TakeDemage(currentUnitPlay._character.charaData.damage, target._def, currentUnitPlay._character.thisUnitElement);
         float animLength = currentUnitPlay.GetComponentInChildren<Animator>().GetCurrentAnimatorStateInfo(0).length;

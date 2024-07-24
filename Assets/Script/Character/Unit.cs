@@ -322,6 +322,7 @@ public class Unit : MonoBehaviour
                 break;
             case CharacterState.ATTACK:
                 GetComponentInChildren<Animator>().Play("Attack");// Memutar Animasi Attack
+                
                 Unit TargetUnit = new Unit();
 
                 //FSM logic Element Attact Target
@@ -480,6 +481,7 @@ public class Unit : MonoBehaviour
                 }
                 TargetUnit.TakeDemage(_character.charaData.damage, TargetUnit._def, _character.thisUnitElement);
                 transform.position = TargetUnit.transform.position;
+                VFXManager.instance.EffetPuch(TargetUnit.transform.position);// vfx keserang
                 await WaitForAnimation(GetComponentInChildren<Animator>());
                 transform.localPosition = Vector3.zero;
                 break;
@@ -488,6 +490,7 @@ public class Unit : MonoBehaviour
                 break;
             case CharacterState.DEFENSE:
                 DefUp(3);//jumlah heal yang dikali dari basestate
+                VFXManager.instance.EffetDef(transform.position);//vfx def
                 break;
         }
     }
