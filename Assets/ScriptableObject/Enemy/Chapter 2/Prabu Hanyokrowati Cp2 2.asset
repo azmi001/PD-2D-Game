@@ -19,14 +19,14 @@ MonoBehaviour:
     ConstantAttack: 0.4
     DeffenceModifier: 0.4
     HealModifier: 0.06
-    unitName: 'Prabu Hanyokrowati '
+    unitName: Dark Hero 3
     unitLevel: 1
     unitexp: 0
     deffense: 408
     damage: 163
     maxHP: 3262
     Heal: 150
-  Unlock: 0
+    Unlock: 0
   HeroIcon: {fileID: 21300000, guid: cae4a174f9716504e912325ed8cf452e, type: 3}
   heroIconFullBody: {fileID: 21300000, guid: 55c48d5fda4dfab4e92187643490322d, type: 3}
   chBio: Raden Mas Jolang atau Prabu Hanyokrowati adalah putra dari Panembahan Senopati.

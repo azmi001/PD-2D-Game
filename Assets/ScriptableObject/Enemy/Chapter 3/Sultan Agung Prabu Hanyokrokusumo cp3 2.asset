@@ -19,14 +19,14 @@ MonoBehaviour:
     ConstantAttack: 0.4
     DeffenceModifier: 0.4
     HealModifier: 0.06
-    unitName: 'Sultan Agung '
+    unitName: Dark Hero 1
     unitLevel: 1
     unitexp: 0
     deffense: 268
     damage: 671
     maxHP: 5367
     Heal: 322
-  Unlock: 0
+    Unlock: 0
   HeroIcon: {fileID: 21300000, guid: c3623d89a971c8143875167c12924c8d, type: 3}
   heroIconFullBody: {fileID: 21300000, guid: a0173667cc150164a9c61107852a2ccd, type: 3}
   chBio: Sultan Agung dikenal sebagai penguasa yang kuat, memperluas wilayah Mataram

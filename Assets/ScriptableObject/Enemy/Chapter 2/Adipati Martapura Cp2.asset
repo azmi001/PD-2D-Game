@@ -19,14 +19,14 @@ MonoBehaviour:
     ConstantAttack: 0.4
     DeffenceModifier: 0.4
     HealModifier: 0.06
-    unitName: Adipati Martapura
+    unitName: Dark Hero 1
     unitLevel: 1
     unitexp: 0
     deffense: 133
     damage: 334
     maxHP: 2670
     Heal: 160
-  Unlock: 0
+    Unlock: 0
   HeroIcon: {fileID: 21300000, guid: ef72358ca865bff4098d6dbe9a4d6b3a, type: 3}
   heroIconFullBody: {fileID: 21300000, guid: fd1d30e003c11e24f953bfd14623deb7, type: 3}
   chBio: "Martapura menjadi raja Mataram untuk memenuhi janji ayahnya, Sultan Hadiwijaya,

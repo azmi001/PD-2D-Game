@@ -19,14 +19,14 @@ MonoBehaviour:
     ConstantAttack: 0.4
     DeffenceModifier: 0.4
     HealModifier: 0.06
-    unitName: 'Sunan Kalijaga '
+    unitName: Dark Hero 1
     unitLevel: 1
     unitexp: 0
     deffense: 11
     damage: 28
     maxHP: 222
     Heal: 13
-  Unlock: 0
+    Unlock: 0
   HeroIcon: {fileID: 21300000, guid: 05134e476e474c84db1e10593b5f9972, type: 3}
   heroIconFullBody: {fileID: 21300000, guid: ddde18d8940d21d4b98dfb5fedde97d0, type: 3}
   chBio: 'Sunan Kalijaga, atau Raden Mas Syahid, adalah salah satu Wali Songo terkenal
